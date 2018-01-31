@@ -17,7 +17,7 @@ class CreateteDocumentsTable extends Migration
             $table->increments('document_id')->comment("视频id");
             $table->integer("user_id")->comment("文档发表者");
             $table->integer('authority')->comment("用户权限");
-            $table->timestamp('delete_time')->comment("删除时间");
+            $table->dateTime('delete_time')->comment("删除时间");
             $table->softDeletes()->comment("软删除");
             $table->timestamps();
         });

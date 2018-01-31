@@ -18,7 +18,7 @@ class CreateVideosTable extends Migration
             $table->integer("user_id")->comment("视频发表者");
             $table->integer('authority')->comment("用户权限");
             $table->string('video_path',100)->comment("视频路径");
-            $table->timestamp('delete_time')->comment("删除时间");
+            $table->dateTime('delete_time')->comment("删除时间");
             $table->softDeletes()->comment("软删除");
             $table->timestamps();
         });
