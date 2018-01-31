@@ -34,7 +34,10 @@ class MainController extends Controller
     public function store(Request $request)
     {
     }
-
+    public function login(Request $request)
+    {
+        return view('main::login');
+    }
     /**
      * Show the specified resource.
      * @return Response
