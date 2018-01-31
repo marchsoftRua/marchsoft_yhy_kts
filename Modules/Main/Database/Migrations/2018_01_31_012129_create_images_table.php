@@ -14,9 +14,13 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->increments('id');
-
+            $table->increments('image_id')->comment("图片id");
+            $table->integer("user_id")->comment("图片发表者");
+            $table->string('image_path',100)->comment("图片路径");
             $table->timestamps();
+            $table->integer('authority')->comment("用户权限");
+            $table->timestamp('delete_time')->comment("删除时间");
+            $table->softDeletes()->comment("软删除");
         });
     }
 
