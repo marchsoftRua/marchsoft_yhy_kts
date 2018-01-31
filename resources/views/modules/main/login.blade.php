@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset("res/css/login/main.css")}}" />
     <script src="{{asset("js/jquery.js")}}"></script>
     <style>
-        #canvas {
+        canvas {
           display: block;
           width: 100%;
           height: 100%;
@@ -46,11 +46,12 @@
                 <div class="input-wrapper input-password">
                     <input name="password" type="password" placeholder="密码" />
                 </div>
-                <div class="input-wrapper input-captcha">
-                <input name="captcha" type="text" placeholder="验证码" />
-                </div>
-            </div>
+                {{--<div class="input-wrapper input-captcha">--}}
+                    {{--<input class="captcha" type="text" placeholder="验证码" />--}}
 
+                {{--</div>--}}
+            </div>
+                {!! Geetest::render('embed') !!}
             <!-- .group-inputs -->
             <input id="signup-btn" class="sign-btn" type="button" onclick=""  value="注册"/>
         </form>
@@ -59,8 +60,7 @@
 
         <!-- 登陆表单 -->
         <div class="signin-wrapper">
-        <form id="signin" class="" method="post"  action="/AuthLogin">
-            <input name="_token" type="hidden" value="{{ csrf_token() }}">
+        <form id="signin" class="">
             <div class="group-inputs">
                 <div class="input-wrapper input-account">
                     <input name="account" type="text" placeholder="手机号或邮箱" />
@@ -68,21 +68,20 @@
                 <div class="input-wrapper input-password">
                     <input name="password" type="password" placeholder="密码" />
                 </div>
-                {{--<div class="input-wrapper input-captcha">--}}
-                    {{--<input name="captcha" type="text" placeholder="验证码" />--}}
-                {{--</div>--}}
-                <?php echo Geetest::render('popup'); ?>
+                <div class="input-wrapper input-captcha">
+                    <input name="captcha" type="text" placeholder="验证码" />
+                </div>
             </div>
             <!-- .group-inputs -->
             <input id="signin-btn" class="sign-btn" type="button" onclick="" value="登陆"/>
         </form>
         <div class="signin-btn-wrapper">
-            {{--<button class="signin-switch-button" type="button">手机验证码登陆</button>--}}
+            <button class="signin-switch-button" type="button">手机验证码登陆</button>
             <button class="unable-signin" type="button">无法登陆？</button>
         </div>
-        {{--<div class="social-signup-wrapper">--}}
-            {{--<button class="social-signup-button" type="button">社交账号登陆</button>--}}
-        {{--</div>--}}
+        <div class="social-signup-wrapper">
+            <button class="social-signup-button" type="button">社交账号登陆</button>
+        </div>
         </div>
     </main>
 
