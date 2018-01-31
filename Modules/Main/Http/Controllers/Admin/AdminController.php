@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
+use Modules\Main\Entities\Sidenav;
+
 class AdminController extends Controller
 {
     /**
@@ -14,8 +16,19 @@ class AdminController extends Controller
      */
     public function index()
     {
-        echo url('user/profile');
+        
         return view('main::admin.index');
+    }
+
+    public function navData(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            return "非ajax请求";
+        }
+        $model = new Sidenav();
+        $data = $model->selectAll();
+        return $data;
     }
 
     /**

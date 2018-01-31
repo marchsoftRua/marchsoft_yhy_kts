@@ -68,7 +68,7 @@
 					</li>
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
-							<img src="{{asset('admin/images/face.jpg')}}" class="layui-circle" width="35" height="35">
+							<img src="{{asset('Main/admin/images/face.jpg')}}" class="layui-circle" width="35" height="35">
 							<cite>请叫我马哥</cite>
 						</a>
 						<dl class="layui-nav-child">
