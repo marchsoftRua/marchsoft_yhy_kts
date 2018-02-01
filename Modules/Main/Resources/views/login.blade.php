@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>三月社区 - 与世界分享你的知识、经验和见解</title>
-    <link rel="stylesheet" href="{{asset("res/css/login/base.css")}}" />
-    <link rel="stylesheet" href="{{asset("res/css/login/main.css")}}" />
-    <script src="{{asset("js/jquery.js")}}"></script>
+    <title>三月社区 - 与世界分享你的知识、经验和见解aaaa</title>
+    <link rel="stylesheet" href="{{asset('Main/res/css/login/base.css')}}" />
+    <link rel="stylesheet" href="{{asset('Main/res/css/login/main.css')}}" />
+    <script src="{{asset('Main/js/jquery.js')}}"></script>
     <style>
         #canvas {
           display: block;

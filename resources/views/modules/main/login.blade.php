@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <title>三月社区 - 与世界分享你的知识、经验和见解</title>
-    <link rel="stylesheet" href="{{asset("res/css/login/base.css")}}" />
-    <link rel="stylesheet" href="{{asset("res/css/login/main.css")}}" />
-    <script src="{{asset("js/jquery.js")}}"></script>
+    <link rel="stylesheet" href="{{asset("Main/res/css/login/base.css")}}" />
+    <link rel="stylesheet" href="{{asset("Main/res/css/login/main.css")}}" />
+    <script type="text/javascript" src="{{asset('Main/layui/layui.js')}}"></script>
     <style>
         canvas {
           display: block;
@@ -110,9 +110,15 @@
         </div>
     </footer>
     <!-- <script src="https://cdn.bootcss.com/blueimp-md5/2.7.0/js/md5.min.js"></script> -->
-    <script src="{{asset("res/mods/login/forms.js")}}"></script>
-    <script src="{{asset("res/mods/login/main.js")}}"></script>
-    <script type="text/javascript" src="{{asset("res/mods/login/bundle.js")}}"></script>
+    <script src="{{asset("Main/res/mods/login/forms.js")}}"></script>
+    <script src="{{asset("Main/res/mods/login/main.js")}}"></script>
+    <script type="text/javascript" src="{{asset("Main/res/mods/login/bundle.js")}}"></script>
+    <script type="text/javascript">
+        layui.use(['jquery'],function(){
+            var $ = layui.jquery;
+            // body...
+        })
+    </script>
 </body>
 
 </html>
