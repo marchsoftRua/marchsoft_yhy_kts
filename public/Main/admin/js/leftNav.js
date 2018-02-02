@@ -4,10 +4,10 @@ function navBar(data){
 		if(data[i].spread){
 			ulHtml += '<li class="layui-nav-item layui-nav-itemed">';
 		}else{
-			ulHtml += '<li class="layui-nav-item">';
+			ulHtml += '<li class="layui-nav-item side-nav">';
 		}
 		if(data[i].children != undefined && data[i].children.length > 0){
-			ulHtml += '<a href="javascript:;">';
+			ulHtml += '<a href="####">';
 			if(data[i].icon != undefined && data[i].icon != ''){
 				if(data[i].icon.indexOf("icon-") != -1){
 					ulHtml += '<i class="iconfont '+data[i].icon+'" data-icon="'+data[i].icon+'"></i>';

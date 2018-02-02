@@ -11,17 +11,19 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="icon" href="favicon.ico">
-	<link rel="stylesheet" href="{{asset('Main/admin/layui/css/layui.css')}}" media="all" />
-	<link rel="stylesheet" href="{{asset('Main/admin/css/font_eolqem241z66flxr.css')}}" media="all" />
-	<link rel="stylesheet" href="{{asset('Main/admin/css/main.css')}}" media="all" />
+	<link rel="stylesheet" href="{{asset('Main/layui/css/layui.css')}}" media="all" />
+	<link rel="stylesheet" href="{{asset('Main/css/font_eolqem241z66flxr.css')}}" media="all" />
+	<link rel="stylesheet" href="{{asset('Main/css/main.css')}}" media="all" />
+
 	<script type="text/javascript" src="{{asset('Main/layui/layui.js')}}"></script>
+
 	<script type="text/javascript">
 		var module_path = "{{asset('Main/admin/js')}}/";
 	</script>
 	<script type="text/javascript" src="{{asset('Main/admin/js/main.js')}}"></script>
 	<script type="text/javascript" src="{{asset('Main/admin/js/nav.js')}}"></script>
 	<script type="text/javascript" src="{{asset('Main/admin/js/leftNav.js')}}"></script>
-	<script type="text/javascript" src={{asset('Main/js/admin/index.js')}}></script>
+	<script type="text/javascript" src={{asset('Main/admin/js/index.js')}}></script>
 </head>
 <body class="main_body">
 	<div class="layui-layout layui-layout-admin">
