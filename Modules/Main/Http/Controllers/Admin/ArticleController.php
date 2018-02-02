@@ -21,9 +21,7 @@ class ArticleController extends Controller
 
     public function showList(Request $request)
     {
-        if(!$request->ajax())
-            return "非ajax请求";
-        return 
+        
     }
 
 

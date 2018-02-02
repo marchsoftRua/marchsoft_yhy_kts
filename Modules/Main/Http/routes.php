@@ -15,7 +15,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::get('/sidenav','AdminController@navData');
     Route::get('/articlePage','AdminController@articlePage');
 
-    Route::get('/articleList','ArticleController@showList')
+    Route::get('/articleList','ArticleController@showList');
 
 });
 
