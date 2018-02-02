@@ -57,6 +57,7 @@ layui.define(["element","jquery"],function(exports){
 	//右侧内容tab操作
 	var tabIdIndex = 0;
 	Tab.prototype.tabAdd = function(_this){
+		
 		if(window.sessionStorage.getItem("menu")){
 			menu = JSON.parse(window.sessionStorage.getItem("menu"));
 		}
@@ -64,7 +65,7 @@ layui.define(["element","jquery"],function(exports){
 		var closed = that.tabConfig.closed,
 			openTabNum = that.tabConfig.openTabNum;
 			tabFilter = that.tabConfig.tabFilter;
-		// $(".layui-nav .layui-nav-item a").on("click",function(){
+		$(".layui-nav .layui-nav-item a").on("click",function(){
 			if(_this.find("i.iconfont,i.layui-icon").attr("data-icon") != undefined){
 				var title = '';
 				if(that.hasTab(_this.find("cite").text()) == -1 && _this.siblings("dl.layui-nav-child").length == 0){
@@ -109,7 +110,7 @@ layui.define(["element","jquery"],function(exports){
 					element.tabChange(tabFilter, that.getLayId(_this.find("cite").text()));
 				}
 			}
-		// })
+		})
 	}
 	$("body").on("click",".top_tab li",function(){
 		//切换后获取当前窗口的内容
@@ -158,7 +159,9 @@ layui.define(["element","jquery"],function(exports){
 	})
 
 	var bodyTab = new Tab();
+	
 	exports("bodyTab",function(option){
 		return bodyTab.set(option);
 	});
+	
 })

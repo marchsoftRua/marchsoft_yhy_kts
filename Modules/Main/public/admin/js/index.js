@@ -60,12 +60,17 @@ layui.config({
 
 	// 添加新窗口
 	$(".layui-nav .layui-nav-item a").on("click",function(){
+		console.log($(this))
 		addTab($(this));
 		$(this).parent("li").siblings().removeClass("layui-nav-itemed");
 	})
 
+
+
 	//公告层
 	function showNotice(){
+		layer.msg('aaaa')
+
 		layer.open({
 	        type: 1,
 	        title: "系统公告", //不显示标题栏
@@ -92,6 +97,8 @@ layui.config({
 	        }
 	    });
 	}
+	// $('showNotice').on('click',showNotice())
+
 	//判断是否处于锁屏状态(如果关闭以后则未关闭浏览器之前不再显示)
 	if(window.sessionStorage.getItem("lockcms") != "true" && window.sessionStorage.getItem("showNotice") != "true"){
 		showNotice();

@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="{{asset('Main/admin/css/main.css')}}" media="all" />
 	<script type="text/javascript" src="{{asset('Main/layui/layui.js')}}"></script>
 	<script type="text/javascript">
-		var module_path = "{{asset('Main/admin/js/')}}/";
+		var module_path = "{{asset('Main/admin/js')}}/";
 	</script>
 	<script type="text/javascript" src="{{asset('Main/admin/js/main.js')}}"></script>
 	<script type="text/javascript" src="{{asset('Main/admin/js/nav.js')}}"></script>
@@ -28,7 +28,9 @@
 
 		@include('main::admin.layouts.header')
 		@include('main::admin.layouts.side')
-		
+		@include('main::admin.layouts.body')
+		@include('main::admin.layouts.phonenav')
+
 	</div>
 </body>
 </html>

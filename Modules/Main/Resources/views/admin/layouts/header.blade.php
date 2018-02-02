@@ -54,7 +54,7 @@
 
 			    <!-- 顶部右侧菜单 -->
 			    <ul class="layui-nav top_menu">
-			    	<li class="layui-nav-item showNotice" id="showNotice" pc>
+			    	<li class="layui-nav-item showNotice" id="showNotice" lay-filter="showNotice" pc>
 						<a href="javascript:;"><i class="iconfont icon-gonggao"></i><cite>系统公告</cite></a>
 					</li>
 			    	<li class="layui-nav-item" mobile>
@@ -72,12 +72,13 @@
 							<cite>请叫我马哥</cite>
 						</a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
-							<dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+							<dd><a href="javascript:;" data-url="/"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
+							<dd><a href="javascript:;" data-url="/"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
 							<dd><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
 						</dl>
 					</li>
 				</ul>
+				
 			</div>
 		</div>
 
