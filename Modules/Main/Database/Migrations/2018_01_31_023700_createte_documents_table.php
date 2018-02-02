@@ -14,7 +14,7 @@ class CreateteDocumentsTable extends Migration
     public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->increments('document_id')->comment("视频id");
+            $table->increments('document_id')->comment("文档id");
             $table->integer("user_id")->comment("文档发表者");
             $table->integer('authority')->comment("用户权限");
             $table->dateTime('delete_time')->comment("删除时间");

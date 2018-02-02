@@ -22,15 +22,16 @@ class ArticleController extends Controller
         return view('main::Index.article');
     }
 
+    public function setData($data)
+    {
+        $dataArr =array("code"=>0,"msg"=>"","count"=>1,"data"=>$data);
+        return $dataArr;
+    }
+
     public function showList(Request $request)
     {
-<<<<<<< HEAD
-        
-=======
-        if(!$request->ajax())
-            return "非ajax请求";
-//        return
->>>>>>> 2d653b5ef50178d92fde04e246f279994f7b8f3e
+        $model = new Article();
+        return $this->setData($model->getArticleTable());
     }
 
 
