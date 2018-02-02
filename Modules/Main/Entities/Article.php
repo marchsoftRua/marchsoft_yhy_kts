@@ -8,6 +8,7 @@ use Modules\Main\Entities;
 class Article extends Model
 {
     protected $fillable = [];
+    public $primaryKey = 'article_id';
     public function getIndexMainData($bycolumn,$status,$type,$getLimit){
         $query=DB::table('articles')
             ->join('users', function ($join) {
