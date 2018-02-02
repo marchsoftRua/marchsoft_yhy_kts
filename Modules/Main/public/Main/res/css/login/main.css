@@ -1,0 +1,191 @@
+#index-header {
+    width: 18.75em;
+    margin: 0 auto;
+    margin-top: 7em;
+}
+
+#index-main {
+    width: 18.75em;
+    margin: 0 auto;
+}
+
+.logo {
+    height: 74px;
+    width: 213px;
+    background: url(../../images/logo_sc.png) no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.hide-text {
+    /*
+    font: 0 / 0 a;
+    */
+    /*color: transparent;*/
+    text-shadow: none;
+    border: 0;
+}
+
+
+#slogan {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1.125em;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.sign-info {
+    position: absolute;
+    top: 1.5em;
+    left: 50%;
+    width: 20em;
+    margin-left: -10em;
+    background: #86C166;
+    color: #fff;
+    font-size: .8em;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    padding: .5em 1em;
+    border-radius: 3px;
+}
+
+.index-tab-nav {
+    margin-bottom: .625em;
+}
+.index-tab-nav button {
+    height: 2.15em;
+    width: 3em;
+    font-size: 1.125em;
+}
+.nav-active {
+    color: #0f88eb;
+    border-bottom: 3px solid #0f88eb;
+}
+.nav-deactive {
+    color: #555;
+    opacity: .7;
+    transition: opacity .15s, color .15s;
+}
+.nav-deactive:hover {
+    opacity: 1;
+}
+
+.group-inputs {
+    padding: 1px 0;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+}
+
+.input-wrapper {
+    height: 2.9em;
+    border-bottom: 1px solid #e8e8e8;
+    background-color: #fff;
+    position: relative;
+}
+
+.input-err {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    padding: 0 8px;
+    color: #c33;
+    line-height: 2.9em;
+}
+
+.input-captcha {
+    border-bottom: none;
+}
+
+.input-wrapper input {
+    height: 99.9%;
+    width: 100%;
+    padding: .87em .7em;
+    line-height: 100%;
+    color: #555;
+    outline: none;
+    background: transparent;
+}
+
+.input-wrapper input:-webkit-autofill {
+    box-shadow: 0 0 0 30px #fff inset;
+    -webkit-text-fill-color: #555;
+}
+
+/*
+.signup-or-signin {
+    display: flex;
+    justify-content: space-between;
+    height: 2.7em;
+    width: 6em;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+*/
+.sign-btn {
+    width: 100%;
+    height: 40.4px;
+    margin-top: 1.4em;
+    border-radius: 3px;
+    color: #fff;
+    background: #0f88eb;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+
+.agreement-tips {
+    margin-top: 1.3em;
+    font-size: 13px;
+    color: #999;
+}
+
+.agreement-tips a {
+    color: #698ebf;
+}
+
+.signin-btn-wrapper {
+    width: 100%;
+    margin-top: 1.375em;
+    display: flex;
+    justify-content: space-between;
+    font-size: .875em;
+}
+.signin-btn-wrapper .signin-switch-button {
+    color: #5ca5e8;
+}
+.signin-btn-wrapper .unable-signin {
+    color: #555;
+}
+
+.social-signup-wrapper {
+    width: 100%;
+    margin-top: 1.375em;
+    margin-bottom: 1.375em;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+}
+.social-signup-button {
+    color: #555;
+}
+
+.download-app {
+    position: relative;
+    bottom: -1.2em;
+    width: 100%;
+    height: 39.4px;
+    color: #5fa6e5;
+    border:1px solid #5fa6e5;
+    border-radius: 3px;
+}
+
+footer {
+    position: relative;
+    bottom: -5em;
+    padding-bottom: 2em;
+}
+
+.informations-wrapper {
+    margin: 0 auto;
+    line-height: 150%;
+}

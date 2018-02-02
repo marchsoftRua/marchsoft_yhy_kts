@@ -5,6 +5,7 @@
     <title>三月社区 - 与世界分享你的知识、经验和见解aaaa</title>
     <link rel="stylesheet" href="{{asset('Main/res/css/login/base.css')}}" />
     <link rel="stylesheet" href="{{asset('Main/res/css/login/main.css')}}" />
+    <script src="{{asset('Main/layui/layui.js')}}"></script>
     <script src="{{asset('Main/js/jquery.js')}}"></script>
     <style>
         #canvas {
@@ -71,9 +72,10 @@
                 {{--<div class="input-wrapper input-captcha">--}}
                     {{--<input name="captcha" type="text" placeholder="验证码" />--}}
                 {{--</div>--}}
-                <?php echo Geetest::render('popup'); ?>
             </div>
-            <!-- .group-inputs -->
+        <?php echo Geetest::render(); ?>
+
+        <!-- .group-inputs -->
             <input id="signin-btn" class="sign-btn" type="button" onclick="" value="登陆"/>
         </form>
         <div class="signin-btn-wrapper">
@@ -111,9 +113,14 @@
         </div>
     </footer>
     <!-- <script src="https://cdn.bootcss.com/blueimp-md5/2.7.0/js/md5.min.js"></script> -->
-    <script src="{{asset("res/mods/login/forms.js")}}"></script>
-    <script src="{{asset("res/mods/login/main.js")}}"></script>
-    <script type="text/javascript" src="{{asset("res/mods/login/bundle.js")}}"></script>
+    <script src="{{asset("Main/res/mods/login/forms.js")}}"></script>
+    <script src="{{asset("Main/res/mods/login/main.js")}}"></script>
+    <script type="text/javascript" src="{{asset("Main/res/mods/login/bundle.js")}}"></script>
+    <script>
+        layui.use(['jquery'],function () {
+            var $ = layui.jquery
+        })
+    </script>
 </body>
 
 </html>

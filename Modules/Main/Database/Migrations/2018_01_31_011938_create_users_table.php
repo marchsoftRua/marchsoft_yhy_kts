@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->integer('group_id')->comment('分组id');
             $table->string('user_email',30)->comment('用户邮箱');
             $table->rememberToken()->comment('记住用户');
-            $table->timestamps();
         });
     }
 
