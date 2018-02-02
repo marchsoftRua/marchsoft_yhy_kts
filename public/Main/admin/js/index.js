@@ -1,5 +1,5 @@
 layui.config({
-	base : module_path
+    base : module_path
 }).use(['jquery','element','layer','Tab'],function(){
 
 	var layer = parent.layer === undefined ? layui.layer : parent.layer,
@@ -115,5 +115,5 @@ layui.config({
 
 function addTab(_this)
 {
-	tab.addTab(_this);
+    tab.addTab(_this);
 }

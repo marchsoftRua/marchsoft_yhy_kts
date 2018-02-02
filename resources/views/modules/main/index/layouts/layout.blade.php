@@ -5,16 +5,19 @@
   <title>基于 layui 的极简社区页面模版</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="三月,三月社区">
+  <meta name="_token" content="{{csrf_token()}}">
   <meta name="description" content="三月小组是最棒的，这是我们大家的社区">
   <link rel="stylesheet" type="text/css" href="{{asset('Main/layui/css/layui.css')}}">
   <link rel="stylesheet" href="{{asset('Main/res/css/global.css')}}">
+  <script src="js/jquery.js"></script>
 </head>
 <body>
   @yield('panel')
   @yield('header')
   @yield('container')
   @yield('footer')
-<script src="Main/res/layui/layui.js"></script>
+<script src="Main/layui/layui.js"></script>
+  <script src="Main/index/render.js"></script>
 <script>
 layui.cache.page = '';
 layui.cache.user = {

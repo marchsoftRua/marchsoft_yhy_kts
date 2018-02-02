@@ -8,7 +8,7 @@
   <meta name="_token" content="{{ csrf_token() }}">
   <meta name="description" content="三月小组是最棒的，这是我们大家的社区">
   <link rel="stylesheet" type="text/css" href="{{asset('Main/layui/css/layui.css')}}">
-  <link rel="stylesheet" href="{{asset('Main/res/css/global.css')}}">
+  <link rel="stylesheet" href="{{asset('Main/css/global.css')}}">
   <script src="{{asset('js/jquery.js')}}"></script>
 </head>
 <body>
@@ -22,13 +22,13 @@ layui.cache.page = '';
 layui.cache.user = {
   username: '游客'
   ,uid: -1
-  ,avatar: "{{asset('Main/res/images/avatar/00.jpg')}}"
+  ,avatar: "{{asset('Main/images/avatar/00.jpg')}}"
   ,experience: 83
   ,sex: '男'
 };
 layui.config({
   version: "3.0.0"
-  ,base: "{{asset('Main/res/mods')}}/" //这里实际使用时，建议改成绝对路径
+  ,base: "{{asset('Main/mods')}}/" //这里实际使用时，建议改成绝对路径
 }).extend({
   fly: 'index'
 }).use('fly');

@@ -141,6 +141,7 @@ layui.define(['element','jquery'],
 					return;
 				}
 			}
+			layer.msg('asd')
 			menu.push(curmenu);
 			Session.setItem('menu',JSON.stringify(menu));
 			element.tabChange(that.tabConfig.tabFilter,curmenu.layId)
