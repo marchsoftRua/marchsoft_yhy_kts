@@ -1,4 +1,5 @@
 function navBar(data){
+					layer.msg('aaa')
 	var ulHtml = '<ul class="layui-nav layui-nav-tree">';
 	for(var i=0;i<data.length;i++){
 		if(data[i].spread){
