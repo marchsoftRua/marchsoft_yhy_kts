@@ -10,6 +10,8 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
 {
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
+    Route::get('/article', 'ArticleController@lookArticle');
+
 });
 
 Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controllers\Index'], function()
@@ -20,4 +22,5 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::get('/', 'IndexController@index');
     Route::post('/reader', 'IndexController@readerSetData');
     Route::post('/getHotUser', 'IndexController@getTheWeekHot');
+    Route::post('/getSpeakRank', 'IndexController@getSpeakRank');
 });

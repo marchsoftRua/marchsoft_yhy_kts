@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Main\Entities\Comment;
 use Modules\Main\Entities\Article;
 use Modules\Main\Entities\Label;
+use Modules\Main\Entities\User;
 class IndexController extends Controller
 {
     /**
@@ -18,9 +19,16 @@ class IndexController extends Controller
     var $ArticleModel=null;
     var $CommentModel = null;
     var $LabelModel = null;
+    var $UserModel=null;
     public function index()
     {
-        return view('main::index.index');
+        $hotRank=$this->getTheWeekHot();
+        $userRank=$this->getSpeakRank();
+        return view('main::index.index')->with(
+            [
+                "hotRank"=>$hotRank,
+               "userRank"=> $userRank
+            ]);
     }
     public function readerSetData(Request $request){
         $bycolumn = $this->sortK_V[$request->bycolumn];
@@ -28,27 +36,19 @@ class IndexController extends Controller
         $type     = $request->type;
         $getLimit = $request->getLimit;
         $getdata  = $this->ArticleModel->getIndexMainData($bycolumn,$status,$type,$getLimit);
-        foreach ($getdata as $iteam){
-            $id = $iteam->article_id;
-            $iteam->CommentNum   =   $this->CommentModel->getCommentNumById($id);
-            $iteam->article_label=   $this->LabelModel->GetArticleLabelById($id);
-        }
-        $tmpview=view('main::index.fillDatas.mainArea')->with("data",$getdata);
-        $html=response($tmpview)->getContent();
-        $getArray =json_decode(json_encode($getdata));
-        $page_info ["current_page"]=$getArray->current_page;
-        $page_info ["last_page"]=$getArray->last_page;
-        $respose_ ["data"]=$page_info;
-        $respose_ ["html"]=$html;
-        return $respose_;
+        return $getdata;
     }
     public function __construct(){
         $this->ArticleModel=new Article();
-        $this->CommentModel=new Comment();
         $this->LabelModel  =new Label();
+        $this->CommentModel=new Comment();
+        $this->UserModel   = new User();
     }
     public function  getTheWeekHot(){
         return $this->ArticleModel->getWeekHotData();
+    }
+    public function getSpeakRank(){
+        return  $this->UserModel->getSpeakMoreUser();
     }
     /**
      * Show the form for creating a new resource.

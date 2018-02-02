@@ -18,12 +18,12 @@ $(document).ready(function(){
         $(this).attr("class","layui-this")
     });
     getMorePage(1,0,1,0,5,0,1); //获得置顶模块
-    getMorePage(0,0,0,0,10,0,1)//获得综合模块
+    getMorePage(0,0,0,0,10,0,1);//获得综合模块
     getWeekHot()
 });
 function getWeekHot() {
     $.ajax({
-        url: "/getHotUser",
+        url: "/getSpeakRank",
         type: "post",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -83,7 +83,6 @@ function getMorePage(isTop,bycolumn,status,type,getLimit,more,page) {
             error:function () {
                 layui.use('layer', function(){
                     var layer = layui.layer;
-
                     layer.msg('服务器错误！');
                 });
             }

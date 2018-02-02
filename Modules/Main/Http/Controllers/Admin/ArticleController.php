@@ -18,7 +18,9 @@ class ArticleController extends Controller
     {
         return view('main::index');
     }
-
+    public function lookArticle(Request $request){
+        return view('main::Index.article');
+    }
     /**
      * Show the form for creating a new resource.
      * @return Response
