@@ -21,6 +21,7 @@ class CreateArticlesTable extends Migration
             $table->integer('praise')->comment("获得赞");
             $table->integer('shame')->comment("获得踩");
             $table->integer('readnum')->comment("浏览量");
+            $table->integer('status')->comment("文章状态");
 //            $table->integer('article_label')->comment("文章标签");//需讨论
             $table->integer('notebook_id')->comment("所属笔记");
             $table->string('cover_path',100)->comment("封面路径");

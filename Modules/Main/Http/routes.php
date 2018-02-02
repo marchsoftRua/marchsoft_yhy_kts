@@ -5,10 +5,19 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::get('/AuthLogin', 'AuthController@postValidate');
     Route::get('/geetest','AuthController@getGeetest');
     Route::get('/login', 'MainController@login');
-    Route::get('/','MainController@index');
 });
 Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controllers\Admin'], function()
 {
-    Route::get('/myadmin', 'AdminController@index');
+    Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
+});
+
+Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controllers\Index'], function()
+{
+    /****
+    前台路由
+     ***/
+    Route::get('/', 'IndexController@index');
+    Route::post('/reader', 'IndexController@readerSetData');
+    Route::post('/getHotUser', 'IndexController@getTheWeekHot');
 });
