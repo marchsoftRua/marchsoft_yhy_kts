@@ -15,7 +15,7 @@
       </div>
 
       <div class="fly-panel" style="margin-bottom: 0;">
-        
+
         <div class="fly-panel-title fly-filter">
           <a href="" class="layui-this">综合</a>
           <span class="fly-mid"></span>
@@ -96,116 +96,28 @@
         <h3 class="fly-panel-title">回贴周榜</h3>
         <dl>
           <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
+          @foreach($userRank as $user)
           <dd>
             <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>{{$user->user_playname}}</cite><i>{{$user->comment_num}}次回答</i>
             </a>
           </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-            </a>
-          </dd>
+          @endforeach
         </dl>
       </div>
 
       <dl class="fly-panel fly-list-one">
         <dt class="fly-panel-title">本周热议</dt>
+        @foreach($hotRank as $hot)
         <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
+          <a href="/article">{{$hotRank->article_name}}</a>
+          <span><i class="iconfont icon-pinglun1"></i> {{$hotRank->comment_num}}</span>
         </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-
+        @endforeach
+        @if(count($hotRank)<1)
         <!-- 无数据时 -->
-        <!--
         <div class="fly-none">没有相关数据</div>
-        -->
+          @endif
       </dl>
 
       <div class="fly-panel">

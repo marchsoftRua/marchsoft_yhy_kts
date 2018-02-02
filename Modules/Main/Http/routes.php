@@ -13,6 +13,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     ******/
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
+    Route::get('/article', 'ArticleController@lookArticle');
     Route::get('/articlePage','AdminController@articlePage');
 
     Route::get('/articleList','ArticleController@showList');
@@ -27,4 +28,5 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::get('/', 'IndexController@index');
     Route::post('/reader', 'IndexController@readerSetData');
     Route::post('/getHotUser', 'IndexController@getTheWeekHot');
+    Route::post('/getSpeakRank', 'IndexController@getSpeakRank');
 });

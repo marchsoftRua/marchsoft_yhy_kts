@@ -18,10 +18,19 @@ class ArticleController extends Controller
     {
         return view('main::index');
     }
+    public function lookArticle(Request $request){
+        return view('main::Index.article');
+    }
 
     public function showList(Request $request)
     {
+<<<<<<< HEAD
         
+=======
+        if(!$request->ajax())
+            return "非ajax请求";
+//        return
+>>>>>>> 2d653b5ef50178d92fde04e246f279994f7b8f3e
     }
 
 

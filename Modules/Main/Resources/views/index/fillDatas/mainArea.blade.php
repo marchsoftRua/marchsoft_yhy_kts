@@ -11,7 +11,7 @@
             </a>
             <h2>
               <a class="layui-badge">分享</a>
-              <a href="jie/detail.html">{{$iteam->article_title}}</a>
+              <a href="article">{{$iteam->article_title}}</a>
             </h2>
             <div class="fly-list-info">
               <a href="user/home.html" link>
