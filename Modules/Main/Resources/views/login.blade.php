@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{asset('Main/res/css/login/base.css')}}" />
     <link rel="stylesheet" href="{{asset('Main/res/css/login/main.css')}}" />
     <script src="{{asset('Main/layui/layui.js')}}"></script>
+    <script src="{{asset('Main/js/jquery.js')}}"></script>
     <style>
         #canvas {
           display: block;
