@@ -3,7 +3,7 @@ var c_current_page=1,c_bycolumn=0,c_status=0,c_type=0,c_getLimit=10,havemore=tru
 $(document).ready(function(){
     $("#getmore").bind("click",function () {
         if(havemore)
-        getMorePage(0,c_bycolumn,c_status,c_type,10,1,c_current_page+1)
+            getMorePage(0,c_bycolumn,c_status,c_type,10,1,c_current_page+1)
     });
     $("#byNew").bind("click",function () {
         c_bycolumn = 3;
@@ -90,4 +90,3 @@ function getMorePage(isTop,bycolumn,status,type,getLimit,more,page) {
         }
     )
 }
-
