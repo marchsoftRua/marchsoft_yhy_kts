@@ -8,8 +8,15 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
 });
 Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controllers\Admin'], function()
 {
+    /****
+    后台路由
+    ******/
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
+    Route::get('/articlePage','AdminController@articlePage');
+
+    Route::get('/articleList','ArticleController@showList')
+
 });
 
 Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controllers\Index'], function()

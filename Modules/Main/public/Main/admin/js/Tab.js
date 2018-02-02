@@ -11,6 +11,7 @@ layui.define(['element','jquery'],
 				tabFilter : "bodyTab"
 			}
 		};
+		layer.msg('asd')
 		var Session = window.sessionStorage;
 		var menu = [];
 		var curmenu = null;
@@ -246,7 +247,6 @@ layui.define(['element','jquery'],
 				if(curmenu!=undefined)
 				element.tabChange(that.tabConfig.tabFilter,curmenu.layId)
 			}
-				
 		}
 
 		readSession();

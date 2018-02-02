@@ -19,6 +19,14 @@ class ArticleController extends Controller
         return view('main::index');
     }
 
+    public function showList(Request $request)
+    {
+        if(!$request->ajax())
+            return "非ajax请求";
+        return 
+    }
+
+
     /**
      * Show the form for creating a new resource.
      * @return Response

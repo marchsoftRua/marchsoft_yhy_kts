@@ -13,7 +13,7 @@
 	<link rel="icon" href="favicon.ico">
 	<link rel="stylesheet" href="{{asset('Main/layui/css/layui.css')}}" media="all" />
 	<link rel="stylesheet" href="{{asset('Main/css/font_eolqem241z66flxr.css')}}" media="all" />
-	<link rel="stylesheet" href="{{asset('Main/css/main.css')}}" media="all" />
+	<link rel="stylesheet" href="{{asset('Main/css/index.css')}}" media="all" />
 
 	<script type="text/javascript" src="{{asset('Main/layui/layui.js')}}"></script>
 
@@ -21,7 +21,6 @@
 		var module_path = "{{asset('Main/admin/js')}}/";
 	</script>
 	<script type="text/javascript" src="{{asset('Main/admin/js/main.js')}}"></script>
-	<script type="text/javascript" src="{{asset('Main/admin/js/nav.js')}}"></script>
 	<script type="text/javascript" src="{{asset('Main/admin/js/leftNav.js')}}"></script>
 	<script type="text/javascript" src={{asset('Main/admin/js/index.js')}}></script>
 </head>

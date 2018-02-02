@@ -32,7 +32,7 @@ function navBar(data){
 			}
 			ulHtml += "</dl>"
 		}else{
-			ulHtml += '<a href="javascript:;" data-url="'+data[i].href+'">';
+			ulHtml += '<a href="javascript:;" data-id ='+data[i].id+' data-url="'+data[i].href+'">';
 			if(data[i].icon != undefined && data[i].icon != ''){
 				if(data[i].icon.indexOf("icon-") != -1){
 					ulHtml += '<i class="iconfont '+data[i].icon+'" data-icon="'+data[i].icon+'"></i>';

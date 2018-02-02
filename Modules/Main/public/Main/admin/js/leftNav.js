@@ -1,4 +1,6 @@
 function navBar(data){
+	console.log(data)ssd
+	
 	var ulHtml = '<ul class="layui-nav layui-nav-tree">';
 	for(var i=0;i<data.length;i++){
 		if(data[i].spread){

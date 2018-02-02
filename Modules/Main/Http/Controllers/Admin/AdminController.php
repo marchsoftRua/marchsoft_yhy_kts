@@ -31,6 +31,11 @@ class AdminController extends Controller
         return $data;
     }
 
+    public function articlePage()
+    {
+        return view('main::admin.page.article');
+    }
+
     /**
      * Show the form for creating a new resource.
      * @return Response
