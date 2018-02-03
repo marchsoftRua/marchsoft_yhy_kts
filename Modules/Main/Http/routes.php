@@ -13,10 +13,10 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     ******/
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
-    Route::get('/article', 'ArticleController@lookArticle');
+    Route::get('/article/{article_id?}', 'ArticleController@lookArticle');
     Route::get('/articlePage','AdminController@articlePage');
-
-    Route::get('/articleList','ArticleController@showList')
+    Route::post('/getComment','ArticleController@getComments');
+    Route::get('/articleList','ArticleController@showList');
 
 });
 

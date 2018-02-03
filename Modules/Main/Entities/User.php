@@ -19,4 +19,8 @@ class User extends Model
             })->groupBy('user_id')->orderBy('comment_num')->take(20)->get();
         return $query;
     }
+    public static function getUserNameById($id){
+       $user =   User::where('user_id',$id);
+       return $user;
+    }
 }

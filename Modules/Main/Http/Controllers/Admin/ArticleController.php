@@ -1,11 +1,11 @@
 <?php
 
 namespace Modules\Main\Http\Controllers\Admin;
-
+use Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use Modules\Main\Entities\Comment;
 use Modules\Main\Entities\Article;
 
 class ArticleController extends Controller
@@ -14,72 +14,40 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
+    var $articleModel=null;
+    var $commentModel=null;
     public function index()
     {
         return view('main::index');
     }
-    public function lookArticle(Request $request){
-        return view('main::Index.article');
+    public function __construct()
+    {
+        $this->articleModel = new Article();
+        $this->commentModel = new Comment();
     }
 
+    public function lookArticle(Request $request){
+        $id = $request->route( 'article_id' );
+        if (!$id){
+            return redirect()->back();
+        }
+        $data = $this->articleModel->getMyArticle($id);
+        return view('main::Index.article')->with(["data"=>$data]);
+    }
+    public function getComments(Request $request){
+        $id = $request->article_id ;
+       $Comments =  $this->commentModel->getOneGrade($id);
+       $tmpview = view('main::Index.fillDatas.comment')->with('comment',$Comments);
+       $html = response($tmpview)->getContent();
+       return $html;
+    }
     public function showList(Request $request)
     {
         if(!$request->ajax())
             return "非ajax请求";
-//        return
+        return null;
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('main::create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
-    {
-        return view('main::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        return view('main::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
-    }
 }

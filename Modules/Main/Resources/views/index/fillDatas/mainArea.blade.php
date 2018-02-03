@@ -6,12 +6,12 @@
  {{--*/--}}
         @foreach($data as $iteam )
           <li>
-            <a href="user/home.html" class="fly-avatar">
+            <a href="article" class="fly-avatar">
               <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
             </a>
             <h2>
               <a class="layui-badge">分享</a>
-              <a href="article">{{$iteam->article_title}}</a>
+              <a href="article/{{$iteam->article_id}}">{{$iteam->article_title}}</a>
             </h2>
             <div class="fly-list-info">
               <a href="user/home.html" link>

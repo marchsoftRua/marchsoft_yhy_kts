@@ -6,5 +6,6 @@
 
 @section('index')
 @endsection
+@include('main::index.layouts.detail')
 
 @include('main::index.layouts.footer')

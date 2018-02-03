@@ -34,6 +34,16 @@ class Article extends Model
         $respose_ ["html"]=$html;
         return $respose_;
     }
+    public function getMyArticle($Id){
+
+        $query=DB::table('articles')
+            ->join('users', function ($join) {
+                $join->on('users.user_id', '=', 'articles.user_id');
+            })->where("article_id",$Id)->first();
+        $query->CommentNum   =   $this->CommentModel->getCommentNumById($Id);
+        $query->article_label=   $this->LabelModel->GetArticleLabelById($Id);
+        return $query;
+    }
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

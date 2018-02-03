@@ -110,7 +110,7 @@
         <dt class="fly-panel-title">本周热议</dt>
         @foreach($hotRank as $hot)
         <dd>
-          <a href="/article">{{$hotRank->article_name}}</a>
+          <a href="/article/{{$hot->article_id}}">{{$hotRank->article_name}}</a>
           <span><i class="iconfont icon-pinglun1"></i> {{$hotRank->comment_num}}</span>
         </dd>
         @endforeach
@@ -143,4 +143,5 @@
     </div>
   </div>
 </div>
+<script src="{{asset('Main/index/render.js')}}"></script>
 @endsection
