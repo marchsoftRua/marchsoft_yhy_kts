@@ -1,4 +1,6 @@
-<?php namespace Germey\Geetest;
+<?php 
+namespace Germey\Geetest;
+
 trait CaptchaGeetest
 {
     /**

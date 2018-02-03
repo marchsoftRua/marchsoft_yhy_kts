@@ -46,6 +46,44 @@ class ArticleController extends Controller
         if(!$request->ajax())
             return "非ajax请求";
         return null;
+    public function setData($data)
+    {
+        $dataArr =array("code"=>0,"msg"=>"","count"=>1,"data"=>$data);
+        return $dataArr;
+    }
+
+    public function showList(Request $request)
+    {
+        $model = new Article();
+        return $this->setData($model->getArticleTable());
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function create()
+    {
+        return view('main::create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @param  Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+    }
+
+    /**
+     * Show the specified resource.
+     * @return Response
+     */
+    public function show()
+    {
+        return view('main::show');
     }
 
 

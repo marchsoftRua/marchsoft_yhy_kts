@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLabelTable extends Migration
+class CreateTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateLabelTable extends Migration
      */
     public function up()
     {
-        Schema::create('labels', function (Blueprint $table) {
-            $table->increments('label_id')->comment("标签id");
-            $table->string("label_name",5)->comment("标签名称");
-            $table->string("label_color",20)->comment("标签的颜色代码");
+        Schema::create('type', function (Blueprint $table) {
+            $table->increments('id')->comment("类型的id");
+            $table->string("type_name",20)->comment("类型的名字");
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateLabelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('labels');
+        Schema::dropIfExists('type');
     }
 }

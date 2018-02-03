@@ -18,9 +18,7 @@ class CreateSidenavsTable extends Migration
             $table->string('title','10')->comment('侧边栏的名字');
             $table->string('icon','50')->comment('侧边栏的图标');
             $table->string('href','50')->comment('侧边栏搞的地址');
-            $table->integer('children_id')->comment('孩子的id');
-
-
+            $table->integer('children_id')->default(0)->comment('孩子的id');
         });
     }
 

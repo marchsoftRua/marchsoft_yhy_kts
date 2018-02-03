@@ -71,4 +71,8 @@ class Article extends Model
     {
         return $this->hasMany("Modules\Main\Entities\Comment",'article_id');
     }
+    public function getArticleTable()
+    {
+        return $this->all();
+    }
 }

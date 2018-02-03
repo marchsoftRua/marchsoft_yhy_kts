@@ -14,7 +14,7 @@ class CreateLabelArticleTable extends Migration
     public function up()
     {
         Schema::create('label_articles', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->comment("关联表 id");
             $table->integer("label_id");
             $table->integer("article_id");
         });
