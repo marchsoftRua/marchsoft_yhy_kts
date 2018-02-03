@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{asset('Main/res/css/login/base.css')}}" />
     <link rel="stylesheet" href="{{asset('Main/res/css/login/main.css')}}" />
     <script src="{{asset('Main/layui/layui.js')}}"></script>
-    <script src="{{asset('Main/js/jquery.js')}}"></script>
+    <script src="{{asset('js/jquery.js')}}"></script>
     <style>
         #canvas {
           display: block;
@@ -20,7 +20,7 @@
     <div id="info" class="sign-info" hidden="hidden"></div>
     <!-- <canvas id="Mycanvas"></canvas> -->
         <canvas id="canvas"></canvas>
-        <main id="index-main">
+    <main id="index-main">
         <header id="index-header">
             <!--
             <div class="logo">
@@ -28,7 +28,7 @@
             </div>
         -->
             <h1 class="logo hide-text"></h1>
-            <h2 id="slogan">与世界分享你的知识、经验和见解</h2>
+            <h2 id="slogan">与世界分享你刚刚编好的故事</h2>
         </header>
         <nav class="index-tab-nav">
             <button id="signup-option" type="button">注册</button>
@@ -36,55 +36,44 @@
         </nav>
         <!-- 注册表单 -->
         <div class="signup-wrapper">
-        <form id="signup" class="" >
-            <div class="group-inputs">
-                <div class="input-wrapper input-username">
-                    <input name="username" type="text" placeholder="姓名" />
+            <form id="signup" class="" >
+                <div class="group-inputs">
+                    <div class="input-wrapper input-username">
+                        <input name="username" type="text" placeholder="姓名" />
+                    </div>
+                    <div class="input-wrapper input-account">
+                        <input name="account" type="text" placeholder="手机号（仅支持中国大陆）" />
+                    </div>
+                    <div class="input-wrapper input-password">
+                        <input name="password" type="password" placeholder="密码" />
+                    </div>
                 </div>
-                <div class="input-wrapper input-account">
-                    <input name="account" type="text" placeholder="手机号（仅支持中国大陆）" />
-                </div>
-                <div class="input-wrapper input-password">
-                    <input name="password" type="password" placeholder="密码" />
-                </div>
-                <div class="input-wrapper input-captcha">
-                <input name="captcha" type="text" placeholder="验证码" />
-                </div>
-            </div>
-
-            <!-- .group-inputs -->
-            <input id="signup-btn" class="sign-btn" type="button" onclick=""  value="注册"/>
-        </form>
-        <p class="agreement-tips">点击「注册」按钮，即代表你同意<a href="https://www.zhihu.com/terms">《三月协议》</a></p>
-    </div>
+                <!-- .group-inputs -->
+                <input id="signup-btn" class="sign-btn" type="button" onclick=""  value="注册"/>
+            </form>
+            <p class="agreement-tips">点击「注册」按钮，即代表你同意<a href="https://www.zhihu.com/terms">《三月协议》</a></p>
+        </div>
 
         <!-- 登陆表单 -->
         <div class="signin-wrapper">
-        <form id="signin" class="" method="post"  action="/AuthLogin">
-            <input name="_token" type="hidden" value="{{ csrf_token() }}">
-            <div class="group-inputs">
-                <div class="input-wrapper input-account">
-                    <input name="account" type="text" placeholder="手机号或邮箱" />
+            <form id="signin" class="" method="post"  action="/login">
+                <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                <div class="group-inputs">
+                    <div class="input-wrapper input-account">
+                        <input name="account" type="text" placeholder="手机号或邮箱" />
+                    </div>
+                    <div class="input-wrapper input-password">
+                        <input name="password" type="password" placeholder="密码" />
+                    </div>
                 </div>
-                <div class="input-wrapper input-password">
-                    <input name="password" type="password" placeholder="密码" />
+                <div>
+                    <?php echo Geetest::render(); ?>
                 </div>
-                {{--<div class="input-wrapper input-captcha">--}}
-                    {{--<input name="captcha" type="text" placeholder="验证码" />--}}
-                {{--</div>--}}
-            </div>
-        <?php echo Geetest::render(); ?>
-
-        <!-- .group-inputs -->
-            <input id="signin-btn" class="sign-btn" type="button" onclick="" value="登陆"/>
-        </form>
+                
+                <input id="signin-btn" class="sign-btn" type="button" onclick="" value="登陆"/>
+            </form>
+            <p class="agreement-tips">点击「注册」按钮，即代表你同意<a href="https://www.zhihu.com/terms">《三月协议》</a></p>
         <div class="signin-btn-wrapper">
-            {{--<button class="signin-switch-button" type="button">手机验证码登陆</button>--}}
-            <button class="unable-signin" type="button">无法登陆？</button>
-        </div>
-        {{--<div class="social-signup-wrapper">--}}
-            {{--<button class="social-signup-button" type="button">社交账号登陆</button>--}}
-        {{--</div>--}}
         </div>
     </main>
 
@@ -113,9 +102,9 @@
         </div>
     </footer>
     <!-- <script src="https://cdn.bootcss.com/blueimp-md5/2.7.0/js/md5.min.js"></script> -->
-    <script src="{{asset("Main/res/mods/login/forms.js")}}"></script>
-    <script src="{{asset("Main/res/mods/login/main.js")}}"></script>
-    <script type="text/javascript" src="{{asset("Main/res/mods/login/bundle.js")}}"></script>
+    <script src="{{asset('Main/res/mods/login/forms.js')}}"></script>
+    <script src="{{asset('Main/res/mods/login/main.js')}}"></script>
+    <script type="text/javascript" src="{{asset('Main/res/mods/login/bundle.js')}}"></script>
     <script>
         layui.use(['jquery'],function () {
             var $ = layui.jquery

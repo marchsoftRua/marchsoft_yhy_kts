@@ -4,7 +4,9 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
 {
     Route::get('/AuthLogin', 'AuthController@postValidate');
     Route::get('/geetest','AuthController@getGeetest');
-    Route::get('/login', 'MainController@login');
+
+    Route::any('/alogin', 'MainController@login');
+    Route::post('/register','MainController@register');
 });
 Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controllers\Admin'], function()
 {
@@ -16,7 +18,9 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::get('/article', 'ArticleController@lookArticle');
     Route::get('/articlePage','AdminController@articlePage');
 
-    Route::get('/articleList','ArticleController@showList');
+    Route::get('/articleList','ArticleController@showList');//nav获取页面
+
+    Route::get('/image/{user_id?}','ImageController@getUserImg');//用户获取头像
 
 });
 
@@ -29,4 +33,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::post('/reader', 'IndexController@readerSetData');
     Route::post('/getHotUser', 'IndexController@getTheWeekHot');
     Route::post('/getSpeakRank', 'IndexController@getSpeakRank');
+
+
+
 });
