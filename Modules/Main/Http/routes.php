@@ -34,7 +34,4 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::post('/reader', 'IndexController@readerSetData');
     Route::post('/getHotUser', 'IndexController@getTheWeekHot');
     Route::post('/getSpeakRank', 'IndexController@getSpeakRank');
-
-
-
 });
