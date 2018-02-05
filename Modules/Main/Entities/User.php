@@ -28,12 +28,12 @@ class User extends Model
         return $query;
     }
 
-    public function　validate($request)
+    public function validate($request)
     {
         $email = $request->input('email');
         $password = $request->input('password');
 
-        
+
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             // 认证通过...
             return redirect()->intended('dashboard');
