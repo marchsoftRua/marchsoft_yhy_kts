@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function articlePage()
     {
-        return view('main::admin.page.article');
+        return view('main::admin.page.articleList');
     }
 
     /**

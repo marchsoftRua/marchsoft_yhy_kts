@@ -5,6 +5,9 @@ namespace Modules\Main\Entities;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use Modules\Main\Entities;
+
+use Modules\Main\Entities\Type;
+
 class Article extends Model
 {
     protected $fillable = [];
@@ -51,6 +54,11 @@ class Article extends Model
         $this->CommentModel=new Comment();
     }
 
+    public function Comments()
+    {
+        return $this->hasMany("Modules\Main\Entities\Comment",'article_id');
+    }
+
     public function getWeekHotData()
     {
         $start = date('y-m-d h:i:s',strtotime('-7 day'));
@@ -67,12 +75,24 @@ class Article extends Model
         return $query;
     }
 
-    public function Comments()
+    public function forUser()
     {
-        return $this->hasMany("Modules\Main\Entities\Comment",'article_id');
+        return $this->belongsTo('Modules\Main\Entities\User','user_id','user_id');
     }
+
+    public function forType()
+    {
+        return $this->belongsTo('Modules\Main\Entities\Type','type_id','type_id');
+    }
+
     public function getArticleTable()
     {
-        return $this->all();
+
+        $collection = $this->all()->map(function ($item, $key) {
+            $item['name'] = $item->forUser->name;
+            $item['type_name'] = $item->forType->type_name;
+            return $item;
+        });
+        return $collection;
     }
 }

@@ -189,3 +189,22 @@ footer {
     margin: 0 auto;
     line-height: 150%;
 }
+.the-button
+{
+    position: relative;
+    bottom: 25px;
+    float: right;
+    margin-right: 3%;
+    color: rgb(23, 81, 153);
+    transform: translateY(-50%);
+    padding: 4px 0px;
+    height: auto;
+    line-height: inherit;
+    background-color: transparent;
+    padding: 0px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 0px;
+}

@@ -8,4 +8,11 @@ function module_js()
 {
 	return("string");
 }
+
+function setData($data)
+{
+    $dataArr =array("code"=>0,"msg"=>"","count"=>1,"data"=>$data);
+    return $dataArr;
+}
+
  ?>

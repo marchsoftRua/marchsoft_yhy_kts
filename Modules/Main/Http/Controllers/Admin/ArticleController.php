@@ -4,9 +4,11 @@ namespace Modules\Main\Http\Controllers\Admin;
 use Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
+
 use Modules\Main\Entities\Comment;
 use Modules\Main\Entities\Article;
+use Modules\Main\Entities\Type;
 
 class ArticleController extends Controller
 {
@@ -16,9 +18,18 @@ class ArticleController extends Controller
      */
     var $articleModel=null;
     var $commentModel=null;
-    public function index()
+    public function index(Request $request)
     {
-        return view('main::index');
+
+        if($request->ajax())
+        {
+            echo "aaa";
+        }
+        else
+        {
+            $typeModle = new Type();
+            return view('main::admin.page.addarticle')->with('types',$typeModle->all());
+        }
     }
     public function __construct()
     {
@@ -42,45 +53,11 @@ class ArticleController extends Controller
        return $html;
     }
 
-    public function setData($data)
-    {
-        $dataArr =array("code"=>0,"msg"=>"","count"=>1,"data"=>$data);
-        return $dataArr;
-    }
-
     public function showList(Request $request)
     {
         $model = new Article();
-        return $this->setData($model->getArticleTable());
+        return setData($model->getArticleTable());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('main::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
-    {
-        return view('main::show');
-    }
-
 
 
 }

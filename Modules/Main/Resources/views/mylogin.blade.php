@@ -2,11 +2,11 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>三月社区 - 与世界分享你的知识、经验和见解aaaa</title>
     <link rel="stylesheet" href="{{asset('Main/res/css/login/base.css')}}" />
     <link rel="stylesheet" href="{{asset('Main/res/css/login/main.css')}}" />
     <script src="{{asset('Main/layui/layui.js')}}"></script>
-    <script src="{{asset('js/jquery.js')}}"></script>
     <style>
         #canvas {
           display: block;
@@ -18,15 +18,9 @@
 
 <body>
     <div id="info" class="sign-info" hidden="hidden"></div>
-    <!-- <canvas id="Mycanvas"></canvas> -->
         <canvas id="canvas"></canvas>
     <main id="index-main">
         <header id="index-header">
-            <!--
-            <div class="logo">
-                <img src="images/zhihu-logo.png" />
-            </div>
-        -->
             <h1 class="logo hide-text"></h1>
             <h2 id="slogan">与世界分享你刚刚编好的故事</h2>
         </header>
@@ -37,23 +31,23 @@
         <!-- 注册表单 -->
         <div class="signup-wrapper">
             <form id="signup" class="" method="post" action="/register">
+                <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="group-inputs">
                     <div class="input-wrapper input-username">
-                        <input name="username" type="text" placeholder="用户昵称" />
+                        <input name="user_playname" type="text" placeholder="用户昵称" />
                     </div>
                     <div class="input-wrapper input-account">
-                        <input name="email" type="email" placeholder="请填写你的注册邮箱" />
+                        <input name="user_email" type="email" placeholder="请填写你的注册邮箱a" />
                     </div>
+                    <button class="the-button" type="button">点击66</button>
                     <div class="input-wrapper input-password">
-                        <input name="password" type="password" placeholder="密码" />
+                        <input name="user_password" type="password" placeholder="密码" style="width: 83%;" />
                     </div>
                 </div>
-                <!-- .group-inputs -->
-                <input id="signup-btn" class="sign-btn" type="button" onclick=""  value="注册"/>
+                <input id="signup-btn" class="sign-btn" type="submit" onclick=""  value="注册"/>
             </form>
             <p class="agreement-tips">点击「注册」按钮，即代表你同意<a href="https://www.zhihu.com/terms">《三月协议》</a></p>
         </div>
-
         <!-- 登陆表单 -->
         <div class="signin-wrapper">
             <form id="signin" class="" method="post" action="/login">
@@ -101,7 +95,6 @@
             <!-- <a href="http://zhstatic.zhihu.com/assets/zhihu/publish-license.jpg" target="_blank">出版物经营许可证</a> -->
         </div>
     </footer>
-    <!-- <script src="https://cdn.bootcss.com/blueimp-md5/2.7.0/js/md5.min.js"></script> -->
     <script src="{{asset('Main/res/mods/login/forms.js')}}"></script>
     <script src="{{asset('Main/res/mods/login/main.js')}}"></script>
     <script type="text/javascript" src="{{asset('Main/res/mods/login/bundle.js')}}"></script>

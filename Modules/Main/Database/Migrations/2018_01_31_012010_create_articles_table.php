@@ -23,9 +23,9 @@ class CreateArticlesTable extends Migration
             $table->integer('shame')->default(0)->comment("获得踩");
             $table->integer('readnum')->default(0)->comment("浏览量");
             $table->integer('status')->comment("文章状态");
-            $table->string('article_content')->comment("文章内容");//需讨论
+            $table->text('article_content')->comment("文章内容");//需讨论
             $table->integer('notebook_id')->comment("所属笔记");//关联外键
-            $table->string('cover_path',100)->comment("封面路径");
+            $table->integer('image_id')->comment("封面id　曾经想要用路径　但感觉不好");
             $table->softDeletes()->comment("软删除");
             $table->timestamps();
         });
