@@ -1,6 +1,6 @@
 
 @section('container')
-    <div class="layui-container">
+    <div class="layui-container" id="theArticle" name='{{$data->article_id}}'>
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md8 content detail">
             <div class="fly-panel detail-box">
@@ -52,27 +52,27 @@
             </div>
 
 
-            <div class="fly-panel detail-box" id="flyReply">
+            <div class="fly-panel detail-box" id="flyReply" >
 
                 <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
                     <legend>回帖</legend>
                 </fieldset>
-                <div class="layui-form layui-form-pane">
-                    <form action="/jie/reply/" method="post">
-                        <div class="layui-form-item layui-form-text">
+                <div class="layui-form layui-form-pane" id="copyIn">
+                    <form action="/jie/reply/" method="post" style="position: relative;">
+                        <div class="layui-form-item layui-form-text" style="    width: 80%;display: inline-block;">
                             <a name="comment"></a>
                             <div class="layui-input-block">
-                                <textarea id="L_content" name="content" required lay-verify="required" placeholder="请输入内容"  class="layui-textarea fly-editor" style="height: 150px;"></textarea>
+                                <textarea id="L_content" name="content" required  placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 100px;resize:none;"></textarea>
                             </div>
                         </div>
-                        <div class="layui-form-item">
+                        <div class="layui-form-item" style="width: 19%;display: inline-block;bottom: 3px;right: 0;position: absolute;">
                             <input type="hidden" name="jid" value="123">
                             <button class="layui-btn" lay-filter="*" lay-submit>提交回复</button>
                         </div>
                     </form>
                 </div>
                 <div class="fly-panel-title fly-filter" style="padding: 0">
-               <span class="fly-filter-left layui-hide-xs">
+               <span class="fly-filter-left layui-hide-xs" >
                     <a href="javascript:void(0);" class="layui-this"  id="byNew">按最新</a>
                     <span class="fly-mid"></span>
                     <a href="javascript:void(0);" id="byHot">按热门排序</a>
@@ -84,7 +84,7 @@
                     <!-- 无数据时 -->
                     <!-- <li class="fly-none">消灭零回复</li> -->
                 </ul>
-
+                <div id="allPage"></div>
 
             </div>
         </div>

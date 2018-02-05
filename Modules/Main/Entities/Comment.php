@@ -12,16 +12,19 @@ class Comment extends Model
        $num = Comment::where("comment_id",$id)->count();
        return $num;
     }
-    public function getOneGrade($w_id){
-        $OneGrade=Comment::where('parent_id',0)->where('article_id',$w_id)->paginate(5);
+    public function getOneGrade($w_id,$orderBy){
+        $OneGrade=Comment::where('parent_id',0)
+        ->where('article_id',$w_id)
+        ->orderBy($orderBy,"desc")
+        ->paginate(5);
         foreach ($OneGrade as $item){
             $item->childs = $this->getChild($item->comment_id,$w_id);
         }
         return $OneGrade;
     }
-    public function getChild($p_id,$w_id){
-        $OneGrade=Comment::where('parent_id',$p_id)->where('article_id',$w_id)->paginate(5);
-        return $OneGrade;
+    public function getChild($p_id,$w_id,$getLimit=3){
+        $OneGrade=Comment::where('parent_id',$p_id)->where('article_id',$w_id)->paginate($getLimit);
+        return json_en_de_code($OneGrade);
     }
 //    public  function getComment($p_id,$belongTo){
 //        $childs=Comment::where('parent_id',$p_id)->where('article_id',$belongTo)->get();

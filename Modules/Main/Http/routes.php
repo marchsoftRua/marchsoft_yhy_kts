@@ -18,7 +18,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::get('/article/{article_id?}', 'ArticleController@lookArticle');
     Route::get('/articlePage','AdminController@articlePage');
     Route::post('/getComment','ArticleController@getComments');
-
+    Route::post('/getChild','ArticleController@getChildComments');
     Route::get('/articleList','ArticleController@showList');//nav获取页面
 
     Route::get('/image/{user_id?}','ImageController@getUserImg');//用户获取头像

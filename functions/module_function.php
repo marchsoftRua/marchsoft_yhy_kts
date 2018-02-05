@@ -8,4 +8,8 @@ function module_js()
 {
 	return("string");
 }
+function json_en_de_code($obj)
+{
+	return json_decode(json_encode($obj)) ;
+}
  ?>

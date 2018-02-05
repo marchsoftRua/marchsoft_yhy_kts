@@ -1,6 +1,5 @@
 
-
-@foreach($comment as $item)
+@foreach($comment as $key=>$item )
 <li data-id="111" class="jieda-daan">
     <a name="item-1111111111"></a>
     <div class="detail-about detail-about-reply">
@@ -29,14 +28,14 @@
         <i class="iconfont icon-caina" title="最佳答案"></i>
     </div>
     <div class="detail-body jieda-body photos">
-        <p>香菇那个蓝瘦，这是一条被采纳的回帖</p>
+        <p>{{$item->comment_inner}}</p>
     </div>
     <div class="jieda-reply">
               <span class="jieda-zan zanok" type="zan">
                 <i class="iconfont icon-zan"></i>
                 <em>66</em>
               </span>
-        <span type="reply">
+                <span type="reply" class="reply_bt">
                 <i class="iconfont icon-svgmoban53"></i>
                 回复
               </span>
@@ -46,9 +45,16 @@
             <!-- <span class="jieda-accept" type="accept">采纳</span> -->
         </div>
     </div>
-    <pre>
-{{$item->childs}}
-</pre>
+        <ul style="margin-left: 50px;">
+            @include('main::index.fillDatas.childComment')
+              @if($item->childs->total>3)
+                <p><a href="javascript:void(0)" class="more"  name="{{$item->comment_id}}">共{{$item->childs->total}}条评论,点击查看更多</a></p>
+              @endif
+        </ul>
+             @if(count($item->childs->data>4))
+              <div id="c_fpage_{{$item->article_id}}_{{$key+1}}" name={{$item->comment_id}} style="padding-left: 50px;"></div>
+             @endif
 
 </li>
 @endforeach
+
