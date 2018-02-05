@@ -36,13 +36,13 @@
         </nav>
         <!-- 注册表单 -->
         <div class="signup-wrapper">
-            <form id="signup" class="" >
+            <form id="signup" class="" method="post" action="/register">
                 <div class="group-inputs">
                     <div class="input-wrapper input-username">
-                        <input name="username" type="text" placeholder="姓名" />
+                        <input name="username" type="text" placeholder="用户昵称" />
                     </div>
                     <div class="input-wrapper input-account">
-                        <input name="account" type="text" placeholder="手机号（仅支持中国大陆）" />
+                        <input name="email" type="email" placeholder="请填写你的注册邮箱" />
                     </div>
                     <div class="input-wrapper input-password">
                         <input name="password" type="password" placeholder="密码" />
@@ -56,7 +56,7 @@
 
         <!-- 登陆表单 -->
         <div class="signin-wrapper">
-            <form id="signin" class="" method="post"  action="/login">
+            <form id="signin" class="" method="post" action="/login">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="group-inputs">
                     <div class="input-wrapper input-account">
