@@ -15,4 +15,9 @@ function setData($data)
     return $dataArr;
 }
 
+function json_en_de_code($obj)
+{
+	return json_decode(json_encode($obj)) ;
+}
+
  ?>

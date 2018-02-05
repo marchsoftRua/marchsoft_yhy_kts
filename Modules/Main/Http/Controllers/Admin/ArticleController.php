@@ -46,13 +46,32 @@ class ArticleController extends Controller
         return view('main::Index.article')->with(["data"=>$data]);
     }
     public function getComments(Request $request){
-        $id = $request->article_id ;
-       $Comments =  $this->commentModel->getOneGrade($id);
+       $oderRule =["created_at","praise"]; 
+       $id = $request->article_id;
+       $oderBy=$request->bycolumn;
+       $Comments =  $this->commentModel->getOneGrade($id,$oderRule[$oderBy]);
        $tmpview = view('main::Index.fillDatas.comment')->with('comment',$Comments);
        $html = response($tmpview)->getContent();
-       return $html;
+       return  [
+                "html"=>$html,
+                "data"=> $Comments
+                ];
     }
-
+    public function getChildComments(Request $request){
+        $id = $request->article_id;
+        $p_id=$request->p_id;
+        $getLimit=$request->getLimit;
+        $item=new \stdClass();
+        $item->childs = $this->commentModel->getChild($p_id,$id,$getLimit);
+        $item->p_id=$p_id;
+        $tmpview = view('main::Index.fillDatas.childComment')->with('item',$item);
+        $html = response($tmpview)->getContent();
+         return  [
+                "html"=>$html,
+                "data"=>$item->childs
+                ];
+    }
+    
     public function showList(Request $request)
     {
         $model = new Article();
