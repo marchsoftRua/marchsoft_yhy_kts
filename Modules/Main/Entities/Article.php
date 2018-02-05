@@ -14,6 +14,7 @@ class Article extends Model
     public $primaryKey = 'article_id';
     public $CommentModel;
     public $LabelModel;
+
     public function getIndexMainData($bycolumn,$status,$type,$getLimit){
         $query=DB::table('articles')
             ->join('users', function ($join) {
@@ -77,7 +78,7 @@ class Article extends Model
 
     public function forUser()
     {
-        return $this->belongsTo('Modules\Main\Entities\User','user_id','user_id');
+        return $this->belongsTo('Modules\Main\Entities\User','user_id','id');
     }
 
     public function forType()
@@ -87,7 +88,6 @@ class Article extends Model
 
     public function getArticleTable()
     {
-
         $collection = $this->all()->map(function ($item, $key) {
             $item['name'] = $item->forUser->name;
             $item['type_name'] = $item->forType->type_name;

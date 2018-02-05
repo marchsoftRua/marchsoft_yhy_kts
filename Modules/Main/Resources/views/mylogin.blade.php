@@ -31,7 +31,7 @@
         <!-- 注册表单 -->
         <div class="signup-wrapper">
             <form id="signup" class="" method="post" action="/register">
-                <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                {{ csrf_field() }}
                 <div class="group-inputs">
                     <div class="input-wrapper input-username">
                         <input name="user_playname" type="text" placeholder="用户昵称" />
@@ -51,20 +51,21 @@
         <!-- 登陆表单 -->
         <div class="signin-wrapper">
             <form id="signin" class="" method="post" action="/login">
-                <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                {{ csrf_field() }}
                 <div class="group-inputs">
                     <div class="input-wrapper input-account">
-                        <input name="account" type="text" placeholder="手机号或邮箱" />
+                        <input name="email" type="email" lay-verify="required|email"  placeholder="邮箱" />
                     </div>
                     <div class="input-wrapper input-password">
-                        <input name="password" type="password" placeholder="密码" />
+                        <input name="password" type="password" lay-verify="password" placeholder="密码" />
                     </div>
                 </div>
                 <div>
                     <?php echo Geetest::render(); ?>
                 </div>
                 
-                <input id="signin-btn" class="sign-btn" type="button" onclick="" value="登陆"/>
+                <input id="signin-btn" lay-filter="login" class="sign-btn" type="submit" onclick="" value="登陆"/>
+
             </form>
             <p class="agreement-tips">点击「注册」按钮，即代表你同意<a href="https://www.zhihu.com/terms">《三月协议》</a></p>
         <div class="signin-btn-wrapper">
@@ -99,8 +100,29 @@
     <script src="{{asset('Main/res/mods/login/main.js')}}"></script>
     <script type="text/javascript" src="{{asset('Main/res/mods/login/bundle.js')}}"></script>
     <script>
-        layui.use(['jquery'],function () {
-            var $ = layui.jquery
+        layui.use(['jquery','layer','form'],function () {
+            var $ = layui.jquery,
+            layer = layui.layer,
+            form = layui.form
+            form.verify({
+              password: function(value, item){
+                layer.msg(value)
+              }
+            })
+            // form.on('submit(login)', function(data){
+
+            // });
+            // $("#signin-btn").on('click',function(){
+
+            //     $.ajax({
+            //         url:'/login',
+            //         method:'post',
+            //         data:$('#signin').serialize(),
+            //         error:function(msg){
+            //             layui.msg(msg)
+            //         },
+            //     })
+            // })
         })
     </script>
 </body>

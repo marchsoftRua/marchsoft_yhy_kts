@@ -13,10 +13,17 @@ class MainController extends Controller
 {
 	public function login(Request $request)
 	{
-		if($request->ajax())
+		if($request->isMethod('post'))
 		{
 			$model = new User();
-			$model->validate($request);
+			$this->validate($request, [
+		        'email' => 'required|email',
+		        'password' => 'required|max:20|min:6',
+		        'geetest_challenge' => 'geetest',
+		    ],[
+		    	'geetest' => config('geetest.server_fail_alert')
+		    	]);
+			return $model->validate($request);
 		}
 		else
 			return view('main::mylogin');
