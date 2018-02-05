@@ -1,7 +1,6 @@
 
 @foreach($comment as $key=>$item )
-<li data-id="111" class="jieda-daan">
-    <a name="item-1111111111"></a>
+<li id="p_id_{{$item->comment_id}}" class="jieda-daan">
     <div class="detail-about detail-about-reply">
         <a class="fly-avatar" href="">
             <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt=" ">
@@ -35,7 +34,7 @@
                 <i class="iconfont icon-zan"></i>
                 <em>66</em>
               </span>
-                <span type="reply" class="reply_bt">
+                <span type="reply" class="reply_bt" pid='{{$item->comment_id}}'>
                 <i class="iconfont icon-svgmoban53"></i>
                 回复
               </span>

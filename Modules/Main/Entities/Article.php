@@ -17,7 +17,7 @@ class Article extends Model
     public function getIndexMainData($bycolumn,$status,$type,$getLimit){
         $query=DB::table('articles')
             ->join('users', function ($join) {
-                $join->on('users.user_id', '=', 'articles.user_id');
+                $join->on('users.id', '=', 'articles.user_id');
             });
         if ($status)  $query = $query->where("status",$status);
         if ($type)    $query = $query->where("article_type",$type);
@@ -41,7 +41,7 @@ class Article extends Model
 
         $query=DB::table('articles')
             ->join('users', function ($join) {
-                $join->on('users.user_id', '=', 'articles.user_id');
+                $join->on('users.id', '=', 'articles.user_id');
             })->where("article_id",$Id)->first();
         $query->CommentNum   =   $this->CommentModel->getCommentNumById($Id);
         $query->article_label=   $this->LabelModel->GetArticleLabelById($Id);

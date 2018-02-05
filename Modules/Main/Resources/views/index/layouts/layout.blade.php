@@ -8,6 +8,7 @@
   <meta name="_token" content="{{ csrf_token() }}">
   <meta name="description" content="三月小组是最棒的，这是我们大家的社区">
   <link rel="stylesheet" type="text/css" href="{{asset('/Main/layui/css/layui.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('/Main/index/css/index.css')}}">
   <link rel="stylesheet" href="{{asset('/Main/css/global.css')}}">
   <script src="{{asset('/js/jquery.js')}}"></script>
 </head>

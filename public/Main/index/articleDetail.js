@@ -6,9 +6,14 @@ $(document).ready(function(){
     getComments(GETALL,1,1,0,5,1);
 
 });
-$('body').on('click','.reply_bt',function(){
-   var back =  $('#flyReply').clone(true)
-   console.log(back)
+$('body').on('click','.reply_bt',function(event){
+   var selEl = "#p_id_"+event.target.getAttribute("pid")
+   var source = document.getElementById(selEl);
+   var back =  $('#copyIn').clone(true)
+   $(back).addClass('back')
+   $(".back").removeAttr("style")
+   $('.back').remove()
+   $(selEl).append(back)
 })
  $('body').on('click','.more',function(event){
     var obj = event.target

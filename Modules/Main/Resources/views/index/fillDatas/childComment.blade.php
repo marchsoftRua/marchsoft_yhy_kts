@@ -22,7 +22,7 @@
                         <i class="iconfont icon-zan"></i>
                         <em>66</em>
                       </span>
-                       <span type="reply">
+                       <span type="reply" class="reply_bt" pid="{{$cc->parent_id}}">
                         <i class="iconfont icon-svgmoban53"></i>
                         回复
                       </span>
