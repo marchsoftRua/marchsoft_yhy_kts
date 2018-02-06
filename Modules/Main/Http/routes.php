@@ -9,12 +9,16 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
 
     Route::any('/login', 'MainController@login')->name('login');
     Route::post('/register','MainController@register');
+
+    Route::get('/lauout','MainController@layout');
 });
 Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\Controllers\Admin'], function()
 {
     /****
     后台路由
     ******/
+
+
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
     Route::get('/article/{article_id?}', 'ArticleController@lookArticle');

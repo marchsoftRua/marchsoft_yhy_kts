@@ -24,6 +24,7 @@ class ArticleController extends Controller
         if($request->ajax())
         {
             echo "aaa";
+            
         }
         else
         {

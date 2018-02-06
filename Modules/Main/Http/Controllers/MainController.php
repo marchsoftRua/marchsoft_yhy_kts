@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\Auth;
 use Modules\Main\Entities\User;
 // use App\User;
 
@@ -28,6 +28,12 @@ class MainController extends Controller
 		}
 		else
 			return view('main::mylogin');
+	}
+
+	public function layout(Request $request)
+	{
+		Auth::logout();
+		return redirect('/');
 	}
 
 	public function register(Request $request)
