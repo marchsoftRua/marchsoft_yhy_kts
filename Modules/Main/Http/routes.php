@@ -7,10 +7,10 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::get('/AuthLogin', 'AuthController@postValidate');
     Route::get('/geetest','AuthController@getGeetest');
 
-    Route::any('/login', 'MainController@login');
+    Route::any('/login', 'MainController@login')->name('login');
     Route::post('/register','MainController@register');
 });
-Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controllers\Admin'], function()
+Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\Controllers\Admin'], function()
 {
     /****
     后台路由
