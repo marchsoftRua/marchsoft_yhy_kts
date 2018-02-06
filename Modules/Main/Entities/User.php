@@ -65,12 +65,13 @@ class User extends Authenticatable
     public function addUser($request)
     {
         $user_playname = $request->input('user_playname');
-        $email = $request->input('user_email');
-        $password = $request->input('user_password');
+        $email = $request->input('email');
+        $password = $request->input('password');
         $this->user_playname = $user_playname;
         $this->email = $email;
         $this->password = Hash::make($password);
         $this->save();
+        $this->validate($request);
         return true;
     }
 

@@ -30,21 +30,21 @@
         </nav>
         <!-- 注册表单 -->
         <div class="signup-wrapper">
-            <form id="signup" class="" method="post" action="/register">
+            <form id="signup" class="">
                 {{ csrf_field() }}
                 <div class="group-inputs">
                     <div class="input-wrapper input-username">
-                        <input name="user_playname" type="text" placeholder="用户昵称" />
+                        <input id='sign-name' name="user_playname" type="text" placeholder="用户昵称5~12个字符" />
                     </div>
                     <div class="input-wrapper input-account">
-                        <input name="user_email" type="email" placeholder="请填写你的注册邮箱a" />
+                        <input id='sign-email' name="email" type="email" placeholder="请填写你的注册邮箱" />
                     </div>
                     <button class="the-button" type="button">点击66</button>
                     <div class="input-wrapper input-password">
-                        <input name="user_password" type="password" placeholder="密码" style="width: 83%;" />
+                        <input name="password" id='sign-password' type="password" placeholder="密码最少６位" style="width: 83%;" />
                     </div>
                 </div>
-                <input id="signup-btn" class="sign-btn" type="submit" onclick=""  value="注册"/>
+                <input id="signup-btn" class="sign-btn" type="button" onclick=""  value="注册"/>
             </form>
             <p class="agreement-tips">点击「注册」按钮，即代表你同意<a href="https://www.zhihu.com/terms">《三月协议》</a></p>
         </div>
@@ -108,6 +108,72 @@
               password: function(value, item){
                 layer.msg(value)
               }
+            })
+            function isEmail(str)
+            { 
+                var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
+                console.log(reg.test(str))
+                return reg.test(str); 
+            } 
+            $('#signup-btn').on('click',function(){
+                if($('#sign-name')[0].value.length<5)
+                {
+                    console.log($('#sign-name')[0].value.length)
+                    layer.tips('用户昵称最少５个字符', '#sign-name', {
+                      tips: [1, '#FF3030']
+                    });
+                    return
+                }
+                if($('#sign-name')[0].value.length>12)
+                {
+                    layer.tips('用户昵称最多12个字符', '#sign-name', {
+                      tips: [1, '#FF3030']
+                    });
+                    return
+                }
+                if(!isEmail($('#sign-email')[0].value))
+                {
+                    layer.tips('不符合邮箱规范', '#sign-email', {
+                      tips: [1, '#FF3030']
+                    });
+                    return
+                }
+                if($('#sign-password')[0].value.length<6)
+                {
+                    layer.tips('密码最少6个字符', '#sign-password', {
+                      tips: [1, '#FF3030']
+                    });
+                    return
+                }
+                if($('#sign-password')[0].value.length>20)
+                {
+                    layer.tips('密码最多20个字符', '#sign-password', {
+                      tips: [1, '#FF3030']
+                    });
+                    return
+                }
+                var index = layer.msg('正在注册...', {
+                  icon: 16
+                  ,shade: 0.5
+                  ,time:0
+                });
+                $.ajax({
+                    url:'/register',
+                    method:'post',
+                    data:$('#signup').serialize(),
+                    dataType:'json',
+                    success:function(msg){
+                        layer.close(index);
+                        layer.msg(msg.msg,{time:0});
+                        setTimeout(function(){
+                            location.href="/";
+                        },3000)
+                    },
+                    error:function(msg){
+                        layer.close(index);
+                        layer.msg(msg.msg);
+                    },
+                })
             })
             // form.on('submit(login)', function(data){
 
