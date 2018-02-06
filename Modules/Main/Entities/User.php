@@ -7,13 +7,23 @@ use DB;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+
+class User extends Authenticatable
 {
     protected $guarded = ['geetest_challenge', 'geetest_validate', 'geetest_seccode'];
-    protected $fillable = [];
     public $timestamps = false;
-    
+
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
     public function article()
     {
         return $this->hasOne('Modules\Main\Entities\Article');
@@ -36,7 +46,7 @@ class User extends Model
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) 
         {
-            return redirect()->intended('/admin');//认证成功 重定向
+            // return redirect('/admin');//认证成功 重定向
         }
         else
         {
@@ -55,16 +65,16 @@ class User extends Model
     public function addUser($request)
     {
         $user_playname = $request->input('user_playname');
-        $user_email = $request->input('user_email');
-        $user_password = $request->input('user_password');
+        $email = $request->input('user_email');
+        $password = $request->input('password');
         $this->user_playname = $user_playname;
-        $this->user_email = $user_email;
-        $this->user_password = Hash::make($user_password);
+        $this->email = $email;
+        $this->password = Hash::make($password);
         $this->save();
         return true;
     }
 
     public function getAuthPassword () {
-        return $this->user_password;
+        return $this->password;
     }
 }
