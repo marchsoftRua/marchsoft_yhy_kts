@@ -1,6 +1,6 @@
 
 @foreach($comment as $key=>$item )
-<li id="p_id_{{$item->comment_id}}" class="jieda-daan">
+<li id="p_id_{{$item->id}}" class="jieda-daan">
     <div class="detail-about detail-about-reply">
         <a class="fly-avatar" href="">
             <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt=" ">
@@ -34,7 +34,7 @@
                 <i class="iconfont icon-zan"></i>
                 <em>66</em>
               </span>
-                <span type="reply" class="reply_bt" pid='{{$item->comment_id}}'>
+                <span type="reply" class="reply_bt" pid='{{$item->id}}'>
                 <i class="iconfont icon-svgmoban53"></i>
                 回复
               </span>
@@ -47,11 +47,11 @@
         <ul style="margin-left: 50px;">
             @include('main::index.fillDatas.childComment')
               @if($item->childs->total>3)
-                <p><a href="javascript:void(0)" class="more"  name="{{$item->comment_id}}">共{{$item->childs->total}}条评论,点击查看更多</a></p>
+                <p><a href="javascript:void(0)" class="more"  name="{{$item->id}}">共{{$item->childs->total}}条评论,点击查看更多</a></p>
               @endif
         </ul>
              @if(count($item->childs->data>4))
-              <div id="c_fpage_{{$item->article_id}}_{{$key+1}}" name={{$item->comment_id}} style="padding-left: 50px;"></div>
+              <div id="c_fpage_{{$item->article_id}}_{{$key+1}}" name="{{$item->id}}"style="padding-left: 50px;"></div>
              @endif
 
 </li>

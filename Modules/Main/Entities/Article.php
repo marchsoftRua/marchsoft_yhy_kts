@@ -11,7 +11,6 @@ use Modules\Main\Entities\Type;
 class Article extends Model
 {
     protected $fillable = [];
-    public $primaryKey = 'article_id';
     public $CommentModel;
     public $LabelModel;
 
@@ -25,7 +24,7 @@ class Article extends Model
         if ($bycolumn)$query = $query->orderby($bycolumn,"desc");
         $res= $query->paginate($getLimit);
         foreach ($res as $iteam){
-            $id = $iteam->article_id;
+            $id = $iteam->id;
             $iteam->CommentNum   =   $this->CommentModel->getCommentNumById($id);
             $iteam->article_label=   $this->LabelModel->GetArticleLabelById($id);
         }
@@ -43,7 +42,7 @@ class Article extends Model
         $query=DB::table('articles')
             ->join('users', function ($join) {
                 $join->on('users.id', '=', 'articles.user_id');
-            })->where("article_id",$Id)->first();
+            })->where("articles.id",$Id)->first();
         $query->CommentNum   =   $this->CommentModel->getCommentNumById($Id);
         $query->article_label=   $this->LabelModel->GetArticleLabelById($Id);
         return $query;
@@ -65,11 +64,11 @@ class Article extends Model
         $start = date('y-m-d h:i:s',strtotime('-7 day'));
         $end = date('y-m-d h:i:s',time());
         $query=DB::table('articles')
-            ->addSelect(DB::raw('count(comment_id) as comment_num,articles.article_id,article_title'))
+            ->addSelect(DB::raw('count(comments.id) as comment_num,articles.articles.id,article_title'))
             ->leftJoin('comments', function ($join) {
-                $join->on('articles.article_id', '=', 'comments.article_id');
+                $join->on('articles.id', '=', 'comments.article_id');
             })->whereBetween("comments.created_at",[$start,$end])
-            ->groupBy("articles.article_id")
+            ->groupBy("articles.id")
             ->orderBy('comment_num', 'desc')
             ->take(10)
             ->get();

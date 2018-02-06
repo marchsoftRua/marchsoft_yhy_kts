@@ -1,6 +1,6 @@
 
 @section('container')
-    <div class="layui-container" id="theArticle" name='{{$data->article_id}}'>
+    <div class="layui-container" id="theArticle" name='{{$data->id}}'>
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md8 content detail">
             <div class="fly-panel detail-box">

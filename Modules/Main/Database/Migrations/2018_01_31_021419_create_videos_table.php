@@ -14,7 +14,7 @@ class CreateVideosTable extends Migration
     public function up()
     {
         Schema::create('videos', function (Blueprint $table) {
-            $table->increments('video_id')->comment("视频id");
+            $table->increments('id')->comment("视频id");
             $table->integer("user_id")->comment("视频发表者");
             $table->integer('authority')->comment("用户权限");
             $table->string('video_path',100)->comment("视频路径");

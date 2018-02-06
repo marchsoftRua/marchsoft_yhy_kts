@@ -1,0 +1,15 @@
+.back{
+	width: 72%;
+	display: inline-block;
+	margin: 10px 0px 15px 45px;
+}
+.back .layui-textarea{
+	height: 50px!important;
+	min-height: 70px!important;
+}
+.back .fly-edit span{
+	line-height: 24px;
+}
+.back .fly-edit{
+	height: 23px;
+}

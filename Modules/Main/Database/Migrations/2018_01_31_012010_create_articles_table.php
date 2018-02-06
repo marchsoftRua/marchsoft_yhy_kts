@@ -14,7 +14,7 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->increments('article_id')->comment("文章id");
+            $table->increments('id')->comment("文章id");
             $table->integer('user_id')->comment('用户id');
             $table->integer('type_id')->comment("类型的id");//关联外键
             $table->string('article_title',20)->comment('文章标题');

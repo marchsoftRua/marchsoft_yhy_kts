@@ -14,7 +14,7 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->increments('image_id')->comment("图片id");
+            $table->increments('id')->comment("图片id");
             $table->integer("user_id")->comment("图片发表者");
             $table->string('image_path',100)->comment("图片路径");
             $table->integer('authority')->comment("用户权限");

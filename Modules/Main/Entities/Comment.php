@@ -9,7 +9,7 @@ class Comment extends Model
 {
     protected $fillable = [];
     public static function getCommentNumById($id){
-       $num = Comment::where("comment_id",$id)->count();
+       $num = Comment::where("id",$id)->count();
        return $num;
     }
     public function getOneGrade($w_id,$orderBy){
@@ -18,7 +18,7 @@ class Comment extends Model
         ->orderBy($orderBy,"desc")
         ->paginate(5);
         foreach ($OneGrade as $item){
-            $item->childs = $this->getChild($item->comment_id,$w_id);
+            $item->childs = $this->getChild($item->id,$w_id);
         }
         return $OneGrade;
     }

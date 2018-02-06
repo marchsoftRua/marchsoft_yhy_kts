@@ -14,7 +14,7 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->increments('comment_id')->comment("评论id");
+            $table->increments('id')->comment("评论id");
             $table->integer("belong_id")->comment("所属于的表 如文章、视频");
             $table->string("type")->comment("评论类型 评论的是什么 存表名");
             $table->text("comment_inner")->comment("评论内容");

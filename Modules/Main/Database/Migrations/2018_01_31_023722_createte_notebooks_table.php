@@ -14,7 +14,7 @@ class CreatetenotebooksTable extends Migration
     public function up()
     {
         Schema::create('notebooks', function (Blueprint $table) {
-            $table->increments('notebook_id')->comment("笔记本id");
+            $table->increments('id')->comment("笔记本id");
             $table->integer("user_id")->comment("创建者id");
             $table->string('notebook_name',20)->comment("笔记本名称");
             $table->timestamps();

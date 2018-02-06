@@ -14,7 +14,7 @@ class CreateLabelTable extends Migration
     public function up()
     {
         Schema::create('labels', function (Blueprint $table) {
-            $table->increments('label_id')->comment("标签id");
+            $table->increments('id')->comment("标签id");
             $table->string("label_name",5)->comment("标签名称");
             $table->string("label_color",20)->comment("标签的颜色代码");
         });
