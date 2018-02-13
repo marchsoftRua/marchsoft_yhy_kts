@@ -14,6 +14,8 @@ class MainController extends Controller
 {
 	public function login(Request $request)
 	{
+		if(Auth::check())
+			return redirect('/admin');
 		if($request->isMethod('post'))
 		{
 			$model = new User();
@@ -38,6 +40,8 @@ class MainController extends Controller
 
 	public function register(Request $request)
 	{
+		if(Auth::check())
+			return redirect('/admin');
 		$this->validate($request, [
 		    'user_playname' => 'required|max:12|min:5',
 		    'email' => 'required|email',

@@ -28,8 +28,7 @@ Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\
     Route::post('/getChild','ArticleController@getChildComments');
     Route::get('/articleList','ArticleController@showList');//nav获取页面
 
-    Route::get('/articleList','ArticleController@showList');
-    Route::get('/articlePage','AdminController@articlePage');//nav获取页面
+
     Route::get('/image/{user_id?}','ImageController@getUserImg');//用户获取头像
 
 });

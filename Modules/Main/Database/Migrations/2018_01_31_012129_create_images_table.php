@@ -18,7 +18,6 @@ class CreateImagesTable extends Migration
             $table->integer("user_id")->comment("图片发表者");
             $table->string('image_path',100)->comment("图片路径");
             $table->integer('authority')->comment("用户权限");
-            $table->dateTime('delete_time')->comment("删除时间");
             $table->timestamps();
             $table->softDeletes()->comment("软删除");
         });

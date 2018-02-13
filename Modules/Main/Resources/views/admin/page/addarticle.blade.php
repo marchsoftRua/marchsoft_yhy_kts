@@ -8,7 +8,7 @@
 </head>
 <body class="childrenBody">
 <form class="layui-form layui-row layui-col-space10" id="from-article">
-	{{ csrf_field() }}
+	<input type="hidden" id="_token" value="{{ csrf_token() }}">
 	<div class="layui-col-md9 layui-col-xs12">
 		<div class="layui-row layui-col-space10">
 			<div class="layui-col-md9 layui-col-xs7">
@@ -42,10 +42,10 @@
 	<div class="layui-col-md3 layui-col-xs12">
 		<blockquote class="layui-elem-quote title"><i class="seraph icon-caidan"></i> 分类目录<span class="layui-badge-dot"></span></blockquote>
 		<div class="border category">
-			<select name="type" lay-filter="type">
+			<select name="type" lay-filter="type" id='type_select'>
 				<option value='' >请选择一个类型</option>
 				@foreach($types as $type)
-		        	<option value="{{$type->type_id}}">{{$type->type_name}}</option>
+		        	<option value="{{$type->id}}">{{$type->type_name}}</option>
 		        @endforeach
 	      	</select>
 		</div>

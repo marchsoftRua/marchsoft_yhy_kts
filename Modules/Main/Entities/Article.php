@@ -5,7 +5,7 @@ namespace Modules\Main\Entities;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use Modules\Main\Entities;
-
+use Illuminate\Support\Facades\Auth;
 use Modules\Main\Entities\Type;
 
 class Article extends Model
@@ -13,6 +13,14 @@ class Article extends Model
     protected $fillable = [];
     public $CommentModel;
     public $LabelModel;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->LabelModel  =new Label();
+        $this->CommentModel=new Comment();
+    }
+
 
     public function getIndexMainData($bycolumn,$status,$type,$getLimit){
         $query=DB::table('articles')
@@ -47,12 +55,7 @@ class Article extends Model
         $query->article_label=   $this->LabelModel->GetArticleLabelById($Id);
         return $query;
     }
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        $this->LabelModel  =new Label();
-        $this->CommentModel=new Comment();
-    }
+
 
     public function Comments()
     {
@@ -82,7 +85,7 @@ class Article extends Model
 
     public function forType()
     {
-        return $this->belongsTo('Modules\Main\Entities\Type','type_id','type_id');
+        return $this->belongsTo('Modules\Main\Entities\Type','type_id','id');
     }
 
     public function getArticleTable()
@@ -94,4 +97,17 @@ class Article extends Model
         });
         return $collection;
     }
+
+    public function add($request,$img_id)
+    {
+
+        $this->article_title = $request->title;
+        $this->article_content = $request->content;
+        $this->type_id = $request->type;
+        $this->image_id = $img_id;
+        $this->user_id = Auth::id();
+        $this->authority = Auth::user()->user_type;
+        $this->save();
+    }
+
 }

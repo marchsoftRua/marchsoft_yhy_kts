@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration
             $table->integer('user_id')->comment('用户id');
             $table->integer('type_id')->comment("类型的id");//关联外键
             $table->string('article_title',20)->comment('文章标题');
+            $table->string('summary',255)->commit('文章摘要');
             $table->integer('authority')->comment("用户权限");
             $table->integer('praise')->default(0)->comment("获得赞");
             $table->integer('shame')->default(0)->comment("获得踩");
