@@ -32,13 +32,12 @@ class User extends Authenticatable
     public function getSpeakMoreUser()
     {
         $query=DB::table('users')
-            ->addSelect(DB::raw('count(comment_id) as comment_num,user_playname,users.user_id,head_url'))
+            ->addSelect(DB::raw('count(comments.id) as comment_num,user_playname,users.id,head_url'))
             ->leftJoin('comments', function ($join) {
-                $join->on('comments.user_id', '=', 'comments.user_id');
-            })->groupBy('user_id')->orderBy('comment_num')->take(20)->get();
+                $join->on('users.id', '=', 'comments.user_id');
+            })->groupBy('users.id')->orderBy('comment_num')->take(20)->get();
         return $query;
     }
-
     public function validate($request)
     {
         $email = $request->input('email');
@@ -58,7 +57,7 @@ class User extends Authenticatable
     }
     public static function getUserNameById($id)
     {
-       $user = $this->find($id);
+       $user = User::find($id);
        return $user;
     }
 

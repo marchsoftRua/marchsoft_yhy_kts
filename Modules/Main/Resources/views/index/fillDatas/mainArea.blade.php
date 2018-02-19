@@ -11,11 +11,11 @@
             </a>
             <h2>
               <a class="layui-badge">分享</a>
-              <a href="article/{{$iteam->article_id}}">{{$iteam->article_title}}</a>
+              <a href="article/{{$iteam->id}}">{{$iteam->article_title}}</a>
             </h2>
             <div class="fly-list-info">
               <a href="user/home.html" link>
-                <cite>{{$iteam->user_name}}</cite>
+                <cite>{{$iteam->name}}</cite>
                 <!--
                 <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
                 <i class="layui-badge fly-badge-vip">VIP3</i>

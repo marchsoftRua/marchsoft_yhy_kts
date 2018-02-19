@@ -38,7 +38,7 @@ layui.define('fly', function(exports){
   });
 
   //提交回答
-  fly.form['/jie/reply/'] = function(data, required){
+  fly.form['/jie/sendComment'] = function(data, required){
     var tpl = '<li>\
       <div class="detail-about detail-about-reply">\
         <a class="fly-avatar" href="/u/{{ layui.cache.user.uid }}" target="_blank">\
@@ -236,6 +236,6 @@ layui.define('fly', function(exports){
     var replyTop = $('#flyReply').offset().top - 80;
     $('html,body').scrollTop(replyTop);
   }
-
+  
   exports('jie', null);
 });

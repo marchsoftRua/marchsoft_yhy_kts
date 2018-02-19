@@ -17,11 +17,9 @@ Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\
     ******/
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
-    Route::get('/article/{article_id?}', 'ArticleController@lookArticle');
 
     Route::get('/articlePage','AdminController@articlePage');
-    Route::post('/getComment','ArticleController@getComments');
-    Route::post('/getChild','ArticleController@getChildComments');
+
     Route::get('/articleList','ArticleController@showList');//nav获取页面
 
     Route::get('/articleList','ArticleController@showList');
@@ -35,9 +33,14 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     /****
     前台路由
      ***/
+    Route::get('/article/{article_id?}', 'ArticleShowController@lookArticle');
+    Route::post('/getComment','ArticleShowController@getComments');
+    Route::post('/jie/sendComment','ArticleShowController@sendComments');
+    Route::post('/getChild','ArticleShowController@getChildComments');
     Route::get('/', 'IndexController@index');
     Route::post('/reader', 'IndexController@readerSetData');
     Route::post('/getHotUser', 'IndexController@getTheWeekHot');
     Route::post('/getSpeakRank', 'IndexController@getSpeakRank');
+    Route::get('/404',"IndexController@error_page");
 });
 

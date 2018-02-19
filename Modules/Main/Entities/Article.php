@@ -1,13 +1,10 @@
 <?php
-
 namespace Modules\Main\Entities;
-
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Log;
 use Modules\Main\Entities;
-
 use Modules\Main\Entities\Type;
-
 class Article extends Model
 {
     protected $fillable = [];
@@ -28,14 +25,17 @@ class Article extends Model
             $iteam->CommentNum   =   $this->CommentModel->getCommentNumById($id);
             $iteam->article_label=   $this->LabelModel->GetArticleLabelById($id);
         }
-        $tmpview=view('main::index.fillDatas.mainArea')->with("data",$res);
-        $html=response($tmpview)->getContent();
         $getArray =json_decode(json_encode($res));
+        $tmpview=view('main::index.fillDatas.mainArea')->with("data",$getArray->data);
+        $html=response($tmpview)->getContent();
         $page_info ["current_page"]=$getArray->current_page;
         $page_info ["last_page"]=$getArray->last_page;
         $respose_ ["data"]=$page_info;
         $respose_ ["html"]=$html;
         return $respose_;
+    }
+    public function getOneArticle($Id){
+       return $this->where('id',$Id)->get();
     }
     public function getMyArticle($Id){
 
@@ -43,6 +43,9 @@ class Article extends Model
             ->join('users', function ($join) {
                 $join->on('users.id', '=', 'articles.user_id');
             })->where("articles.id",$Id)->first();
+        if (!$query) {
+           return null;
+        }
         $query->CommentNum   =   $this->CommentModel->getCommentNumById($Id);
         $query->article_label=   $this->LabelModel->GetArticleLabelById($Id);
         return $query;
@@ -56,7 +59,7 @@ class Article extends Model
 
     public function Comments()
     {
-        return $this->hasMany("Modules\Main\Entities\Comment",'article_id');
+        return $this->hasMany("Modules\Main\Entities\Comment",'belong_id');
     }
 
     public function getWeekHotData()
@@ -64,9 +67,9 @@ class Article extends Model
         $start = date('y-m-d h:i:s',strtotime('-7 day'));
         $end = date('y-m-d h:i:s',time());
         $query=DB::table('articles')
-            ->addSelect(DB::raw('count(comments.id) as comment_num,articles.articles.id,article_title'))
-            ->leftJoin('comments', function ($join) {
-                $join->on('articles.id', '=', 'comments.article_id');
+            ->addSelect(DB::raw('count(comments.id) as comment_num,articles.id,article_title'))
+            ->Join('comments', function ($join) {
+                $join->on('articles.id', '=', 'comments.belong_id');
             })->whereBetween("comments.created_at",[$start,$end])
             ->groupBy("articles.id")
             ->orderBy('comment_num', 'desc')

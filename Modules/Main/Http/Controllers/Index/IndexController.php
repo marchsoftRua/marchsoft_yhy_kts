@@ -1,7 +1,7 @@
 <?php
 
 namespace Modules\Main\Http\Controllers\Index;
-
+use Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -30,6 +30,9 @@ class IndexController extends Controller
                "userRank"=> $userRank
             ]);
     }
+    public function error_page(){
+        return view('main::index.layouts.404');
+    }
     public function readerSetData(Request $request){
         $bycolumn = $this->sortK_V[$request->bycolumn];
         $status   = $request->status;
@@ -45,7 +48,8 @@ class IndexController extends Controller
         $this->UserModel   = new User();
     }
     public function  getTheWeekHot(){
-        return $this->ArticleModel->getWeekHotData();
+        $data = $this->ArticleModel->getWeekHotData();
+        return $data;
     }
     public function getSpeakRank(){
         return  $this->UserModel->getSpeakMoreUser();

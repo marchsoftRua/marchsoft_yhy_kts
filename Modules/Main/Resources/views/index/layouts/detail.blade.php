@@ -31,11 +31,11 @@
                 </div>
                 <div class="detail-about">
                     <a class="fly-avatar" href="../user/home.html">
-                        <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="{{$data->user_playname}}">
+                        <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="{{$data->name}}">
                     </a>
                     <div class="fly-detail-user">
                         <a href="../user/home.html" class="fly-link">
-                            <cite>{{$data->user_playname}}</cite>
+                            <cite>{{$data->name}}</cite>
                             <i class="iconfont icon-renzheng" title="认证信息：@{{ rows.user.approve }}"></i>
                             <i class="layui-badge fly-badge-vip">VIP3</i>
                         </a>
@@ -57,8 +57,9 @@
                 <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
                     <legend>回帖</legend>
                 </fieldset>
-                <div class="layui-form layui-form-pane" id="copyIn">
-                    <form action="/jie/reply/" method="post" style="position: relative;">
+                <div class="layui-form layui-form-pane" id="copyIn" name='0'>
+                    <form action="/jie/sendComment" method="post" style="position: relative;" onsubmit="return false;">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="layui-form-item layui-form-text" style="    width: 80%;display: inline-block;">
                             <a name="comment"></a>
                             <div class="layui-input-block">
@@ -66,7 +67,7 @@
                             </div>
                         </div>
                         <div class="layui-form-item" style="width: 19%;display: inline-block;bottom: 3px;right: 0;position: absolute;">
-                            <input type="hidden" name="jid" value="123">
+                            <input type="hidden" name="jid" value="0">
                             <button class="layui-btn" lay-filter="*" lay-submit>提交回复</button>
                         </div>
                     </form>

@@ -9,7 +9,6 @@
           <a href="#signin" class="layui-hide-sm layui-show-xs-block fly-right" id="LAY_goSignin" style="color: #FF5722;">去签到</a>
         </div>
         <ul class="fly-list" id="setTop">
-          {{--置顶区域  ul占位--}}
         </ul>
 
       </div>
@@ -110,8 +109,8 @@
         <dt class="fly-panel-title">本周热议</dt>
         @foreach($hotRank as $hot)
         <dd>
-          <a href="/article/{{$hot->id}}">{{$hotRank->article_name}}</a>
-          <span><i class="iconfont icon-pinglun1"></i> {{$hotRank->comment_num}}</span>
+          <a href="/article/{{$hot->id}}">{{$hot->article_title}}</a>
+          <span><i class="iconfont icon-pinglun1"></i> {{$hot->comment_num}}</span>
         </dd>
         @endforeach
         @if(count($hotRank)<1)

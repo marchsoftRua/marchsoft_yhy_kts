@@ -13,3 +13,10 @@
 .back .fly-edit{
 	height: 23px;
 }
+.childs-nav{
+	display: none;
+}
+.jieda-admin:hover>.childs-nav{
+	display: inline-block;
+
+}
