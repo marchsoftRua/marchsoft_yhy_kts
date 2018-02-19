@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Modules\Main\Entities\Article;
+use Modules\Main\Entities\Image;
 use Modules\Main\Entities\Type;
 
 class ArticleController extends Controller
@@ -17,10 +18,12 @@ class ArticleController extends Controller
 
     public function index(Request $request)
     {
-
         if($request->ajax())
         {
-            echo "aaa";
+            $model = new Article();
+            $img = new Image();
+            $img_id = $img->saveArticleImg($request->imgpath);
+            $model->add($request,$img_id);
         }
         else
         {

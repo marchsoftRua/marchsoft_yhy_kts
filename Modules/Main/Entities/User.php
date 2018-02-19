@@ -45,7 +45,7 @@ class User extends Authenticatable
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) 
         {
-            // return redirect('/admin');//认证成功 重定向
+            return redirect('/admin');//认证成功 重定向
         }
         else
         {
@@ -64,12 +64,13 @@ class User extends Authenticatable
     public function addUser($request)
     {
         $user_playname = $request->input('user_playname');
-        $email = $request->input('user_email');
+        $email = $request->input('email');
         $password = $request->input('password');
         $this->user_playname = $user_playname;
         $this->email = $email;
         $this->password = Hash::make($password);
         $this->save();
+        $this->validate($request);
         return true;
     }
 

@@ -38,7 +38,37 @@
 </table>
 	
 </form>
+<script type="text/javascript">
+	layui.use(['table','layer','jquery'],function(){
+		var table = layui.table,
+		$ = layui.jquery,
+		layer = layui.layer;
+		table.render({
+	    elem: '#newsList'
+	    ,height: 315
+	    ,even:true
+	    ,url:'/articleList'
+	    ,cellMinWidth: 80
+	    ,cols: [[ //表头
+	       {type:'checkbox',fixed: 'left'}
+	      ,{type:'numbers',title:'id',width:50}
+	      ,{field:'name',title: '用户名称',align:'center'}
+	      ,{field: 'article_title', title: '文章标题',align:'center'}
+	      ,{field: 'type_name', title: '文章类型',align:'center'}
+	      ,{field: 'authority', title: '文章权限',align:'center',width:100}
+	      ,{field: 'notebook_id', title: '笔记本',align:'center'}
+	      ,{field:'readnum',title:'浏览量',sort:true,align:'center',width:100}
+	      ,{field: 'praise', title: '赞', sort: true,align:'center',width:75}
+	      ,{field:'shame',title:'踩',align:'center',width:75}
+	      ,{field: 'created_at', title: '创建时间', sort: true}
+	      ,{field:'updated_at',title:'最后更新',sort: true}
+	      ,{field:'is_delet',title:'是否置顶', templet: '#switchTpl',align:'center',width:100}
+	      ,{field:'tools',title:'操作',toolbar:'#barDemo',fixed:'right',align:'center'}
+	    ]]
+	  });
+	});
 
+</script>
 
 </body>
 </html>

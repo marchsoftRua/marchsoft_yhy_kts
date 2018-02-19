@@ -17,7 +17,7 @@ layui.config({
 			$(window).resize(function(){
 				$(".navBar").height($(window).height()-230);
 			})
-			$(".layui-nav .layui-nav-item a").on("click",function(){
+			$(".layui-nav.layui-nav-tree .layui-nav-item a").on("click",function(){
 				addTab($(this));
 				$(this).parent("li").siblings().removeClass("layui-nav-itemed");
 			})
@@ -116,4 +116,5 @@ layui.config({
 function addTab(_this)
 {
     tab.addTab(_this);
+
 }

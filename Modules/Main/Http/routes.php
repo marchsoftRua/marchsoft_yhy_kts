@@ -9,12 +9,16 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
 
     Route::any('/login', 'MainController@login')->name('login');
     Route::post('/register','MainController@register');
+
+    Route::get('/lauout','MainController@layout');
 });
 Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\Controllers\Admin'], function()
 {
     /****
     后台路由
     ******/
+
+
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
 
@@ -22,8 +26,7 @@ Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\
 
     Route::get('/articleList','ArticleController@showList');//nav获取页面
 
-    Route::get('/articleList','ArticleController@showList');
-    Route::get('/articlePage','AdminController@articlePage');//nav获取页面
+
     Route::get('/image/{user_id?}','ImageController@getUserImg');//用户获取头像
 
 });

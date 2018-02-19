@@ -5,7 +5,7 @@ namespace Modules\Main\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use Illuminate\Support\Facades\Auth;
 use Modules\Main\Entities\Sidenav;
 
 class AdminController extends Controller
@@ -17,7 +17,7 @@ class AdminController extends Controller
     public function index()
     {
         
-        return view('main::admin.index');
+        return view('main::admin.index')->with('user',Auth::user());
     }
 
     public function navData(Request $request)

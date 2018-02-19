@@ -138,10 +138,10 @@ layui.define(['element','jquery'],
 				  content: "<iframe src='"+navObj.attr("data-url")+"'></frame>", //支持传入html
 				  id: the_id,
 				});
-				console.log(the_id)
 				element.tabChange(that.tabConfig.tabFilter,the_id);
 			}
-			that.updataThisNav(navObj)
+			
+			addMenu(that.updataThisNav(navObj))
 		}
 
 		Tab.prototype.updataThisNav = function($thisNav)
@@ -154,7 +154,9 @@ layui.define(['element','jquery'],
 						"href" : $thisNav.attr("data-url"),
 						"layId" : $thisNav.attr('data-id')
 					};
+			console.log(curmenu)
 			Session.setItem('curmenu',JSON.stringify(curmenu));
+			return curmenu
 		}
 
 		//点击上方导航栏切换
@@ -165,13 +167,12 @@ layui.define(['element','jquery'],
 					that.updataThisNav($(this).find('a'))
 				}
 			})
-			
-
 		})
 
+
 		//点击左侧侧边栏
-		$("body").on("click",".layui-nav li",function(){
-			that.updataThisNav($(this).find('a'))
+		function addMenu(curmenu){
+			// that.updataThisNav($(this).find('a'))
 			var cite = $(this).find('cite').text()
 			var selectId = 0;
 			$('.layui-tab-title.top_tab li').each(function(){
@@ -191,7 +192,32 @@ layui.define(['element','jquery'],
 			menu.push(curmenu);
 			Session.setItem('menu',JSON.stringify(menu));
 			element.tabChange(that.tabConfig.tabFilter,curmenu.layId)
-		})
+		}
+
+		// //点击左侧侧边栏
+		// $(".layui-nav.layui-nav-tree .layui-nav-item").on("click",function(){
+		// 	that.updataThisNav($(this).find('a'))
+		// 	var cite = $(this).find('cite').text()
+		// 	var selectId = 0;
+		// 	$('.layui-tab-title.top_tab li').each(function(){
+		// 		if($(this).find('cite').text()==cite)
+		// 		{
+		// 			selectId = $(this).attr('lay-id');
+		// 		}
+		// 	});
+		// 	for(let i = 0;i<menu.length;i++)
+		// 	{
+		// 		if(menu[i]['layId'] == curmenu['layId'])
+		// 		{
+		// 			element.tabChange(that.tabConfig.tabFilter,selectId)
+		// 			return;
+		// 		}
+		// 	}
+
+		// 	menu.push(curmenu);
+		// 	Session.setItem('menu',JSON.stringify(menu));
+		// 	element.tabChange(that.tabConfig.tabFilter,curmenu.layId)
+		// })
 
 		Tab.prototype.setTitle = function(navObj,icon = null,cite = null)
 		{
