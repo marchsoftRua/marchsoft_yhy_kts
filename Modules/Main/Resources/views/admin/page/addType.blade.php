@@ -20,7 +20,6 @@
 		var form = layui.form,
 		layer = layui.layer,
 		$ = layui.jquery;
-
 	});
 
 </script>
