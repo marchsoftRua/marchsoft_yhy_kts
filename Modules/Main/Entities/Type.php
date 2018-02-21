@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     protected $fillable = [];
-    public $primaryKey = 'type_id';
+
+    public function add($request,$color)
+    {
+    	$this->type_name = $request->name;
+    	$this->type_color = $color;
+    	return $this->save();
+    }
+
 }

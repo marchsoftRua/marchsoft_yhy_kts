@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>aaaaa</title>
+	<title>添加文章</title>
 	@include('main::admin.layouts.script')
 	<script type="text/javascript" src="{{asset('Main/admin/article/addarticle.js')}}"></script>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
@@ -42,11 +42,12 @@
 	<div class="layui-col-md3 layui-col-xs12">
 		<blockquote class="layui-elem-quote title"><i class="seraph icon-caidan"></i> 分类目录<span class="layui-badge-dot"></span></blockquote>
 		<div class="border category">
-			<select name="type" lay-filter="type" id='type_select'>
+			<select name="type" lay-filter="type" id='type_select' lay-search>
 				<option value='' >请选择一个类型</option>
 				@foreach($types as $type)
 		        	<option value="{{$type->id}}">{{$type->type_name}}</option>
 		        @endforeach
+		        	<option value = 'add'>&#xe654;添加一个类型</option>
 	      	</select>
 		</div>
 		<blockquote class="layui-elem-quote title magt10"><i class="layui-icon">&#xe609;</i> 发布</blockquote>

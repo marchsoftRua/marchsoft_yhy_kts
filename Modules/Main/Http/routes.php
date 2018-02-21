@@ -21,11 +21,15 @@ Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\
 
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
-
+    /*
+        放到nav的地址
+    */
     Route::get('/articlePage','AdminController@articlePage');
+    Route::get('/lable','LableController@index');
+    Route::get('/type','TypeController@index');
 
     Route::get('/articleList','ArticleController@showList');//nav获取页面
-
+    Route::get('/typeList','TypeController@showList');
 
     Route::get('/image/{user_id?}','ImageController@getUserImg');//用户获取头像
 

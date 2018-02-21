@@ -72,8 +72,29 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         }
     })
 
+    function addType()
+    {
+        var index = layer.open({
+            title:'添加类型',
+            content:'/add/type',
+            type:2,
+            shade:0.4,
+            resize:false,
+            anim:1
+        })
+        // layui.layer.full(index);
+        // //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        // $(window).on("resize",function(){
+        //     layui.layer.full(index);
+        // })
+    }
+
     form.on('select(type)', function(data){
         select_val = data.value
+        if(data.value == 'add')
+        {
+            addType()
+        }
     }); 
 
     form.on("submit(addNews)",function(data){
@@ -120,5 +141,4 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         }
     });
     form.render('select', 'type');
-
 })
