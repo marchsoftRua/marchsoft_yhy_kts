@@ -22,8 +22,11 @@ class ArticleController extends Controller
         {
             $model = new Article();
             $img = new Image();
-            $img_id = $img->saveArticleImg($request->imgpath);
+            $img_id = null;
+            if($request->imgpath)
+                $img_id = $img->saveArticleImg($request->imgpath);
             $model->add($request,$img_id);
+            
         }
         else
         {

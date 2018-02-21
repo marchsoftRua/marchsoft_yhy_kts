@@ -72,16 +72,45 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         }
     })
 
+    function sendType(text,index)
+    {
+        $.ajax({
+            url:'/add/type',
+            method:'post',
+            dataType:'json',
+            data:{
+                    'name':text,
+                    '_token':$("#_token").val()
+                },
+            success:function(msg){
+                layer.msg(msg.msg);
+                layer.close(index);
+            },
+            error:function(msg){
+                layer.msg(msg.msg);
+                layer.close(index);
+            },
+
+        })
+    }
+
     function addType()
     {
-        var index = layer.open({
-            title:'添加类型',
-            content:'/add/type',
-            type:2,
-            shade:0.4,
-            resize:false,
-            anim:1
-        })
+
+        layer.prompt({title: '添加类型', formType: 0}, function(text, index){
+            sendType(text,index)
+            
+        });
+
+        // var index = layer.open({
+        //     title:'添加类型',
+        //     content:'/add/type',
+        //     type:2,
+        //     area: ['20%', '80%'],
+        //     shade:0.4,
+        //     anim:1,
+
+        // })
         // layui.layer.full(index);
         // //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
         // $(window).on("resize",function(){
@@ -109,7 +138,7 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
             data:{
                 _token:$("#_token").val(),
                 title : $(".newsName").val(),  //文章标题
-                abstract : $(".abstract").val(),  //文章摘要
+                summary : $(".abstract").val().length>0?$(".abstract").val():abstract,  //文章摘要
                 content : layedit.getContent(editIndex),  //文章内容
                 imgpath : $(".thumbImg").attr("src"),  //缩略图
                 type : select_val,    //文章分类

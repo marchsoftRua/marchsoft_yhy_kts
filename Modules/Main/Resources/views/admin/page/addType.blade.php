@@ -6,14 +6,18 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body　class="childrenBody">
-	<form class="layui-form layui-col-space5" id="from-type">
-		<div class="layui-form-item　">
-		    <label class="layui-form-label">输入框</label>
-		    <div class="layui-input-block">
-		      <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
-		    </div>
-	  	</div>
-	</form>
+	<div class="layui-container">
+		<div class="layui-row">
+			<form class="layui-form layui-form-pane" id="from-type">
+				<div class="layui-form-item">
+				    <label class="layui-form-label">标签名字</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+				    </div>
+			  	</div>
+			</form>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	layui.use(['form','layer','jquery'],function(){

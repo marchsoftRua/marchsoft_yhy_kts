@@ -14,7 +14,7 @@ class TypeController extends Controller
 
 	public function __construct()
 	{
-		$this->type = new Type();
+		$this->typeModel = new Type();
 	}
 
     public function index(Request $request)
@@ -24,22 +24,24 @@ class TypeController extends Controller
 
     public function showList(Request $request)
     {
-    	return setData($this->type->all());
+    	return setData($this->typeModel->all());
     }
 
     public function addType(Request $request)
    	{
-   		if($request->method('get'))
+   		if($request->ajax())
    		{
-   			return view('main::admin.page.addType');
+   			$this->validate($request, [
+            'name' => 'required|max:10|min:2|string',
+        ]);
+        if($this->typeModel->add($request))
+          return setData(null);
+        else
+          return setData(null,"有问题请刷新");
    		}
    		else
    		{
-   			$this->validate($request, [
-		        'name' => 'required|unique:posts|max:255',
-		        'color' => 'max:20|string|nullable',
-	    	]);
-    		return $this->typeModel->add();
+   			  return "非ajax访问";
    		}
    		
    	}
