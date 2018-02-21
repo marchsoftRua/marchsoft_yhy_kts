@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Modules\Main\Entities\Sidenav;
+use Modules\Main\Entities\Menu;
 
 class AdminController extends Controller
 {
@@ -22,11 +22,11 @@ class AdminController extends Controller
 
     public function navData(Request $request)
     {
-        if(!$request->ajax())
-        {
-            return "非ajax请求";
-        }
-        $model = new Sidenav();
+        // if(!$request->ajax())
+        // {
+        //     return "非ajax请求";
+        // }
+        $model = new Menu();
         $data = $model->selectAll();
         return $data;
     }

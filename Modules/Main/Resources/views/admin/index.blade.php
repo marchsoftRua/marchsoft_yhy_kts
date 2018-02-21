@@ -20,9 +20,8 @@
 	<script type="text/javascript">
 		var module_path = "{{asset('Main/admin/js')}}/";
 	</script>
-	<script type="text/javascript" src="{{asset('Main/admin/js/main.js')}}"></script>
-	<script type="text/javascript" src="{{asset('Main/admin/js/leftNav.js')}}"></script>
-	<script type="text/javascript" src={{asset('Main/admin/js/index.js')}}></script>
+	
+	
 </head>
 <body class="main_body">
 	<div class="layui-layout layui-layout-admin">
@@ -34,4 +33,6 @@
 
 	</div>
 </body>
+<script type="text/javascript" src="{{asset('Main/admin/js/index.js')}}"></script>
+	<script type="text/javascript" src="{{asset('Main/admin/js/cache.js')}}"></script>
 </html>
