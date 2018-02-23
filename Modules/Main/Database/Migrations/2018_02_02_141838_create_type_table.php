@@ -16,7 +16,7 @@ class CreateTypeTable extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id')->comment("类型的id");
             $table->string("type_name",20)->comment("类型的名字");
-
+            $table->integer('user_id')->comment('创建的用户id');
             $table->timestamps();
         });
     }

@@ -24,7 +24,7 @@ class TypeController extends Controller
 
     public function showList(Request $request)
     {
-    	return setData($this->typeModel->all());
+    	return setData($this->typeModel->typeList());
     }
 
     public function addType(Request $request)
@@ -34,8 +34,9 @@ class TypeController extends Controller
    			$this->validate($request, [
             'name' => 'required|max:10|min:2|string',
         ]);
-        if($this->typeModel->add($request))
-          return setData(null);
+        $id = $this->typeModel->add($request);
+        if($id)
+          return setData(array('id'=>$id));
         else
           return setData(null,"有问题请刷新");
    		}

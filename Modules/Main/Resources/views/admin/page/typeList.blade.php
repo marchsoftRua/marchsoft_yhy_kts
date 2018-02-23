@@ -52,8 +52,8 @@
 	    ,cols: [[ //表头
 	       {type:'checkbox',fixed: 'left'}
 	      ,{type:'numbers',title:'id',width:50}
-	      ,{field: 'type_name', title: '文章类型',align:'center'}
-	      ,{field: 'type_color',title: '类型颜色'}
+	      ,{field: 'type_name', title: '类型名称',align:'center'}
+	      ,{field: 'name',title: '创建者'}
 	    ]]
 	  });
 	});

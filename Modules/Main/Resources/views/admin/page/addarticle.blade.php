@@ -42,7 +42,7 @@
 	<div class="layui-col-md3 layui-col-xs12">
 		<blockquote class="layui-elem-quote title"><i class="seraph icon-caidan"></i> 分类目录<span class="layui-badge-dot"></span></blockquote>
 		<div class="border category">
-			<select name="type" lay-filter="type" id='type_select' lay-search>
+			<select name="type" lay-filter="articletype" id='type_select' lay-search>
 				<option value='' >请选择一个类型</option>
 				@foreach($types as $type)
 		        	<option value="{{$type->id}}">{{$type->type_name}}</option>
