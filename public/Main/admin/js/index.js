@@ -1,41 +1,57 @@
+var $,tab,dataStr,layer;
 layui.config({
-    base : module_path
-}).use(['jquery','element','layer','Tab'],function(){
+	base : module_path
+}).extend({
+	"bodyTab" : "bodyTab"
+})
+layui.use(['bodyTab','form','element','layer','jquery'],function(){
+	var form = layui.form,
+		element = layui.element;
+		$ = layui.$;
+    	layer = parent.layer === undefined ? layui.layer : top.layer;
+		tab = layui.bodyTab({
+			openTabNum : "10",  //最大可打开窗口数量
+			url : "/sidenav" //获取菜单json地址
+		});
 
-	var layer = parent.layer === undefined ? layui.layer : parent.layer,
-	element = layui.element,
-	$ = layui.jquery;
-	tab = layui.Tab();
-
-	$.get('sidenav',
-		function(data)
-		{
-			var _this = this;
-			$(".navBar").html(navBar(data)).height($(window).height()-230);
-
-			element.init();  //初始化页面元素
-			$(window).resize(function(){
-				$(".navBar").height($(window).height()-230);
-			})
-			$(".layui-nav.layui-nav-tree .layui-nav-item a").on("click",function(){
-				addTab($(this));
-				$(this).parent("li").siblings().removeClass("layui-nav-itemed");
-			})
+	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
+	function getData(json){
+		$.getJSON(tab.tabConfig.url,function(data){
+			if(json == "contentManagement"){
+				dataStr = data.contentManagement;
+				//重新渲染左侧菜单
+				tab.render();
+			}else if(json == "memberCenter"){
+				dataStr = data.memberCenter;
+				//重新渲染左侧菜单
+				tab.render();
+			}else if(json == "systemeSttings"){
+				dataStr = data.systemeSttings;
+				//重新渲染左侧菜单
+				tab.render();
+			}else if(json == "seraphApi"){
+                dataStr = data.seraphApi;
+                //重新渲染左侧菜单
+                tab.render();
+            }
 		})
+	}
+	//页面加载时判断左侧菜单是否显示
+	//通过顶部菜单获取左侧菜单
+	$(".topLevelMenus li,.mobileTopLevelMenus dd").click(function(){
+		if($(this).parents(".mobileTopLevelMenus").length != "0"){
+			$(".topLevelMenus li").eq($(this).index()).addClass("layui-this").siblings().removeClass("layui-this");
+		}else{
+			$(".mobileTopLevelMenus dd").eq($(this).index()).addClass("layui-this").siblings().removeClass("layui-this");
+		}
+		$(".layui-layout-admin").removeClass("showMenu");
+		$("body").addClass("site-mobile");
+		getData($(this).data("menu"));
+		//渲染顶部窗口
+		tab.tabMove();
+	})
 
-	//手机设备的简单适配
-	var treeMobile = $('.site-tree-mobile'),
-		shadeMobile = $('.site-mobile-shade')
-
-	treeMobile.on('click', function(){
-		$('body').addClass('site-mobile');
-	});
-
-	shadeMobile.on('click', function(){
-		$('body').removeClass('site-mobile');
-	});
-
-	//添加新窗口
+	//隐藏左侧导航
 	$(".hideMenu").click(function(){
 		if($(".topLevelMenus li.layui-this a").data("url")){
 			layer.msg("此栏目状态下左侧菜单不可展开");  //主要为了避免左侧显示的内容与顶部菜单不匹配
@@ -46,13 +62,28 @@ layui.config({
 		tab.tabMove();
 	})
 
+	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
+	getData("contentManagement");
 
-	// $("a").on("click",function(){
-	// 	layer.msg("添加tab");
-	// 	// element.tabAdd(filter, options);
-	// 	addTab($(this));
-	// 	$(this).parent("li").siblings().removeClass("layui-nav-itemed");
-	// })
+	//手机设备的简单适配
+    $('.site-tree-mobile').on('click', function(){
+		$('body').addClass('site-mobile');
+	});
+    $('.site-mobile-shade').on('click', function(){
+		$('body').removeClass('site-mobile');
+	});
+
+	// 添加新窗口
+	$("body").on("click",".layui-nav .layui-nav-item a:not('.mobileTopLevelMenus .layui-nav-item a')",function(){
+		//如果不存在子级
+		if($(this).siblings().length == 0){
+			addTab($(this));
+			$('body').removeClass('site-mobile');  //移动端点击菜单关闭菜单层
+		}
+		$(this).parent("li").siblings().removeClass("layui-nav-itemed");
+	})
+
+	//清除缓存
 	$(".clearCache").click(function(){
 		window.sessionStorage.clear();
         window.localStorage.clear();
@@ -62,59 +93,74 @@ layui.config({
             layer.msg("缓存清除成功！");
         },1000);
     })
-
-
-		//公告层
-    function showNotice(){
-        layer.open({
-            type: 1,
-            title: "系统公告",
-            area: '300px',
-            shade: 0.8,
-            id: 'LAY_layuipro',
-            btn: ['火速围观'],
-            moveType: 1,
-            content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p class="layui-red">请使用模版前请务必仔细阅读首页右下角的《更新日志》，避免使用中遇到一些简单的问题造成困扰。</p></pclass></p><p>1.0发布以后发现很多朋友将代码上传到各种素材网站，当然这样帮我宣传我谢谢大家，但是有部分朋友上传到素材网站后将下载分值设置的相对较高，需要朋友们充钱才能下载。本人发现后通过和站长、网站管理员联系以后将分值调整为不需要充值才能下载或者直接免费下载。在此郑重提示各位：<span class="layui-red">本模版已进行作品版权证明，不管以何种形式获取的源码，请勿进行出售或者上传到任何素材网站，否则将追究相应的责任。</span></p></div>',
-            success: function(layero){
-                var btn = layero.find('.layui-layer-btn');
-                btn.css('text-align', 'center');
-                btn.on("click",function(){
-                    tipsShow();
-                });
-            },
-            cancel: function(index, layero){
-                tipsShow();
+	//刷新后还原打开的窗口
+    if(cacheStr == "true") {
+        if (window.sessionStorage.getItem("menu") != null) {
+            menu = JSON.parse(window.sessionStorage.getItem("menu"));
+            curmenu = window.sessionStorage.getItem("curmenu");
+            var openTitle = '';
+            for (var i = 0; i < menu.length; i++) {
+                openTitle = '';
+                if (menu[i].icon) {
+                    if (menu[i].icon.split("-")[0] == 'icon') {
+                        openTitle += '<i class="seraph ' + menu[i].icon + '"></i>';
+                    } else {
+                        openTitle += '<i class="layui-icon">' + menu[i].icon + '</i>';
+                    }
+                }
+                openTitle += '<cite>' + menu[i].title + '</cite>';
+                openTitle += '<i class="layui-icon layui-unselect layui-tab-close" data-id="' + menu[i].layId + '">&#x1006;</i>';
+                element.tabAdd("bodyTab", {
+                    title: openTitle,
+                    content: "<iframe src='" + menu[i].href + "' data-id='" + menu[i].layId + "'></frame>",
+                    id: menu[i].layId
+                })
+                //定位到刷新前的窗口
+                if (curmenu != "undefined") {
+                    if (curmenu == '' || curmenu == "null") {  //定位到后台首页
+                        element.tabChange("bodyTab", '');
+                    } else if (JSON.parse(curmenu).title == menu[i].title) {  //定位到刷新前的页面
+                        element.tabChange("bodyTab", menu[i].layId);
+                    }
+                } else {
+                    element.tabChange("bodyTab", menu[menu.length - 1].layId);
+                }
             }
-        });
-    }
-    function tipsShow(){
-        window.sessionStorage.setItem("showNotice","true");
-        if($(window).width() > 432){  //如果页面宽度不足以显示顶部“系统公告”按钮，则不提示
-            layer.tips('系统公告躲在了这里', '#userInfo', {
-                tips: 3,
-                time : 1000
-            });
+            //渲染顶部窗口
+            tab.tabMove();
         }
-    }
-
-
-
-    $(".showNotice").on("click",function(){
-        showNotice();
-    })
-
-
-    if(window.sessionStorage.getItem("lockcms") != "true" && window.sessionStorage.getItem("showNotice") != "true")
-    {
-    	showNotice();
-    }
+    }else{
+		window.sessionStorage.removeItem("menu");
+		window.sessionStorage.removeItem("curmenu");
+	}
 })
 
+//打开新窗口
+function addTab(_this){
+	tab.tabAdd(_this);
+}
 
-// 打开新窗口
+//捐赠弹窗
+function donation(){
+	layer.tab({
+		area : ['260px', '367px'],
+		tab : [{
+			title : "微信",
+			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='images/wechat.jpg'></div>"
+		},{
+			title : "支付宝",
+			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='images/alipay.jpg'></div>"
+		}]
+	})
+}
 
-function addTab(_this)
-{
-    tab.addTab(_this);
-
+//图片管理弹窗
+function showImg(){
+    $.getJSON('json/images.json', function(json){
+        var res = json;
+        layer.photos({
+            photos: res,
+            anim: 5
+        });
+    });
 }

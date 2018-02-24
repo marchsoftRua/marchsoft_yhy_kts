@@ -111,13 +111,17 @@ class Article extends Model
     public static function getArticleById($id){
         return Article::where('id',$id)->first();
     }
-    public function add($request,$img_id)
+
+
+    public function add($request,$img_id=null)
     {
 
         $this->article_title = $request->title;
         $this->article_content = $request->content;
+        $this->summary = $request->summary;
         $this->type_id = $request->type;
-        $this->image_id = $img_id;
+        if($img_id)
+            $this->image_id = $img_id;
         $this->user_id = Auth::id();
         $this->authority = Auth::user()->user_type;
         $this->save();

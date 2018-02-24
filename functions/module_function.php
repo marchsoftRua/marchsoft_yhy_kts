@@ -9,9 +9,9 @@ function module_js()
 	return("string");
 }
 
-function setData($data)
+function setData($data,$msg = "没问题")
 {
-    $dataArr =array("code"=>0,"msg"=>"","count"=>1,"data"=>$data);
+    $dataArr =array("code"=>0,"msg"=>$msg,"count"=>1,"data"=>$data);
     return $dataArr;
 }
 

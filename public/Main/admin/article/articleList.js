@@ -14,7 +14,7 @@ layui.use(['table','layer','jquery'],function(){
   	});
 
     function addNews(edit){
-        var index = layui.layer.open({
+        var index = layer.open({
             title : "添加文章",
             type : 2,
             content : "/add/article",

@@ -72,8 +72,62 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         }
     })
 
-    form.on('select(type)', function(data){
+    function sendType(text,index,elem)
+    {
+        let this_ajax = $.ajax({
+            url:'/add/type',
+            method:'post',
+            dataType:'json',
+            data:{
+                    'name':text,
+                    '_token':$("#_token").val()
+                },
+            beforeSend:function(ajax){
+                if(text.length<2)
+                {
+                    layer.tips('兄弟,类型至少得一个字符以上。',elem, {
+                      tips: [1, '#3595CC'],
+                      time: 2500
+                    });
+                    ajax.abort()
+                }
+            },
+            success:function(msg){
+                layer.msg(msg.msg);
+                var id = msg.data.id;
+                layer.close(index);
+                selectNewType(id,text);
+            },
+            error:function(msg){
+                layer.msg("出现了某种错误，请刷新!");
+                layer.close(index);
+            },
+
+        })
+    }
+
+    function selectNewType(id,val)//增加类型
+    {
+        elem = $("#type_select").children(":first");
+        console.log(elem)
+        elem.after("<option value="+id+">"+val+"</option>")
+        form.render()
+    }
+
+    function addType()
+    {
+
+        layer.prompt({title: '添加类型', formType: 0,maxlength: 10}, function(text, index,elem){
+            sendType(text,index,elem);
+        });
+    }
+
+    form.on('select(articletype)', function(data){
         select_val = data.value
+        if(data.value == 'add')
+        {
+            addType()
+        }
     }); 
 
     form.on("submit(addNews)",function(data){
@@ -88,7 +142,7 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
             data:{
                 _token:$("#_token").val(),
                 title : $(".newsName").val(),  //文章标题
-                abstract : $(".abstract").val(),  //文章摘要
+                summary : $(".abstract").val().length>0?$(".abstract").val():abstract,  //文章摘要
                 content : layedit.getContent(editIndex),  //文章内容
                 imgpath : $(".thumbImg").attr("src"),  //缩略图
                 type : select_val,    //文章分类
@@ -119,6 +173,5 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
             url : "/add/image"
         }
     });
-    form.render('select', 'type');
-
+    form.render('select', 'articletype');
 })
