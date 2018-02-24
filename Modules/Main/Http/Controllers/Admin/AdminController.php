@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Main\Entities\Menu;
+use Modules\Main\Entities\User;
+use Modules\Main\Entities\Image;
 
 class AdminController extends Controller
 {
@@ -22,10 +24,10 @@ class AdminController extends Controller
 
     public function navData(Request $request)
     {
-        // if(!$request->ajax())
-        // {
-        //     return "非ajax请求";
-        // }
+        if(!$request->ajax())
+        {
+            return "非ajax请求";
+        }
         $model = new Menu();
         $data = $model->selectAll();
         return $data;
@@ -36,56 +38,19 @@ class AdminController extends Controller
         return view('main::admin.page.articleList');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
+    public function userInfoShow()
     {
-        return view('main::create');
+        return view('main::admin.page.userInfo')->withUser(Auth::user());
     }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function changeImage(Request $request)
     {
-    }
-
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
-    {
-        return view('main::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        return view('main::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
+        if(!$request->method('post'))
+            return redirect('/admin');
+        $model = new Image();
+        $image_id = $model->saveUserImg($request);
+        $user = User::find(Auth::user()->id);
+        $user->head_url = Image::find($image_id)->image_path;
+        $user->save();
+        return setData(['url'=>$user->head_url],'修改成功!');
     }
 }

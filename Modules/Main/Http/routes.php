@@ -21,6 +21,9 @@ Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\
 
     Route::get('/admin', 'AdminController@index');
     Route::get('/sidenav','AdminController@navData');
+    Route::get('/userInfo','AdminController@userInfoShow');
+    Route::any('/changeImage','AdminController@changeImage');//更改用户头像
+
     /*
         放到nav的地址
     */

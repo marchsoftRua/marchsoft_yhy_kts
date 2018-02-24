@@ -51,7 +51,7 @@
 	    ,cellMinWidth: 80
 	    ,cols: [[ //表头
 	       {type:'checkbox',fixed: 'left'}
-	      ,{type:'numbers',title:'id',width:50}
+	      ,{field:'id',title:'id',width:50}
 	      ,{field:'name',title: '用户名称',align:'center'}
 	      ,{field: 'article_title', title: '文章标题',align:'center'}
 	      ,{field: 'type_name', title: '文章类型',align:'center'}

@@ -13,9 +13,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $guarded = ['geetest_challenge', 'geetest_validate', 'geetest_seccode'];
     public $timestamps = false;
-
+    
+    protected $guarded = ['geetest_challenge', 'geetest_validate', 'geetest_seccode'];
     protected $fillable = [
         'name', 'email', 'password',
     ];
