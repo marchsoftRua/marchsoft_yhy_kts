@@ -58,9 +58,15 @@ class User extends Authenticatable
     public static function getUserNameById($id)
     {
        $user = User::find($id);
+
        return $user;
     }
+    public static function getUserIdByPlayName($PlayName)
+    {
+       $user = User::where('user_playname',$PlayName)->first();
 
+       return $user->id;
+    }
     public function addUser($request)
     {
         $user_playname = $request->input('user_playname');

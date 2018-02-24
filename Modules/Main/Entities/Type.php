@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     protected $fillable = [];
-    public $primaryKey = 'type_id';
+    public static function getTypeList()
+    {
+    	$types = Type::all();
+    	return $types;
+    }
 }

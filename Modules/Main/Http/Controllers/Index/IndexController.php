@@ -30,6 +30,23 @@ class IndexController extends Controller
                "userRank"=> $userRank
             ]);
     }
+    public function showPerson_home(Request $request){
+        $user_playname = $request->route( 'user_playname' );
+        $user_id = User::getUserIdByPlayName($user_playname);
+        $info = User::getUserNameById($user_id);
+        $articles = Article::getUserArticleById($user_id);
+
+        $comments = Comment::getUserCommentsById($user_id);
+
+        return view( 'main::index.userHome' )
+        ->with(
+        [
+          'info'=>$info,
+          'articles'=>$articles,
+          'comments'=>$comments
+        ]
+        );
+    }
     public function error_page(){
         return view('main::index.layouts.404');
     }

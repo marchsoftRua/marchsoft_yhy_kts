@@ -30,11 +30,11 @@
           </span>
                 </div>
                 <div class="detail-about">
-                    <a class="fly-avatar" href="../user/home.html">
+                    <a class="fly-avatar" href="/user_home/{{$data->user_playname}}">
                         <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="{{$data->name}}">
                     </a>
                     <div class="fly-detail-user">
-                        <a href="../user/home.html" class="fly-link">
+                        <a href="/user_home/{{$data->user_playname}}" class="fly-link">
                             <cite>{{$data->name}}</cite>
                             <i class="iconfont icon-renzheng" title="认证信息：@{{ rows.user.approve }}"></i>
                             <i class="layui-badge fly-badge-vip">VIP3</i>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="detail-body photos">
-                    {{$data->praise}}
+                    {{$data->article_content}}
                 </div>
             </div>
 

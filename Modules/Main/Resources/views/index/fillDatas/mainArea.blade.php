@@ -13,6 +13,9 @@
               <a class="layui-badge">分享</a>
               <a href="article/{{$iteam->id}}">{{$iteam->article_title}}</a>
             </h2>
+            <div style="color: gray;font-size: 13px;">
+                <p>{{$iteam->summary}}</p>
+            </div>
             <div class="fly-list-info">
               <a href="user/home.html" link>
                 <cite>{{$iteam->name}}</cite>

@@ -18,13 +18,15 @@ class Article extends Model
         $this->LabelModel  =new Label();
         $this->CommentModel=new Comment();
     }
-
-
+    public static function getUserArticleById($id){
+        return Article::where('user_id',$id)->orderBy('created_at','desc')->take(10)->get();
+    }
     public function getIndexMainData($bycolumn,$status,$type,$getLimit){
         $query=DB::table('articles')
             ->join('users', function ($join) {
                 $join->on('users.id', '=', 'articles.user_id');
             });
+        Log::info('状态'.$status);
         if ($status)  $query = $query->where("status",$status);
         if ($type)    $query = $query->where("article_type",$type);
         if ($bycolumn)$query = $query->orderby($bycolumn,"desc");
@@ -33,6 +35,7 @@ class Article extends Model
             $id = $iteam->id;
             $iteam->CommentNum   =   $this->CommentModel->getCommentNumById($id);
             $iteam->article_label=   $this->LabelModel->GetArticleLabelById($id);
+            // mb_substr($iteam->article_content,0,100,"utf-8")
         }
         $getArray =json_decode(json_encode($res));
         $tmpview=view('main::index.fillDatas.mainArea')->with("data",$getArray->data);
@@ -43,8 +46,12 @@ class Article extends Model
         $respose_ ["html"]=$html;
         return $respose_;
     }
-    public function getOneArticle($Id){
-       return $this->where('id',$Id)->get();
+    public  static function getOneArticle($Id){
+       return Article::where('id',$Id)->first();
+    }
+    public static function getAuthorByWid($wid){
+        $wz= Article::where('id',$wid)->first();
+        return $wz->user_id;
     }
     public function getMyArticle($Id){
 
@@ -101,7 +108,9 @@ class Article extends Model
         });
         return $collection;
     }
-
+    public static function getArticleById($id){
+        return Article::where('id',$id)->first();
+    }
     public function add($request,$img_id)
     {
 

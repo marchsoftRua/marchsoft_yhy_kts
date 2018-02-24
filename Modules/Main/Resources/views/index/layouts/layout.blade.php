@@ -19,7 +19,12 @@
   @yield('header')
   @yield('container')
   @yield('footer')
+  <ul class="layui-fixbar">
+    <li class="layui-icon" lay-type="bar1" style="background-color:#009688">&#xe68e;</li>
+    <li class="layui-icon" lay-type="bar1" style="background-color:#009688">&#xe642;</li>
+    <li class="layui-icon" lay-type="bar1" style="background-color:#009688">&#xe604;</li>
 
+  </ul>
 <script>
 layui.cache.page = '';
 layui.cache.user = {

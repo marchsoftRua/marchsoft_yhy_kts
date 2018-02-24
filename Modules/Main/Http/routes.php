@@ -40,8 +40,11 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::post('/getComment','ArticleShowController@getComments');
     Route::post('/jie/sendComment','ArticleShowController@sendComments');
     Route::post('/getChild','ArticleShowController@getChildComments');
+    Route::get('/user_home/{user_playname?}', 'IndexController@showPerson_home');
+    
     Route::get('/', 'IndexController@index');
     Route::post('/reader', 'IndexController@readerSetData');
+    Route::post('/comment_delete','ArticleShowController@comment_delete');
     Route::post('/getHotUser', 'IndexController@getTheWeekHot');
     Route::post('/getSpeakRank', 'IndexController@getSpeakRank');
     Route::get('/404',"IndexController@error_page");
