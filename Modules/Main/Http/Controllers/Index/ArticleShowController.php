@@ -22,7 +22,6 @@ class ArticleShowController extends Controller
     public function lookArticle(Request $request){
           $id = $request->route( 'article_id' );
           $num = $this->articleModel->getOneArticle($id);
-          Log::info(json_encode($num));
           if (!$id||count($num)<1){
               return redirect('/404');
           }
@@ -33,7 +32,7 @@ class ArticleShowController extends Controller
        $oderRule =["created_at","praise"]; 
        $id = $request->article_id;
        $oderBy=$request->bycolumn;
-       $Comments =  $this->commentModel->getOneGrade($id,$oderRule[$oderBy]);
+       $Comments =  $this->commentModel->getOneGrade($id,$oderRule[$oderBy],1,$request);
        $tmpview = view('main::Index.fillDatas.comment')->with('comment',$Comments);
        $html = response($tmpview)->getContent();
        return  [
@@ -62,6 +61,14 @@ class ArticleShowController extends Controller
           "status"=>0,
           "msg"=>55
         ]);
+    }
+    public function comment_delete(Request $request){
+      $getdata = $request->all();
+      $val = $this->commentModel->comment_delete(1,$getdata['w_id'],$getdata['c_id']);
+      if ($val) {
+        return responseToJson(0,'删除成功');
+      }
+      return responseToJson(1,'没有权限');
     }
 
 }

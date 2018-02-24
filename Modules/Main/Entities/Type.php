@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Auth;
 class Type extends Model
 {
     protected $fillable = [];
-
+    public static function getTypeList()
+    {
+    	$types = Type::all();
+    	return $types;
+	}
     public function add($request)
     {
     	$this->type_name = $request->name;

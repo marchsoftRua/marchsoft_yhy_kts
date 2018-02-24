@@ -20,3 +20,9 @@
 	display: inline-block;
 
 }
+.fly-list li{
+	height: auto!important;
+}
+.fly-list li p{
+	text-indent: 20px;
+}

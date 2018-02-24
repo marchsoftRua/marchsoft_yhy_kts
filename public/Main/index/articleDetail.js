@@ -8,9 +8,11 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
   ,upload = layui.upload
   ,util = layui.util
   ,device = layui.device()
-
+  var current_w_id = $('#theArticle').attr('name')
   ,DISABLED = 'layui-btn-disabled',childSortWay=1,orderRule = 0;
   var current_input=null;
+  var current_page = 0;
+
     const GETCHILD = 1;
     const GETALL = 2;
   //阻止IE7以下访问
@@ -79,13 +81,12 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
     initAction:function(){
             form.on('submit(*)', function(data){
                 if (fly.charLen(data.field.content)<5) {
-                        console.log()
-
                         layer.alert('太短')
 
                         return 0;
                 }
-                data.field.belong_id=$('#theArticle').attr('name');
+                data.field.belong_id=current_w_id;
+                data.field.toid=$(data.form).parent().attr('toid')||0
                 data.field.p_id=$(data.form).parent().attr('name')
                 data.field.content=fly.content_(data.field.content)
                 $.ajax(
@@ -99,8 +100,11 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
                             success:function(res) {
                                 if (res.status==0) {
                                     data.form.getElementsByTagName('textarea')[0].value=''
-                                    layer.alert('回复成功')
-                                    fly.getComments(GETALL,1,1,0,5,1);
+                                    layer.alert('回复成功',function(){
+                                    fly.getComments(GETALL,1,current_page,0,5,1);
+
+                                    })
+                                    // fly.getComments(GETALL,1,1,0,5,1);
                                 }
                             },
                             error:function(){
@@ -123,11 +127,28 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
                $(selEl).append(back)
                var p_id = $('.back').prev().attr('name')
                $('.back').attr('name',p_id)
+               $('.back').attr('toid',event.target.getAttribute("toid"))
             })
-
+            $('body').on('click','.childs-nav span',function(event){
+                var Btn_type = $(event.target).attr('type')
+                var p_id = $(event.target).parent().parent().prev().attr('pid')
+                var c_id = $(event.target).parent().attr('c_id')
+                // var current_w_id = current_w_id
+                // console.log(c_id+"--"+current_w_id)
+                if (Btn_type=='edit') {
+                    alert(0)
+                }else if(Btn_type=='del'){
+                    layer.confirm('确定要删除该条评论吗？', {
+                      btn: ['确定','取消'] //按钮
+                    }, function(){
+                        fly.deleteComment(current_w_id,p_id,c_id)
+                    });
+                }
+            });
              $('body').on('click','.more',function(event){
                 var obj = event.target
                 var select = $(obj).parent().parent()
+                console.log("p_id"+obj.name)
                 fly.getComments(GETCHILD,obj.name,1,0,5,select)
              })
               $('body').on('click','#byHot',function(event){
@@ -143,10 +164,38 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
                 fly.getComments(GETALL,1,1,orderRule,5,1);
              })
     },
+    deleteComment:function(w_id,p_id,c_id){
+        $.ajax(
+        {
+            url:'/comment_delete',
+            type:'post',
+            data:{
+                "w_id":w_id,
+                'p_id':p_id,
+                'c_id':c_id
+            },
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+            success:function(data){
+                if (data.status==0) {
+                        layer.msg(data.msg, {icon: 1});
+                        fly.getComments(GETALL,1,current_page,0,5,1);
+                }else{
+                        layer.msg(data.msg, {icon: 2});
+                }
+            }
+        }
+        )
+    }
+    ,
      getComments:function(type,p_id,c_page,bycolumn,getLimit,el) {
+            layer.msg('玩命加载中',{time:0});
             var rout_info = document.getElementById('theArticle').getAttribute('name')
             var actionUrl;
             actionUrl = type==GETCHILD ?"/getChild":"/getComment";
+            current_page = c_page;
+
             $.ajax(
                 {
                     url: actionUrl,
@@ -163,6 +212,9 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
                     },
                     success:function (data) {
                         layer.closeAll();
+                        if (data.data.data.length==0&&data.data.current_page>1) {
+                          fly.getComments(type,1,c_page-1,0,5,1);
+                        }
                         if (type==GETALL&&data.data.last_page>0) {
                             $("#comment_area").html(data.html)
                             if (data.data.current_page==1) {
@@ -174,6 +226,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
                             if (data.data.current_page==1) {
                                 fly.readyPage(data.data.total,c_id,fly.dealPage)
                             }
+                            
                         }
                     }
             })
@@ -186,7 +239,6 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
         if (obj.elem=="allPage") {
             fly.getComments(GETALL,1,obj.curr,orderRule,5,obj.elem)
             window.scrollTo(0,$('#flyReply').offset().top);
-            layer.msg('玩命加载中',{time:0});
 
         }else{
             var select = document.getElementById(obj.elem)
