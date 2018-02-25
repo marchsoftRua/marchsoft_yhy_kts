@@ -10,7 +10,8 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
     var layer = parent.layer === undefined ? layui.layer : top.layer,
         upload = layui.upload,
         laydate = layui.laydate,
-        address = layui.address;
+        address = layui.address,
+        _token = $('#_token').val();
 
     //上传头像
     upload.render({
@@ -21,7 +22,7 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
         field:'img',
         dataType:'json',
         data:{
-            '_token':$('#_token').val()
+            '_token':_token
         },
         done:function(msg){
 
@@ -49,9 +50,9 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
         trigger: 'click',
         max : 0,
         done: function(value, date){
-            
+                layer.msg('修改成功!');
+                console.log($(".userBirthday").val())
             }
-        }
     });
 
     //获取省信息
@@ -73,16 +74,25 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
             'userEmail' : $(".userEmail").val(),
             'myself' : $(".myself").val()
         };
+        var sendData = userInfoHtml
+        
         for(key in data.field){
             if(key.indexOf("like") != -1){
                 userInfoHtml[key] = "on";
             }
         }
         window.sessionStorage.setItem("userInfo",JSON.stringify(userInfoHtml));
-        setTimeout(function(){
-            layer.close(index);
-            layer.msg("提交成功！");
-        },2000);
+        userInfoHtml._token = _token
+        $.ajax({
+            url:'/userInfo',
+            method:'post',
+            data:userInfoHtml,
+            dataType:'json',
+            success:function(msg){
+                layer.close(index);
+                layer.msg(msg.msg);
+            },
+        });
         return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     })
 

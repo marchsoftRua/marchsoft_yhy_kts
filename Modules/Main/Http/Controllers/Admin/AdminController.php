@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Main\Entities\Menu;
 use Modules\Main\Entities\User;
 use Modules\Main\Entities\Image;
+use Modules\Main\Rules\Phone;
 
 class AdminController extends Controller
 {
@@ -16,9 +17,18 @@ class AdminController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
+    var $userModel = null;
+    var $imageModel = null;
+    var $menuModel = null;
+    public function __construct()
+    {
+        $this->userModel = new User();
+        $this->imageModel = new Image();
+        $this->menuModel = new Menu();
+    }
+
     public function index()
     {
-        
         return view('main::admin.index')->with('user',Auth::user());
     }
 
@@ -28,8 +38,7 @@ class AdminController extends Controller
         {
             return "非ajax请求";
         }
-        $model = new Menu();
-        $data = $model->selectAll();
+        $data = $this->menuModel->selectAll();
         return $data;
     }
 
@@ -38,16 +47,28 @@ class AdminController extends Controller
         return view('main::admin.page.articleList');
     }
 
-    public function userInfoShow()
+    public function userInfoShow(Request $request)
     {
-        return view('main::admin.page.userInfo')->withUser(Auth::user());
+        if($request->isMethod('post'))
+        {
+            $this->validate($request,[
+                'realName' => 'required|string|max:10',
+                'sex' => 'required|boolean',
+                'userPhone' => ['required',new Phone],
+                'userBirthday' => '',
+                'userEmail' => '',
+                'myself' => ''
+            ]);
+            $this->userModel->setInfo($request);
+        }
+        else
+            return view('main::admin.page.userInfo')->withUser(Auth::user());
     }
     public function changeImage(Request $request)
     {
         if(!$request->method('post'))
             return redirect('/admin');
-        $model = new Image();
-        $image_id = $model->saveUserImg($request);
+        $image_id = $this->imageModel->saveUserImg($request);
         $user = User::find(Auth::user()->id);
         $user->head_url = Image::find($image_id)->image_path;
         $user->save();
