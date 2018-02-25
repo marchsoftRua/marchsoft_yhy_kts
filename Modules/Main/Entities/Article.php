@@ -119,6 +119,7 @@ class Article extends Model
         $this->article_title = $request->title;
         $this->article_content = $request->content;
         $this->summary = $request->summary;
+        $this->status = 1;//后期再改
         $this->type_id = $request->type;
         if($img_id)
             $this->image_id = $img_id;
