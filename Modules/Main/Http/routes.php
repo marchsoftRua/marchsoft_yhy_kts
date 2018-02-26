@@ -40,6 +40,9 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     /****
     前台路由
      ***/
+    
+    Route::get('/typeList', 'IndexController@getTypeList');
+    Route::get('/type/{type_url?}', 'IndexController@index');
     Route::get('/article/{article_id?}', 'ArticleShowController@lookArticle');
     Route::post('/getComment','ArticleShowController@getComments');
     Route::post('/jie/sendComment','ArticleShowController@sendComments');
@@ -49,6 +52,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
     Route::get('/', 'IndexController@index');
     Route::post('/reader', 'IndexController@readerSetData');
     Route::post('/comment_delete','ArticleShowController@comment_delete');
+    Route::post('/click_praise','ArticleShowController@clickPraise');
     Route::post('/getHotUser', 'IndexController@getTheWeekHot');
     Route::post('/getSpeakRank', 'IndexController@getSpeakRank');
     Route::get('/404',"IndexController@error_page");

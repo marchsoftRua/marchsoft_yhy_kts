@@ -54,6 +54,12 @@ class ArticleShowController extends Controller
                 "data"=>$item->childs
                 ];
     }
+    public function clickPraise(Request $request)
+    {
+        Praise::addPraise($request->all());
+        
+
+    }
     public function sendComments(Request $request){
       $getdata = $request->all();
         $this->commentModel->addComment($getdata);

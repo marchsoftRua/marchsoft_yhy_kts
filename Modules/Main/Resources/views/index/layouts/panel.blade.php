@@ -7,20 +7,24 @@
 
 <div class="fly-panel fly-column">
   <div class="layui-container">
-    <ul class="layui-clear">
-      <li class="layui-hide-xs layui-this"><a href="/">首页</a></li> 
+    
+    <ul class="layui-clear" id='TopType'>
+ <!--      <li class="layui-hide-xs layui-this"><a href="/">推荐</a></li> 
       
-      <li><a href="jie/index.html">提问</a></li> 
-      <li><a href="jie/index.html">分享<span class="layui-badge-dot"></span></a></li> 
-      <li><a href="jie/index.html">讨论</a></li> 
-      <li><a href="jie/index.html">建议</a></li> 
-      <li><a href="jie/index.html">公告</a></li> 
-      <li><a href="jie/index.html">动态</a></li> 
-      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li> 
+      <li><a href="jie/index.html">科技</a></li> 
+      <li><a href="jie/index.html">情感<span class="layui-badge-dot"></span></a></li> 
+      <li><a href="jie/index.html">大数据</a></li> 
+      <li><a href="jie/index.html">游戏开发</a></li> 
+      <li><a href="jie/index.html">前端</a></li> 
+      <li><a href="jie/index.html">后端</a></li>
+      <li><a href="jie/index.html">数据库</a></li>
+      <li><a href="jie/index.html">移动开发</a></li> 
+      <li><i class="layui-icon">&#xe602;</i></li>
+      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>  -->
       
       <!-- 用户登入后显示 -->
-      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html">我发表的贴</a></li> 
-      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html#collection">我收藏的贴</a></li> 
+<!--       <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html">我发表的贴</a></li> 
+      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html#collection">我收藏的贴</a></li>  -->
     </ul> 
     
     <div class="fly-column-right layui-hide-xs"> 

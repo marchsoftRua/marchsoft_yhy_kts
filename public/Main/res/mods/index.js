@@ -92,7 +92,23 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
     }
     
     ,form: {}
+    ,renderType:function(page_num){
+      fly.json(
+        '/typeList',
+        {
+          page:page_num,
+          current_path:window.location.pathname.replace('#','')
+        }
+        ,function(data) {
+          $('#TopType').html(data.html)
 
+        // body...
+        },
+        {
+          'type':'get'
+        }
+      )
+    }
     //简易编辑器
     // ,layEditor: function(options){
       // var html = ['<div class="layui-unselect fly-edit">'
@@ -486,7 +502,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
   //   $('body').on('click', '.photos img', function(){
   //     window.open(this.src);
   //   });
-  // }
+  }
 
 
   //搜索
@@ -516,9 +532,12 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
       }
     })
   });
-
+  $('body').click('.page_switch',function(node){
+    var page_num = $(node.target).attr('page_num')
+    fly.renderType(page_num)
+    })
   //新消息通知
-  fly.newmsg();
+  // fly.newmsg();
 
   //发送激活邮件
   // fly.activate = function(email){
@@ -586,9 +605,9 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
   }
 
   //加载编辑器
-  fly.layEditor({
-    elem: '.fly-editor'
-  });
+  // fly.layEditor({
+  //   elem: '.fly-editor'
+  // });
 
   //手机设备的简单适配
   var treeMobile = $('.site-tree-mobile')
@@ -611,17 +630,17 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
   // });
   
   //固定Bar
-  // util.fixbar({
-  //   bar1: '&#xe642;'
-  //   ,bgcolor: '#009688'
-  //   ,click: function(type){
-  //     if(type === 'bar1'){
-  //       layer.msg('打开 index.js，开启发表新帖的路径');
-  //       //location.href = 'jie/add.html';
-  //     }
-  //   }
-  // });
-
+  util.fixbar({
+    bar1: '&#xe642;'
+    ,bgcolor: '#009688'
+    ,click: function(type){
+      if(type === 'bar1'){
+        layer.msg('打开 index.js，开启发表新帖的路径');
+        //location.href = 'jie/add.html';
+      }
+    }
+  });
+fly.renderType();
   exports('fly', fly);
 
 });

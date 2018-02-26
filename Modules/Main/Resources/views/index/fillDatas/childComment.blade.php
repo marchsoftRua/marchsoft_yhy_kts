@@ -41,7 +41,7 @@
                         回复
                       </span>
                       <span>{{$cc->created_at}}</span>
-                        @if($item->author==getUserInfo()->id)
+                        @if(getUserInfo() && $item->author==getUserInfo()->id)
                         <div class="jieda-admin">
                             <span class="childs-nav" c_id="{{$cc->id}}">
                                   <span type="edit">

@@ -10,8 +10,8 @@ class Type extends Model
     protected $fillable = [];
     public static function getTypeList()
     {
-    	$types = Type::all();
-    	return $types;
+    	$types = Type::paginate(8);
+    	return json_en_de_code($types);
 	}
     public function add($request)
     {
@@ -20,7 +20,11 @@ class Type extends Model
     	$this->save();
     	return $this->all()->last()->id;
     }
-
+    public  static function getTypeByUrl($value)
+    {
+    	return Type::where('url',$value)->first();
+    	# code...
+    }
     public function user()
     {
     	return $this->belongsTo('Modules\Main\Entities\User');
