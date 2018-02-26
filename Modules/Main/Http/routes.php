@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\
     Route::get('/sidenav','AdminController@navData');
     Route::any('/userInfo','AdminController@userInfoShow');//改成ａｎｙ　修改的信息也提交到这个路由
     Route::any('/changeImage','AdminController@changeImage');//更改用户头像
-
+    Route::any('/changepwd','AdminController@changepwd');//修改用户密码
     /*
         放到nav的地址
     */

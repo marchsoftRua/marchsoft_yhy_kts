@@ -60,30 +60,18 @@
 		<div class="layui-form-item userAddress">
 			<label class="layui-form-label">家庭住址</label>
 			<div class="layui-input-inline">
-				<select name="province" lay-filter="province" class="province">
-					@if($user->province)
-						<option value="{{$user->province}}" selected>{{addCodeToString($user->province)}}</option>
-					@else
-						<option value="">请选择市</option>
-					@endif
+				<select id='province' name="province" lay-filter="province" class="province" data-province = "{{$user->province}}">
+					<option value="">请选择省</option>
 				</select>
 			</div>
 			<div class="layui-input-inline">
-				<select name="city" lay-filter="city" disabled>
-					@if($user->city)
-						<option value="{{$user->city}}" selected>{{addCodeToString($user->city)}}</option>
-					@else
-						<option value="">请选择市</option>
-					@endif
+				<select id='city' name="city" lay-filter="city" disabled data-city = "{{$user->city}}">
+					<option value="">请选择市</option>
 				</select>
 			</div>
 			<div class="layui-input-inline">
-				<select name="area" lay-filter="area" disabled>
-					@if($user->area)
-						<option value="{{$user->area}}" selected>{{addCodeToString($user->area)}}</option>
-					@else
-						<option value="">请选择市</option>
-					@endif
+				<select id='area' name="area" lay-filter="area" disabled data-area = "{{$user->area}}">
+					<option value="">请选择区</option>
 				</select>
 			</div>
 		</div>
@@ -111,7 +99,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">自我评价</label>
 			<div class="layui-input-block">
-				<textarea placeholder="请输入内容" class="layui-textarea myself"></textarea>
+				<textarea placeholder="请输入内容" class="layui-textarea myself">{{$user->myself}}</textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">

@@ -70,12 +70,17 @@ class AdminController extends Controller
     }
     public function changeImage(Request $request)
     {
-        if(!$request->method('post'))
+        if(!$request->isMethod('post'))
             return redirect('/admin');
         $image_id = $this->imageModel->saveUserImg($request);
         $user = User::find(Auth::user()->id);
         $user->head_url = Image::find($image_id)->image_path;
         $user->save();
         return setData(['url'=>$user->head_url],'修改成功!');
+    }
+    public function changepwd(Request $request)
+    {
+        if($request->isMethod('get'))
+            return view('main::admin.page.userpwd')->withUser(Auth::user());
     }
 }

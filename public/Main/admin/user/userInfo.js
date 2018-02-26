@@ -96,13 +96,32 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
     })
 
     //修改密码
-    form.on("submit(changePwd)",function(data){
-        var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        setTimeout(function(){
-            layer.close(index);
-            layer.msg("密码修改成功！");
-            $(".pwd").val('');
-        },2000);
-        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-    })
+
+
+    setAdd = function(){
+        var province = $('#province').attr('data-province'),
+        city = $('#city').attr('data-city'),
+        area = $('#area').attr('data-area');
+        $.get("Main/json/address.json", function (addressData) {
+            $(".userAddress select[name='province']").val(province); //省
+            var value = province;
+            if (value > 0) {
+                address.citys(addressData[$(".userAddress select[name='province'] option[value='"+province+"']").index()-1].childs);
+                citys = addressData[$(".userAddress select[name='province'] option[value='"+province+"']").index()-1].childs;
+            } else {
+                $('.userAddress select[name=city]').attr("disabled","disabled");
+            }
+            $(".userAddress select[name='city']").val(city); //市
+            //填充市级信息，同时调取区县信息列表
+            var value = city;
+            if (value > 0) {
+                address.areas(citys[$(".userAddress select[name=city] option[value='"+city+"']").index()-1].childs);
+            } else {
+                $('.userAddress select[name=area]').attr("disabled","disabled");
+            }
+            $(".userAddress select[name='area']").val(area); //区
+            form.render();
+        })
+    }
+    setAdd();
 })
