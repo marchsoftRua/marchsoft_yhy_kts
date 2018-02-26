@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->comment('用户id');
             $table->string('name',10)->default('康宏顺')->comment('用户的真实姓名');
-            $table->boolean('sex')->default(0)->comment('用户的性别');
+            $table->boolean('sex')->default(0)->comment('用户的性别 1男 0女 ');
             $table->string('province',10)->nullable()->comment('省');
             $table->string('city',10)->nullable()->comment('市');
             $table->string('area',10)->nullable()->comment('区');

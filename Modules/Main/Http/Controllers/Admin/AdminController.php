@@ -4,7 +4,7 @@ namespace Modules\Main\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Main\Entities\Menu;
 use Modules\Main\Entities\User;
@@ -54,12 +54,16 @@ class AdminController extends Controller
             $this->validate($request,[
                 'realName' => 'required|string|max:10',
                 'sex' => 'required|boolean',
-                'userPhone' => ['required',new Phone],
-                'userBirthday' => '',
-                'userEmail' => '',
-                'myself' => ''
+                'userPhone' => ['nullable',new Phone],
+                'userBirthday' => 'date|nullable',
+                'province' => 'nullable|string|max:10',
+                'city' => 'nullable|string|max:10',
+                'area' => 'nullable|string|max:10',
+                'userEmail' => 'required|email',
+                'myself' => 'nullable|string|max:120'
             ]);
-            $this->userModel->setInfo($request);
+            if($this->userModel->setInfo($request))
+                return setData(null);
         }
         else
             return view('main::admin.page.userInfo')->withUser(Auth::user());

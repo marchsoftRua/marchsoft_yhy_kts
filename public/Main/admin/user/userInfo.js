@@ -74,7 +74,6 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
             'userEmail' : $(".userEmail").val(),
             'myself' : $(".myself").val()
         };
-        var sendData = userInfoHtml
         
         for(key in data.field){
             if(key.indexOf("like") != -1){

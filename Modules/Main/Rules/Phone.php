@@ -26,6 +26,8 @@ class Phone implements Rule
     public function passes($attribute, $value)
     {
         //
+        if(empty($value))
+            return true;
         $isMatched = preg_match_all('/^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/', $value);
         return $isMatched;
     }

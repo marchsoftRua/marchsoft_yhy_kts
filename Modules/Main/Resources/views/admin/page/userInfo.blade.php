@@ -39,38 +39,51 @@
 		<div class="layui-form-item" pane="">
 			<label class="layui-form-label">性别</label>
 			<div class="layui-input-block userSex">
-				<input type="radio" name="sex" value="男" title="男" checked="">
-				<input type="radio" name="sex" value="女" title="女">
-				<input type="radio" name="sex" value="保密" title="保密">
+
+				<input type="radio" name="sex" value="1" title="男" @if($user->sex == 1) checked @endif>
+				<input type="radio" name="sex" value="0" title="女" @if($user->sex == 0) checked @endif>
+				<input type="radio" name="sex" value="" title="保密">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">手机号码</label>
 			<div class="layui-input-block">
-				<input type="tel" value="" placeholder="请输入手机号码" lay-verify="phone" class="layui-input userPhone">
+				<input type="tel" value="" placeholder="请输入手机号码" lay-verify="" class="layui-input userPhone">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">出生年月</label>
 			<div class="layui-input-block">
-				<input type="text" value="" placeholder="请输入出生年月" lay-verify="userBirthday" readonly class="layui-input userBirthday">
+				<input type="text" value="{{explode(' ',$user->birthday)[0]}}" placeholder="请输入出生年月" lay-verify="userBirthday" readonly class="layui-input userBirthday">
 			</div>
 		</div>
 		<div class="layui-form-item userAddress">
 			<label class="layui-form-label">家庭住址</label>
 			<div class="layui-input-inline">
 				<select name="province" lay-filter="province" class="province">
-					<option value="">请选择市</option>
+					@if($user->province)
+						<option value="{{$user->province}}" selected>{{addCodeToString($user->province)}}</option>
+					@else
+						<option value="">请选择市</option>
+					@endif
 				</select>
 			</div>
 			<div class="layui-input-inline">
 				<select name="city" lay-filter="city" disabled>
-					<option value="">请选择市</option>
+					@if($user->city)
+						<option value="{{$user->city}}" selected>{{addCodeToString($user->city)}}</option>
+					@else
+						<option value="">请选择市</option>
+					@endif
 				</select>
 			</div>
 			<div class="layui-input-inline">
 				<select name="area" lay-filter="area" disabled>
-					<option value="">请选择县/区</option>
+					@if($user->area)
+						<option value="{{$user->area}}" selected>{{addCodeToString($user->area)}}</option>
+					@else
+						<option value="">请选择市</option>
+					@endif
 				</select>
 			</div>
 		</div>

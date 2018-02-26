@@ -54,3 +54,33 @@ function wordTime($time) {
         }
         return $str;
     }
+
+function serchAddName($item,$code)
+{
+    $name = false;
+    if(isset($item['code'])&&$item['code'] == $code)
+        return $item['name'];
+    else if(isset($item['childs']))
+        return serchAddName($item['childs'],$code);
+    else if(gettype($item) == 'array'&&!isset($item['code']))
+        for($i=0;$i<count($item);$i++){
+            $name = serchAddName($item[$i],$code);
+            if($name!=false)
+                return $name;
+        }
+    else
+        return null;
+}
+
+function addCodeToString($code)
+{
+    $filename = 'Main/json/address.json';
+    $addName = null;
+    if(file_exists($filename))
+    {
+        $content = file_get_contents($filename); 
+        $json = json_decode($content,true); 
+        $addName = serchAddName($json,$code);
+        return $addName;
+    }
+}
