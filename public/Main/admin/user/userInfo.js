@@ -46,7 +46,7 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
     //选择出生日期
     laydate.render({
         elem: '.userBirthday',
-        format: 'yyyy年MM月dd日',
+        format: 'yyyy-MM-dd',
         trigger: 'click',
         max : 0,
         done: function(value, date){
