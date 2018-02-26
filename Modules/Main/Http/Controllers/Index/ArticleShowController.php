@@ -26,14 +26,14 @@ class ArticleShowController extends Controller
               return redirect('/404');
           }
           $data = $this->articleModel->getMyArticle($id);
-          return view('main::Index.article')->with(["data"=>$data]);
+          return view('main::index.article')->with(["data"=>$data]);
     }
     public function getComments(Request $request){
        $oderRule =["created_at","praise"]; 
        $id = $request->article_id;
        $oderBy=$request->bycolumn;
        $Comments =  $this->commentModel->getOneGrade($id,$oderRule[$oderBy],1,$request);
-       $tmpview = view('main::Index.fillDatas.comment')->with('comment',$Comments);
+       $tmpview = view('main::index.fillDatas.comment')->with('comment',$Comments);
        $html = response($tmpview)->getContent();
        return  [
                 "html"=>$html,
@@ -47,7 +47,7 @@ class ArticleShowController extends Controller
         $item=new \stdClass();
         $item->childs = $this->commentModel->getChild($p_id,$id,$getLimit);
         $item->p_id=$p_id;
-        $tmpview = view('main::Index.fillDatas.childComment')->with('item',$item);
+        $tmpview = view('main::index.fillDatas.childComment')->with('item',$item);
         $html = response($tmpview)->getContent();
          return  [
                 "html"=>$html,

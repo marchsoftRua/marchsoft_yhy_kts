@@ -13,9 +13,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $guarded = ['geetest_challenge', 'geetest_validate', 'geetest_seccode'];
     public $timestamps = false;
-
+    
+    protected $guarded = ['geetest_challenge', 'geetest_validate', 'geetest_seccode'];
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -83,4 +83,20 @@ class User extends Authenticatable
     public function getAuthPassword () {
         return $this->password;
     }
+
+    public function setInfo($request)
+    {
+        $user = $this->find(Auth::id());
+        $user->name = $request->realName;
+        $user->sex = $request->sex;
+        $user->userPhone = $request->userPhone;
+        $user->birthday = $request->userBirthday;
+        $user->province = $request->province;
+        $user->city = $request->city;
+        $user->area = $request->area;
+        $user->myself = $request->myself;
+        $user->save();
+        return true;
+    }
+
 }

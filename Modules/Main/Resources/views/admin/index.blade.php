@@ -19,6 +19,7 @@
 
 	<script type="text/javascript">
 		var module_path = "{{asset('Main/admin/js')}}/";
+		var userImage = "{{$user->head_url}}";
 	</script>
 	
 	

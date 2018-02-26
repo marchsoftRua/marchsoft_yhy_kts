@@ -16,12 +16,6 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->comment('用户id');
             $table->string('name',10)->default('康宏顺')->comment('用户的真实姓名');
-            $table->boolean('sex')->default(0)->comment('用户的性别 1男 0女 ');
-            $table->string('province',10)->nullable()->comment('省');
-            $table->string('city',10)->nullable()->comment('市');
-            $table->string('area',10)->nullable()->comment('区');
-            $table->string('myself',120)->nullable()->comment('用户自我介绍');
-            $table->dateTime('birthday')->nullable()->comment('用户的生日');
             $table->string('head_url')->default("/public/defualt_img.jpg")->comment("用户头像的url地址");
             $table->string('password',255)->comment('用户密码');
             $table->string('user_playname',12)->comment('用户昵称');

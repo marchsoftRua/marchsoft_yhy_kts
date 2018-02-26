@@ -25,8 +25,8 @@ class CreateArticlesTable extends Migration
             $table->integer('readnum')->default(0)->comment("浏览量");
             $table->integer('status')->comment("文章状态");
             $table->text('article_content')->comment("文章内容");//需讨论
-            $table->integer('notebook_id')->default(0)->comment("所属笔记");//关联外键 0是默认笔记本
-            $table->integer('image_id')->nullable()->comment("封面id　曾经想要用路径　但感觉不好");//可以为空
+            $table->integer('notebook_id')->comment("所属笔记");//关联外键
+            $table->integer('image_id')->comment("封面id　曾经想要用路径　但感觉不好");
             $table->softDeletes()->comment("软删除");
             $table->timestamps();
         });

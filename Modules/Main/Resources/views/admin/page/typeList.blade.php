@@ -29,7 +29,6 @@
 </script>
 
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -51,9 +50,10 @@
 	    ,cellMinWidth: 80
 	    ,cols: [[ //表头
 	       {type:'checkbox',fixed: 'left'}
-	      ,{type:'numbers',title:'id',width:50}
+	      ,{field:'id',title:'id',width:50}
 	      ,{field: 'type_name', title: '类型名称',align:'center'}
-	      ,{field: 'name',title: '创建者'}
+	      ,{field: 'name',title: '创建者',align:'center'}
+	      ,{field:'tools',title:'操作',toolbar:'#barDemo',fixed:'right',align:'center'}
 	    ]]
 	  });
 	});

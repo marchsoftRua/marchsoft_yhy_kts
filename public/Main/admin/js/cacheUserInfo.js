@@ -1,6 +1,7 @@
 layui.config({
-    base : "../../js/"
-}).use(['form','jquery',"address"],function() {
+    base : module_path
+})
+layui.use(['form','jquery',"address"],function() {
     var form = layui.form,
         $ = layui.jquery,
         address = layui.address;
@@ -8,9 +9,9 @@ layui.config({
     //判断是否设置过头像，如果设置过则修改顶部、左侧和个人资料中的头像，否则使用默认头像
     if(window.sessionStorage.getItem('userFace')){
         $("#userFace").attr("src",window.sessionStorage.getItem('userFace'));
-        $(".userAvatar").attr("src",$(".userAvatar").attr("src").split("images/")[0] + "images/" + window.sessionStorage.getItem('userFace').split("images/")[1]);
+        $(".userAvatar").attr("src",window.sessionStorage.getItem('userFace'));
     }else{
-        $("#userFace").attr("src","../../images/face.jpg");
+        $("#userFace").attr("src",userImage);
     }
 
     //判断是否修改过用户信息，如果修改过则填充修改后的信息
@@ -26,7 +27,7 @@ layui.config({
         $(".userPhone").val(userInfo.userPhone); //手机号
         $(".userBirthday").val(userInfo.userBirthday); //出生年月
         //填充省份信息，同时调取市级信息列表
-        $.get("../../json/address.json", function (addressData) {
+        $.get("Main/json/address.json", function (addressData) {
             $(".userAddress select[name='province']").val(userInfo.province); //省
             var value = userInfo.province;
             if (value > 0) {
