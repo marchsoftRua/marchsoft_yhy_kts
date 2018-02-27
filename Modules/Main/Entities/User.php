@@ -99,4 +99,17 @@ class User extends Authenticatable
         return true;
     }
 
+    function setPwd($request)
+    {
+        $user = $this->find(Auth::id());
+        if(Hash::check($request->oldpwd, $user->password))
+        {
+            $user->password = Hash::make($request->newpwd);
+            $user->save();
+            return true;
+        }
+        else
+            return false;
+    }
+
 }

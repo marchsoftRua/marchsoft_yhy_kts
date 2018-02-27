@@ -10,6 +10,7 @@ use Modules\Main\Entities\Menu;
 use Modules\Main\Entities\User;
 use Modules\Main\Entities\Image;
 use Modules\Main\Rules\Phone;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -82,5 +83,14 @@ class AdminController extends Controller
     {
         if($request->isMethod('get'))
             return view('main::admin.page.userpwd')->withUser(Auth::user());
+        else
+        {
+            $this->validate($request,[
+                'newpwd' => 'required|confirmed|max:20|min:6',
+                'newpwd_confirmation'=>'required'
+            ]);
+            if($this->userModel->setPwd($request))
+                return setData(null);
+        }
     }
 }

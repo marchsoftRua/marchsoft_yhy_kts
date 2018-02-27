@@ -19,19 +19,19 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">旧密码</label>
 			<div class="layui-input-block">
-				<input type="password" value="" placeholder="请输入旧密码" lay-verify="required|oldPwd" class="layui-input pwd">
+				<input type="password" value="" placeholder="请输入旧密码" id='oldpwd' lay-verify="required|oldPwd" class="layui-input pwd">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">新密码</label>
 			<div class="layui-input-block">
-				<input type="password" value="" placeholder="请输入新密码" lay-verify="required|newPwd" id="oldPwd" class="layui-input pwd">
+				<input type="password" value="" placeholder="请输入新密码" id="newpwd" lay-verify="required|newPwd"  class="layui-input pwd">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">确认密码</label>
 			<div class="layui-input-block">
-				<input type="password" value="" placeholder="请确认密码" lay-verify="required|confirmPwd" class="layui-input pwd">
+				<input type="password" value="" placeholder="请确认密码" id='newpwd_confirmation' lay-verify="required|confirmPwd" class="layui-input pwd">
 			</div>
 		</div>
 		<div class="layui-form-item">
