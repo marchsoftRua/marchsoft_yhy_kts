@@ -11,6 +11,8 @@ use Modules\Main\Entities\User;
 use Modules\Main\Entities\Image;
 use Modules\Main\Rules\Phone;
 use Illuminate\Validation\Rule;
+use Modules\Main\Entities\Article;
+use Modules\Main\Entities\Type;
 
 class AdminController extends Controller
 {
@@ -92,5 +94,13 @@ class AdminController extends Controller
             if($this->userModel->setPwd($request))
                 return setData(null);
         }
+    }
+    public function  changeArticle(Request $request,$article_id)
+    {
+        if($request->isMethod('get'))
+        {
+            return view('main::admin.page.addarticle')->withArticle(Article::find($article_id))->withTypes(Type::all());
+        }
+
     }
 }

@@ -7,7 +7,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="childrenBody">
-<form class="layui-form layui-row layui-col-space10" id="from-article">
+<form class="layui-form layui-row layui-col-space10" id="from-article" @isset($article)data-id="{{$article->id}}@endisset">
 	<input type="hidden" id="_token" value="{{ csrf_token() }}">
 	<div class="layui-col-md9 layui-col-xs12">
 		<div class="layui-row layui-col-space10">
@@ -15,19 +15,21 @@
 				<div class="layui-form-item magt3">
 					<label class="layui-form-label">文章标题<span class="layui-badge-dot"></span></label>
 					<div class="layui-input-block">
-						<input type="text" class="layui-input newsName" lay-verify="newsName" name='title' placeholder="请输入文章标题">
+						<input type="text" class="layui-input newsName" lay-verify="newsName" name='title' placeholder="请输入文章标题" value="@isset($article){{$article->article_title}}@endisset">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">内容摘要</label>
 					<div class="layui-input-block">
-						<textarea placeholder="请输入内容摘要"  class="layui-textarea abstract" name='textpart'></textarea>
+						<textarea placeholder="请输入内容摘要"  class="layui-textarea abstract" name='textpart'>@isset($article){{$article->summary}}@endisset</textarea>
 					</div>
 				</div>
 			</div>
 			<div class="layui-col-md3 layui-col-xs5">
 				<div class="layui-upload-list thumbBox mag0 magt3">
-					<img class="layui-upload-img thumbImg">
+					<img class="layui-upload-img thumbImg" src="@isset($article)
+					@if($article->image_id){{$article->Image->image_path}}@endif
+					@endisset">
 				</div>
 			</div>
 		</div>
@@ -35,7 +37,9 @@
 			<label class="layui-form-label">文章内容<span class="layui-badge-dot"></span></label>
 
 			<div class="layui-input-block">
-				<textarea class="layui-textarea layui-hide"  name="content" lay-verify="content" id="news_content"></textarea>
+				<textarea class="layui-textarea layui-hide"  name="content" lay-verify="content" id="news_content">
+					@isset($article){!!$article->article_content!!}@endisset
+				</textarea>
 			</div>
 		</div>
 	</div>
@@ -45,6 +49,13 @@
 			<select name="type" lay-filter="articletype" id='type_select' lay-search>
 				<option value='' >请选择一个类型</option>
 				@foreach($types as $type)
+					@isset($article)
+						@if($article->type_id==$type->id)
+							<option value="{{$type->id}}" selected>{{$type->type_name}}</option>
+							@continue
+						@endif
+		        		
+		        	@endisset
 		        	<option value="{{$type->id}}">{{$type->type_name}}</option>
 		        @endforeach
 		        	<option value = 'add'>&#xe654;添加一个类型</option>
@@ -89,7 +100,7 @@
 			</div>
 			<hr class="layui-bg-gray" />
 			<div class="layui-right">
-				<a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit><i class="layui-icon">&#xe609;</i>发布</a>
+				<a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit><i class="layui-icon">&#xe609;</i>@isset($article)修改@else发布@endisset</a>
 				<a class="layui-btn layui-btn-primary layui-btn-sm" lay-filter="look" lay-submit>预览</a>
 			</div>
 		</div>

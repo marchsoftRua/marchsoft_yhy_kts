@@ -5,8 +5,9 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         upload = layui.upload,
         layedit = layui.layedit,
         laydate = layui.laydate,
-        select_val = 0,
-        $ = layui.jquery;
+        $ = layui.jquery,
+        select_val = $("#type_select").find("option:selected").val()?$("#type_select").find("option:selected").val():0;
+        
 
     
 
@@ -16,7 +17,8 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         url: '/add/image',
         field:'img',
         data:{
-            '_token':$("#_token").val()
+            '_token':$("#_token").val(),
+            article_id : $('#from-article').attr('data-id')
         },
         // method : "post",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
         done: function(res, index, upload){
@@ -148,6 +150,7 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
                 type : select_val,    //文章分类
                 newsStatus : $('.newsStatus select').val(),    //发布状态
                 newsTime : submitTime,    //发布时间
+                article_id : $('#from-article').attr('data-id'),
                 // newsTop : data.filed.newsTop == "on" ? "checked" : "",    //是否置顶
             },
             success:function(msg){

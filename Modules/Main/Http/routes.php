@@ -24,6 +24,7 @@ Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\
     Route::any('/userInfo','AdminController@userInfoShow');//改成ａｎｙ　修改的信息也提交到这个路由
     Route::any('/changeImage','AdminController@changeImage');//更改用户头像
     Route::any('/changepwd','AdminController@changepwd');//修改用户密码
+    Route::any('/change/article/{article_id}','AdminController@changeArticle');//修改页面　和数据提交本页
     /*
         放到nav的地址
     */

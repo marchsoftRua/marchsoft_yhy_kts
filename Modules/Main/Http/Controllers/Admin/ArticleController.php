@@ -20,13 +20,20 @@ class ArticleController extends Controller
     {
         if($request->ajax())
         {
-            $model = new Article();
+            if($request->article_id)
+            {
+                $model = Article::find($request->article_id);
+            }
+            else
+                $model = new Article();
             $img = new Image();
             $img_id = null;
             if($request->imgpath)
                 $img_id = $img->saveArticleImg($request->imgpath);
-            $model->add($request,$img_id);
-            
+            if($request->article_id)
+                $model->change($request,$model,$img_id);
+            else
+                $model->add($request,$img_id);
         }
         else
         {

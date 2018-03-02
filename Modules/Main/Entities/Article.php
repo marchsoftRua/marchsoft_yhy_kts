@@ -99,6 +99,12 @@ class Article extends Model
         return $this->belongsTo('Modules\Main\Entities\Type','type_id','id');
     }
 
+    public function Image()
+    {
+        return $this->hasOne('Modules\Main\Entities\Image','id','image_id');
+    }
+
+
     public function getArticleTable()
     {
         $collection = $this->all()->map(function ($item, $key) {
@@ -116,16 +122,23 @@ class Article extends Model
     public function add($request,$img_id=null)
     {
 
-        $this->article_title = $request->title;
-        $this->article_content = $request->content;
-        $this->summary = $request->summary;
-        $this->status = 1;//后期再改
-        $this->type_id = $request->type;
+        $this->change($request,$this,$img_id);
+    }
+
+    public function change($request,$model=null,$img_id=null)
+    {
+        if($model==null)
+            $model = $this;
+        $model->article_title = $request->title;
+        $model->article_content = $request->content;
+        $model->summary = $request->summary;
+        $model->status = 1;//后期再改
+        $model->type_id = $request->type;
         if($img_id)
-            $this->image_id = $img_id;
-        $this->user_id = Auth::id();
-        $this->authority = Auth::user()->user_type;
-        $this->save();
+            $model->image_id = $img_id;
+        $model->user_id = Auth::id();
+        $model->authority = Auth::user()->user_type;
+        $model->save();
     }
 
 }
