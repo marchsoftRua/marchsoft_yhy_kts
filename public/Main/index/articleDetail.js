@@ -129,6 +129,36 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
                $('.back').attr('name',p_id)
                $('.back').attr('toid',event.target.getAttribute("toid"))
             })
+            $('body').on('click','.praise',function(event){
+                $.ajax(
+                        {
+                            url:'/jie/sendComment',
+                            type:'post',
+                            data:{
+                              'praise_type':$(event.target).attr('p_type'),
+                              'obj_id':$(event.target).attr('obj_id')
+                            },
+                            headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            },
+                            success:function(res) {
+                                if (res.status==0) {
+                                    data.form.getElementsByTagName('textarea')[0].value=''
+                                    layer.alert('回复成功',function(){
+                                    fly.getComments(GETALL,1,current_page,0,5,1);
+
+                                    })
+                                    // fly.getComments(GETALL,1,1,0,5,1);
+                                }
+                            },
+                            error:function(){
+                                    layer.alert('系统繁忙')
+                            }
+
+                      }
+                    )
+            })                console.log()
+            })
             $('body').on('click','.childs-nav span',function(event){
                 var Btn_type = $(event.target).attr('type')
                 var p_id = $(event.target).parent().parent().prev().attr('pid')

@@ -142,5 +142,7 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+</script>
 <script src="{{asset('Main/index/render.js')}}"></script>
 @endsection

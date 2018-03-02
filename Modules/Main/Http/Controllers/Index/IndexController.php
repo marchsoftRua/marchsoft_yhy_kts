@@ -9,6 +9,7 @@ use Modules\Main\Entities\Comment;
 use Modules\Main\Entities\Article;
 use Modules\Main\Entities\Label;
 use Modules\Main\Entities\User;
+use Modules\Main\Entities\Type;
 class IndexController extends Controller
 {
     /**
@@ -20,8 +21,12 @@ class IndexController extends Controller
     var $CommentModel = null;
     var $LabelModel = null;
     var $UserModel=null;
-    public function index()
-    {
+    public function index(Request $request)
+    {   $path = $request->path();
+        $arg = $request->route('type_url');
+        if ($path!='/'&&!$arg) {
+            return redirect('/404');
+        }
         $hotRank=$this->getTheWeekHot();
         $userRank=$this->getSpeakRank();
         return view('main::index.index')->with(
@@ -29,6 +34,31 @@ class IndexController extends Controller
                 "hotRank"=>$hotRank,
                "userRank"=> $userRank
             ]);
+    }
+    public function TypeSwitch(Request $request)
+    {
+         $path = $request->path();
+
+        # code...
+    }
+    public function getTypeList(Request $request)
+    {
+        $current_path = $request['current_path'];
+        $lists = Type::getTypeList();
+        $view = view('main::index.fillDatas.TopType')
+        ->with(
+            [
+             'lists'=>$lists,
+             'current_path'=>$current_path
+             ]
+        );
+        $html = response($view)->getContent();
+        $data = $lists;
+        return 
+        ["status"=>0,
+          'html'=>$html,
+          'data'=>$data  
+        ];
     }
     public function showPerson_home(Request $request){
         $user_playname = $request->route( 'user_playname' );
@@ -55,7 +85,8 @@ class IndexController extends Controller
         $status   = $request->status;
         $type     = $request->type;
         $getLimit = $request->getLimit;
-        $getdata  = $this->ArticleModel->getIndexMainData($bycolumn,$status,$type,$getLimit);
+        $url      = $request->address;
+        $getdata  = $this->ArticleModel->getIndexMainData($bycolumn,$status,$url,$getLimit);
         return $getdata;
     }
     public function __construct(){

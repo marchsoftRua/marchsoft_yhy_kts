@@ -19,7 +19,8 @@ class CreateCommentsTable extends Migration
             $table->string("type")->comment("评论类型 评论的是什么 存表名");
             $table->text("comment_inner")->comment("评论内容");
             $table->integer("user_id")->comment("评论发表者");
-            $table->integer("parent_id")->comment("评论接受者");
+            $table->integer("rec_id")->comment("评论接受者");
+            $table->integer("parent_id")->comment("父级评论");
             $table->integer("praise")->default(0)->comment("赞美の心");
             $table->timestamps();
             $table->softDeletes()->comment("软删除");

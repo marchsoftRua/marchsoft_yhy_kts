@@ -17,8 +17,8 @@ $(document).ready(function(){
         $("#byNew").attr("class","");
         $(this).attr("class","layui-this")
     });
-    getMorePage(1,0,2,0,5,0,1); //获得置顶模块
-    getMorePage(0,0,1,0,10,0,1);//获得综合模块
+    getMorePage(1,0,1,0,5,0,1); //获得置顶模块
+    getMorePage(0,0,0,0,10,0,1);//获得综合模块
     getWeekHot()
 });
 function getWeekHot() {
@@ -43,6 +43,8 @@ function getMorePage(isTop,bycolumn,status,type,getLimit,more,page) {
      * bycolumn 根据什么字段排序  0 不排序  1  赞数 2 阅读量 3 创建时间
      * status
      * */
+     var  address = window.location.pathname
+     console.log(address)
     $.ajax(
         {
             url: "/reader",
@@ -52,6 +54,7 @@ function getMorePage(isTop,bycolumn,status,type,getLimit,more,page) {
                 "bycolumn":bycolumn,
                 "status":status,
                 "type":type,
+                "address":address,
                 "getLimit":getLimit
             },
             headers: {

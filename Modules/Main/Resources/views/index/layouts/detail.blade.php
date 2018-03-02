@@ -25,8 +25,9 @@
                         <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
                     </div>
                     <span class="fly-list-nums">
-            <a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i> {{$data->CommentNum}}</a>
-            <i class="iconfont" title="人气">&#xe60b;</i> {{$data->readnum}}
+              <a href="javascript:void(0);" class="praise" ><i class="layui-icon" obj_id="{{$data->id}}" p_type='1' title="点赞">&#xe6c6;</i></a>    {{$data->praise}}        
+            <a href="#comment"><i class="layui-icon" title="回答">&#xe63a;</i> {{$data->CommentNum}}</a>
+            <i class="layui-icon" title="人气">&#xe705;</i> {{$data->readnum}}
           </span>
                 </div>
                 <div class="detail-about">
@@ -42,7 +43,6 @@
                         <span>{{$data->created_at}}</span>
                     </div>
                     <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
-                        <span style="padding-right: 10px; color: #FF7200">{{$data->praise}}</span>
                         <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="add.html">编辑此贴</a></span>
                     </div>
                 </div>

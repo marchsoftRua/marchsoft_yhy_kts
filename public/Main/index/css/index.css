@@ -26,3 +26,18 @@
 .fly-list li p{
 	text-indent: 20px;
 }
+
+#TopType li a:hover{
+ color: green;
+}
+
+#TopType li a:hover::after{
+	content: "\2764";
+	position: absolute;
+	left: 0;
+}
+#TopType li a:hover::before{
+	content: "\2764";
+	position: absolute;
+	right: 0;
+}

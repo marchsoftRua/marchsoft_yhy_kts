@@ -21,15 +21,20 @@ class Article extends Model
     public static function getUserArticleById($id){
         return Article::where('user_id',$id)->orderBy('created_at','desc')->take(10)->get();
     }
-    public function getIndexMainData($bycolumn,$status,$type,$getLimit){
+    public function getIndexMainData($bycolumn,$status,$url,$getLimit){
         $query=DB::table('articles')
             ->join('users', function ($join) {
                 $join->on('users.id', '=', 'articles.user_id');
             });
-        Log::info('状态'.$status);
-        if ($status)  $query = $query->where("status",$status);
-        if ($type)    $query = $query->where("article_type",$type);
-        if ($bycolumn)$query = $query->orderby($bycolumn,"desc");
+        $type = $url!='/'?Type::getTypeByUrl($url)->id:0;
+            Log::info('类型'.$type."状态".$status);
+
+        if ($status) 
+             $query = $query->where("status",$status);
+         else{
+            if ($type)    $query = $query->where("type_id",$type);
+            if ($bycolumn)$query = $query->orderby($bycolumn,"desc");  
+         }
         $res= $query->paginate($getLimit);
         foreach ($res as $iteam){
             $id = $iteam->id;
