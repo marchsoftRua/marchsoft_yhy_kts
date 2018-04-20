@@ -37,6 +37,8 @@ Route::group(['middleware' => ['web','auth'], 'namespace' => 'Modules\Main\Http\
 
     Route::get('/image/{user_id?}','ImageController@getUserImg');//用户获取头像
 
+    Route::get('/info/video','VideoController@getInfo');//从第三方获取视频的资料
+
 });
 
 Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controllers\Index'], function()

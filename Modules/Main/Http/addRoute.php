@@ -6,5 +6,5 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Main\Http\Controlle
 	Route::any('/add/article','ArticleController@index');//文章上传页
 	Route::any('/add/image','ImageController@index');
 	Route::any('/add/type','TypeController@addType');
-	// Route::any('/add/video','')
+	Route::any('/add/video','VideoController@index');
 });

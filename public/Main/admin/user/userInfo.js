@@ -31,7 +31,7 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
             window.sessionStorage.setItem('userFace',msg.data['url']);
         },
         error:function(msg){
-
+            
         },
     });
 

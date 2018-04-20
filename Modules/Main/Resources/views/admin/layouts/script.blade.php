@@ -5,6 +5,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
+	<meta name="referrer" content="no-referrer" />
 	<link rel="stylesheet" href="{{asset('Main/layui/css/layui.css')}}" media="all" />
 	<link rel="stylesheet" href="{{asset('Main/css/public.css')}}" media="all" />
 	<script type="text/javascript" src="{{asset('Main/layui/layui.js')}}"></script>
