@@ -5,9 +5,10 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 	laytpl = layui.laytpl,
 	$ = layui.jquery,
 	_token = $('#_token').val(),
-	cid = null,
-	aid = null,
+	cid = null,//数据必须ｉｄ
+	aid = null,//同上
 	videoUrl = null,//暂存视频地址　用来判断是否改变　需要不需要重新加载
+	linkGet = false,//是否获取了正确ｕｒｌ
 	upload = layui.upload;
 
 	var uploadInst = upload.render({
@@ -80,7 +81,45 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 		$('#userFace').attr('src',img)
 		$('#getvideo').removeClass('layui-hide')
 	}
-
+	/*
+	链接上传
+	*/
+	$('#link-upload').click(function(){
+		if(!linkGet)
+		{
+			layer.tips('请填写正确的url地址，谢谢!', '#video-link', {
+			  tips: [1, '#3595CC'],
+			  time: 3000
+			});
+			return
+		}
+		if($('#link-name').val().length==0||$('#link-name').val().length>30){
+			layer.tips('请按格式填写，名字的长度为0-30', '#link-name', {
+			  tips: [1, '#3595CC'],
+			  time: 3000
+			});
+			return
+		}
+		if($('#link-outline').val().length==0||$('#link-outline').val().length>120){
+			layer.tips('请按格式填写，视频描述的长度为0-120', '#link-outline', {
+			  tips: [1, '#3595CC'],
+			  time: 3000
+			});
+			return
+		}
+		$.ajax({
+			url:'/'
+			type:'post',
+			dataType:'json',
+			data:{
+				'_token':_token,
+				'image':$('#userFace').attr('src'),
+				'video':$('#video-link').val(),
+				'name':$('#link-name').val(),
+				'description':$('#link-outline').val(),
+			}
+		})
+	})
 
 	$('#video-link').blur(function(){
 		var val = $('#video-link').val();
@@ -91,7 +130,6 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 		var pattern = /av[0-9]*/g;
 		
 		var url = "/info/video";//比比汗丽丽的接口
-		// var url = "http://9bl.bakayun.cn/API/GetVideoInfo.php" 
 		//例如http://9bl.bakayun.cn/API/GetVideoInfo.php?aid=4143031&p=1&type=json
 		if(val!=""&&pattern.test(val))
 		{
@@ -108,10 +146,14 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 					type:'json'
 				},
 				success:function(data){
-					layer.close(index)
-					console.log(data)
-					setVideo(data.images[0],data.title,data.description)
-					cid = data.cid
+					layer.close(index);
+					setVideo(data.images[0],data.title,data.description);
+					cid = data.cid;
+					linkGet = true;
+				},
+				error:function(){
+					layer.close(index);
+					linkGet = false;
 				}
 			});
 		}

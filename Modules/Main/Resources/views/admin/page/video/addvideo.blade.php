@@ -50,6 +50,11 @@
 						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 					</div>
 				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button type="button" class="layui-btn layui-btn-normal" id="link-upload">上传视频</button>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="uploadsend" class="layui-hide layui-anim layui-anim-upbit">

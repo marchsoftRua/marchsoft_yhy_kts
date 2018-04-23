@@ -25,6 +25,25 @@ class VideoController extends Controller
             return ("烦烦烦");
     }
 
+    /*
+    通过链接上传
+    */
+    public function linkUpload(Request $request)
+    {
+        $name = $request->name;
+        $description = $request->description;
+        $image = $request->image;
+        $user_id = Auth::id();
+    }
+
+    /*
+    直接上传
+    */
+    public function upload(Request $request)
+    {
+
+    }
+
     public function getInfo(Request $request)
     {
         $aid = $request->aid;
