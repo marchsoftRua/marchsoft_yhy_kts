@@ -75,9 +75,9 @@ class AdminController extends Controller
     {
         if(!$request->isMethod('post'))
             return redirect('/admin');
-        $image_id = $this->imageModel->saveUserImg($request);
+        $image_path = $this->imageModel->saveUserImg($request);
         $user = User::find(Auth::user()->id);
-        $user->head_url = Image::find($image_id)->image_path;
+        $user->head_url = $image_path;
         $user->save();
         return setData(['url'=>$user->head_url],'修改成功!');
     }

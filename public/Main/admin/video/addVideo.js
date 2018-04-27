@@ -93,8 +93,8 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 			});
 			return
 		}
-		if($('#link-name').val().length==0||$('#link-name').val().length>30){
-			layer.tips('请按格式填写，名字的长度为0-30', '#link-name', {
+		if($('#link-name').val().length==0||$('#link-name').val().length>50){
+			layer.tips('请按格式填写，名字的长度为0-50', '#link-name', {
 			  tips: [1, '#3595CC'],
 			  time: 3000
 			});
@@ -107,17 +107,22 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 			});
 			return
 		}
+		var index = layer.load(1, {shade: 0.6,time:3000});
 		$.ajax({
-			url:'/'
+			url:'/add/link/video',
 			type:'post',
 			dataType:'json',
 			data:{
 				'_token':_token,
-				'image':$('#userFace').attr('src'),
-				'video':$('#video-link').val(),
+				'img':$('#userFace').attr('src'),
+				'video':"https://www.bilibili.com/video/av"+aid+"/",
 				'name':$('#link-name').val(),
 				'description':$('#link-outline').val(),
-			}
+			},
+			success:function(msg){
+				layer.close(index);
+				layer.msg('上传完成!');
+			},
 		})
 	})
 
@@ -146,10 +151,12 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 					type:'json'
 				},
 				success:function(data){
+					$('#video-link').val("https://www.bilibili.com/video/av"+aid+"/")
 					layer.close(index);
 					setVideo(data.images[0],data.title,data.description);
 					cid = data.cid;
 					linkGet = true;
+
 				},
 				error:function(){
 					layer.close(index);

@@ -16,7 +16,7 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id')->comment("视频id");
             $table->string('video_path',100)->comment("视频路径");
-            $table->string("name",30)->comment('视频名称');
+            $table->string("name",50)->comment('视频名称');
             $table->string('description',120)->nullable()->comment('视频描述');
             $table->integer('authority')->comment("用户权限");
             $table->integer("user_id")->comment("视频发表者");

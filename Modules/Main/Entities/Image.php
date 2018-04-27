@@ -11,7 +11,7 @@ class Image extends Model
     // protected $guarded = ['geetest_challenge', 'geetest_validate', 'geetest_seccode'];
     // protected $fillable = [];
 
-    public function userUpload($request,$field = 'img')///用户上传图片，都将经过这个方法，游客不经过这个方法。
+    public function getPath($request,$field = 'img')///返回路径
     {
     	if($request->hasFile($field))
     	{
@@ -33,7 +33,7 @@ class Image extends Model
 
     // public function saveArticleImg($path)
     // {
-    // 	$path = $this->userUpload($request);
+    // 	$path = $this->getPath($request);
     // 	$filename = explode('/', $path);
     // 	$newPath = '/public/user/'.Auth::id().'/'.end($filename);
     // 	if($path)
@@ -43,24 +43,36 @@ class Image extends Model
     // 	}
     // }
 
-    public function saveUserImg($request,$field = 'img')//保存一个用户的头像　返回ｉｄ
+    public function saveVideoImg($request,$field = 'img')//保存视频封面
     {
-        $path = $this->userUpload($request,$field);
+        $path = $this->getPath($request,$field);
         $filename = explode('/', $path);
         $filename = end($filename);
         $filetype = explode('.',$filename);
+
+        $newPath = '/public/user/'.Auth::id().'/videoImg/'.$filename;
+        Storage::move($path,$newPath);
+        return $this->addImage($newPath,Auth::id(),Auth::user()->user_type)->id;
+    }
+    public function saveUserImg($request,$field = 'img')//保存一个用户的头像　返回ｉｄ
+    {
+        $path = $this->getPath($request,$field);
+        $filename = explode('/', $path);
+        $filename = end($filename);
+        $filetype = explode('.',$filename);
+
         $newPath = '/public/user/'.Auth::id().'/userImage.'.end($filetype);
         $userPath = substr(Auth::user()->head_url,7);
-        // dd($userPath);
         if(Storage::disk('public')->exists($userPath));
             Storage::disk('public')->delete($userPath);
         Storage::move($path,$newPath);
-        return $this->addImage($newPath,Auth::id(),Auth::user()->user_type)->id;
+        return $newPath;
+        // return $this->addImage($newPath,Auth::id(),Auth::user()->user_type)->id;
     }
 
     public function cacheImg($request,$field = 'img')//用户在选择封面时　所储存
     {
-    	$path = $this->userUpload($request,$field);
+    	$path = $this->getPath($request,$field);
     	$filename = explode('/', $path);
     	$newPath = '/public/user/'.Auth::id().'/cache/'.end($filename);
     	if($path)

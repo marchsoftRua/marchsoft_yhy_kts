@@ -6,13 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Modules\Main\Entities\Video;
+use Modules\Main\Entities\Image;
+use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
     var $videoModel = null;
+    public $imageModel = null;
     public function __construct()
     {
         $this->videoModel = new Video();
+        $this->imageModel = new Image();
     }   
 
     public function index(Request $request)
@@ -32,8 +36,12 @@ class VideoController extends Controller
     {
         $name = $request->name;
         $description = $request->description;
-        $image = $request->image;
         $user_id = Auth::id();
+        $imgId = $this->imageModel->addImage($request->img,$user_id)->id;
+        $authority = 1;
+        $video_path = $request->video;
+        if($this->videoModel->saveVideo($name,$description,$user_id,$imgId,$authority,$video_path))
+            return setData("200");
     }
 
     /*
