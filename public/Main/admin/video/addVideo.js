@@ -9,7 +9,8 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 	aid = null,//同上
 	videoUrl = null,//暂存视频地址　用来判断是否改变　需要不需要重新加载
 	linkGet = false,//是否获取了正确ｕｒｌ
-	upload = layui.upload;
+	upload = layui.upload,
+	fromData = new FormData();//一个ｆｒｏｍｄａｔａ对象
 
 	var uploadInst = upload.render({
 	    elem: '.userFaceBtn', //绑定元素
@@ -30,6 +31,78 @@ layui.use(['form','layer','jquery','table','laytpl','upload'],function(){
 
         },
   	});
+
+  	$("#click-video").click(function(){
+  		return $("#upload-video").click();
+  	});
+
+  	// $('.upload-video-box').on({
+  	// 	drop:function(event){
+		 //  		event.preventDefault();  
+   //  			event.stopPropagation();
+		 //  		console.log(event.originalEvent.dataTransfer.files);
+	  // 		}
+  	// 	},
+  	// );
+  	$(".upload-video-box").on("dragover",function(event){
+  		event.preventDefault();  
+	    event.stopPropagation();
+  	})
+	$(".upload-video-box").on("dragleave",function(event){
+  		event.preventDefault();  
+	    event.stopPropagation();
+  	})
+  	$(".upload-video-box").on("drop",function(event){
+  		event.preventDefault();  
+	    event.stopPropagation();
+	    $('.upload-video-box')[0].files[0] = event.originalEvent.dataTransfer.files
+	    videoSend();
+  	});
+
+  	function videoSend(){
+  		fromData.append('video',$('.upload-video-box')[0].files[0]);
+  		$.ajax({
+  			url:'/upload/video',
+  			type:'post',
+  			dataType:'json',
+  			data:fromData,
+  			success:function(msg){
+
+  			},
+  			error:function(msg){
+
+  			},
+  		})
+  	}
+  	// var uploadVideo = upload.render({
+  	// 	elem:'.upload-video-box',
+  	// 	url:'/upload/video',
+  	// 	method:'post',
+  	// 	accept:'video',
+  	// 	field:'video',
+  	// 	auto:'false',
+  	// 	dataType:'json',
+  	// 	data:{
+  	// 		'_token':_token
+  	// 	},
+  	// 	choose:function(msg){
+  	// 		var formData = new FormData();
+  	// 		formData.append('file', $('.upload-video-box')[0].files[0]);
+
+			// $.ajax({
+			//     url: '/upload/video',
+			//     type: 'post',
+			//     cache: false,
+			//     data: formData,
+			//     processData: false,
+			//     contentType: false
+			// }).done(function(res) {
+			// }).fail(function(res) {});
+  	// 	},
+  	// });
+
+
+
   	form.on('select(manner)', function(data){
 	  if(data.value==1)
 	  {

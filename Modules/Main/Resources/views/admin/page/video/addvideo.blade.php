@@ -3,6 +3,7 @@
 <head>
 	<title视频上传</title>
 	@include('main::admin.layouts.script')
+	<link rel="stylesheet" type="text/css" href="{{asset('Main/admin/video/video.css')}}">
 </head>
 <body class="childrenBody">
 <form class="layui-form layui-row">
@@ -58,6 +59,25 @@
 			</div>
 		</div>
 		<div id="uploadsend" class="layui-hide layui-anim layui-anim-upbit">
+			<div class="layui-form-item">
+				<div class="upload-video-box layui-input-block">
+					<div class="upload-btn">
+						<div id="click-video" class="upload-btn-icon layui-btn" style="background:url({{asset('Main/img/upload-video.png')}}) no-repeat">
+							
+						</div>
+						<div class="upload-btn-title">
+							上传视频
+						</div>
+						<input type="file" name="file" id="upload-video" class="layui-hide" accept=".mp4,.flv,.avi,.wmv,.mov,.webm,.mpeg4,.ts,.mpg,.rm,.rmvb,.mkv">
+					</div>
+					<div class="upload-hint">
+						<span>
+							拖拽视频到此处也可上传
+						</span>
+						
+					</div>
+				</div>
+			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">用户名</label>
 				<div class="layui-input-block">

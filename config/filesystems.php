@@ -47,7 +47,11 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-
+        'cacheImage' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/cache'),
+            'visibility' => 'public',
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

@@ -5,7 +5,7 @@ namespace Modules\Main\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use App\Class\ImageFile;
 class Image extends Model
 {
     // protected $guarded = ['geetest_challenge', 'geetest_validate', 'geetest_seccode'];

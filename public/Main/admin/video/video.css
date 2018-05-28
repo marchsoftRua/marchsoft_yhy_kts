@@ -1,0 +1,50 @@
+.upload-video-box
+{
+	padding: 60px 0 100px 0;
+	display: flex;
+    justify-content: center;
+	border-radius: .04rem;
+    box-shadow: 0 0.01rem 0.02rem rgba(0,0,0,.1);
+    flex-direction: column;
+    align-items: center;
+}
+.upload-btn
+{
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    width: 210px;
+    height: 80px;
+    padding: 0 .34rem;
+    cursor: pointer;
+    background-color: #1aa3d5;
+    border: .01rem solid #1aa3d5;
+    border-radius: 52px;
+    white-space: nowrap;
+    font-size: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.upload-btn-icon
+{
+	padding-right: 15px;
+    width: 2.38rem;
+    height: 2.38rem;
+    background-size: 100% 100%;
+}
+.upload-btn-title
+{
+    font-size: 1.50rem;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+}
+.upload-hint
+{
+    font-size: 20px;
+    color: #212121;
+    text-align: center;
+    padding-top: 20px;
+}

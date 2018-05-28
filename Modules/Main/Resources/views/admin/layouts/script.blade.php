@@ -9,3 +9,5 @@
 	<link rel="stylesheet" href="{{asset('Main/layui/css/layui.css')}}" media="all" />
 	<link rel="stylesheet" href="{{asset('Main/css/public.css')}}" media="all" />
 	<script type="text/javascript" src="{{asset('Main/layui/layui.js')}}"></script>
+	
+	<script type="text/javascript"　src="{{asset('Main/js/main.js')}}"></script>

@@ -84,3 +84,17 @@ function addCodeToString($code)
         return $addName;
     }
 }
+
+function pathToFileName($path)
+{
+    $filename = explode('/', $path);
+    $filename = end($filename);
+    return $filename;
+}
+
+function pathToFileType($path)
+{
+    $filename = pathToFileName($path);
+    $fileType = explode('.',$filename);
+    return end($fileType);
+}

@@ -47,9 +47,9 @@ class VideoController extends Controller
     /*
     直接上传
     */
-    public function upload(Request $request)
+    public function uploadVideo(Request $request)
     {
-
+        $this->videoModel->downloadVideo();//保存用户上传的ｖｉｄｅｏ
     }
 
     public function getInfo(Request $request)
