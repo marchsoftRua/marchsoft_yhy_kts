@@ -1,6 +1,6 @@
 <?php
-namespace App\Class; 
-interface FileMaster()
+namespace App\TheClass; 
+interface FileMaster
 {
 
 	/*
@@ -10,7 +10,7 @@ interface FileMaster()
 	/*
 	存在这个文件模式
 	*/
-	protected function hasMod(String $pathMod);
+	public function hasMod(String $pathMod);
 	/*
 	保存文件,保存在path路径中
 	*/

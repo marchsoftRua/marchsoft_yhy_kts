@@ -47,18 +47,25 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-        'cacheImage' => [
+        'cache' => [
             'driver' => 'local',
             'root' => storage_path('app/public/cache'),
+            'pathRoot' => '/public/cache/',
             'visibility' => 'public',
         ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
+            'pathRoot' => '/public/',
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-
+        'user' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/user'),
+            'pathRoot' => '/public/user',
+            'visibility' => 'public',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

@@ -85,7 +85,7 @@ function addCodeToString($code)
     }
 }
 
-function pathToFileName($path)
+function pathToFileName($path)//返回文件名字带后缀
 {
     $filename = explode('/', $path);
     $filename = end($filename);

@@ -7,23 +7,26 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Modules\Main\Entities\Video;
 use Modules\Main\Entities\Image;
+use Modules\Main\Entities\Type;
 use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
     var $videoModel = null;
     public $imageModel = null;
+    public $typeModle = null;
     public function __construct()
     {
         $this->videoModel = new Video();
         $this->imageModel = new Image();
+        $this->typeModle = new Type();
     }   
 
     public function index(Request $request)
     {
         if($request->isMethod('get'))
         {
-            return view('main::admin.page.video.addvideo');
+            return view('main::admin.page.video.addvideo')->with('types',$this->typeModle->all());
         }
         else
             return ("烦烦烦");
@@ -49,7 +52,25 @@ class VideoController extends Controller
     */
     public function uploadVideo(Request $request)
     {
-        $this->videoModel->downloadVideo();//保存用户上传的ｖｉｄｅｏ
+        // $this->videoModel->downloadVideo($request);//保存用户上传的ｖｉｄｅｏ
+        $this->validate($request, [
+            'name' => 'required|max:50|String',
+            'type' => 'required|Integer',
+            'description' => 'String|max:120',
+            'pathList' => 'required|array',
+            'img' => 'required'
+        ]);
+       $data = $this->videoModel->downloadVideo($request->pathList[0],$request->img);
+       $img_id = $this->imageModel->addImage($data[1],Auth::id())->id;//保存图片进入数据库
+       $this->videoModel->saveVideo($request->name,$request->description,Auth::id(),$img_id,0,$data[0]);
+       return setData("视频上传成功！");
+    }
+
+    public function cacheVideo(Request $request)
+    {
+        $path = $this->videoModel->cacheVideo($request->file);
+        $imgPath = $this->videoModel->returnImg($path);
+        return setData(array($path,$imgPath),"上传成功");
     }
 
     public function getInfo(Request $request)

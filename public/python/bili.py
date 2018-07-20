@@ -25,7 +25,7 @@ class BLInterface(object):
         self.cid = pattern.search(self.content.decode()).group()[4:]
         for i in self.pq('script').items():
             if i.attr('type') == "application/ld+json":
-                thejson = json.loads(i.html())
+                thejson = json.loads(i.html().replace("&quot;", '"'))
                 if 'images' in thejson:
                     thejson['cid'] = self.cid
                     self.jsonDate = json.dumps(thejson)

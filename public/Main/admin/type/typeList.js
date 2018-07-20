@@ -5,7 +5,6 @@ layui.use(['table','layer','jquery'],function(){
 
 	function addType()
 	{
-		console.log('asds')
 		var index = layer.open({
 			title:'添加类型',
 			type : 2,

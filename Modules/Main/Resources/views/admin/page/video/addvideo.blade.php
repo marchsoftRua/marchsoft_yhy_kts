@@ -4,17 +4,20 @@
 	<title视频上传</title>
 	@include('main::admin.layouts.script')
 	<link rel="stylesheet" type="text/css" href="{{asset('Main/admin/video/video.css')}}">
+	<link rel="stylesheet" href="{{asset('Main/admin/video/easyUpload/easy-upload.css')}}">
 </head>
 <body class="childrenBody">
-<form class="layui-form layui-row">
+<form class="layui-form layui-row flex-center" id="video-from">
 	<input type="hidden" id="_token" value="{{ csrf_token() }}">
-	<div class="layui-col-md3 layui-col-xs12 user_right">
+
+	<div class="layui-col-md3 layui-col-xs12 user_right layui-hide" id="videoImageBox">
 		<div class="layui-upload-list">
-			<img class="layui-upload-img userFaceBtn userAvatar" style="max-height: 200px;" id="userFace">
+			<img class="layui-upload-img videoImg userAvatar" style="max-height: 200px;" id="videoImage">
 		</div>
-		<button type="button" class="layui-btn layui-btn-primary userFaceBtn"><i class="layui-icon">&#xe67c;</i>点击上传封面</button>
+		<button type="button" class="layui-btn layui-btn-primary videoImg"><i class="layui-icon">&#xe67c;</i>点击上传封面</button>
 	</div>
-	<div class="layui-col-md6 layui-col-xs12">
+
+	<div class="layui-col-md6 layui-col-xs12" >
 		<div class="layui-form-item">
 			<label class="layui-form-label">选择上传方式</label>
 			<div class="layui-input-block">
@@ -61,115 +64,56 @@
 		<div id="uploadsend" class="layui-hide layui-anim layui-anim-upbit">
 			<div class="layui-form-item">
 				<div class="upload-video-box layui-input-block">
-					<div class="upload-btn">
-						<div id="click-video" class="upload-btn-icon layui-btn" style="background:url({{asset('Main/img/upload-video.png')}}) no-repeat">
-							
-						</div>
-						<div class="upload-btn-title">
-							上传视频
-						</div>
-						<input type="file" name="file" id="upload-video" class="layui-hide" accept=".mp4,.flv,.avi,.wmv,.mov,.webm,.mpeg4,.ts,.mpg,.rm,.rmvb,.mkv">
-					</div>
-					<div class="upload-hint">
-						<span>
-							拖拽视频到此处也可上传
-						</span>
-						
-					</div>
+					<div id="easyContainer" style="width: 100%;"></div>
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">用户名</label>
+				<label class="layui-form-label">视频名称</label>
 				<div class="layui-input-block">
-					<input type="text" value="驊驊龔頾" disabled class="layui-input layui-disabled">
+					<input type="text" placeholder="最多５０个汉字!" class="layui-input" id="upload-name">
 				</div>
 			</div>
+			
 			<div class="layui-form-item">
-				<label class="layui-form-label">用户组</label>
+				<label class="layui-form-label">视频类型</label>
 				<div class="layui-input-block">
-					<input type="text" value="超级管理员" disabled class="layui-input layui-disabled">
+					<select name="type" lay-filter="articletype" id='type_select' lay-search>
+						<option value='' >请选择一个类型</option>
+						@foreach($types as $type)
+							@isset($article)
+								@if($article->type_id==$type->id)
+									<option value="{{$type->id}}" selected>{{$type->type_name}}</option>
+									@continue
+								@endif
+				        		
+				        	@endisset
+				        	<option value="{{$type->id}}">{{$type->type_name}}</option>
+				        @endforeach
+				        	<option value = 'add'>&#xe654;添加一个类型</option>
+			      	</select>
 				</div>
 			</div>
+
 			<div class="layui-form-item">
-				<label class="layui-form-label">真实姓名</label>
+				<label class="layui-form-label">视频简介</label>
 				<div class="layui-input-block">
-					<input type="text" value="" placeholder="请输入真实姓名" lay-verify="required" class="layui-input realName">
+					<textarea placeholder="在这里写下视频的简介，不要超过１2０字哟～！" class="layui-textarea myself" id="upload-outline"></textarea>
 				</div>
 			</div>
-			<div class="layui-form-item" pane="">
-				<label class="layui-form-label">性别</label>
-				<div class="layui-input-block userSex">
-					<input type="radio" name="sex" value="男" title="男" checked="">
-					<input type="radio" name="sex" value="女" title="女">
-					<input type="radio" name="sex" value="保密" title="保密">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">手机号码</label>
-				<div class="layui-input-block">
-					<input type="tel" value="" placeholder="请输入手机号码" lay-verify="phone" class="layui-input userPhone">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">出生年月</label>
-				<div class="layui-input-block">
-					<input type="text" value="" placeholder="请输入出生年月" lay-verify="userBirthday" readonly class="layui-input userBirthday">
-				</div>
-			</div>
-			<div class="layui-form-item userAddress">
-				<label class="layui-form-label">家庭住址</label>
-				<div class="layui-input-inline">
-					<select name="province" lay-filter="province" class="province">
-						<option value="">请选择市</option>
-					</select>
-				</div>
-				<div class="layui-input-inline">
-					<select name="city" lay-filter="city" disabled>
-						<option value="">请选择市</option>
-					</select>
-				</div>
-				<div class="layui-input-inline">
-					<select name="area" lay-filter="area" disabled>
-						<option value="">请选择县/区</option>
-					</select>
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">掌握技术</label>
-				<div class="layui-input-block userHobby">
-					<input type="checkbox" name="like[javascript]" title="Javascript">
-					<input type="checkbox" name="like[C#]" title="C#">
-					<input type="checkbox" name="like[php]" title="PHP">
-					<input type="checkbox" name="like[html]" title="HTML(5)">
-					<input type="checkbox" name="like[css]" title="CSS(3)">
-					<input type="checkbox" name="like[.net]" title=".net">
-					<input type="checkbox" name="like[ASP]" title="ASP">
-					<input type="checkbox" name="like[Angular]" title="Angular">
-					<input type="checkbox" name="like[VUE]" title="VUE">
-					<input type="checkbox" name="like[XML]" title="XML">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">邮箱</label>
-				<div class="layui-input-block">
-					<input type="text" value="" placeholder="请输入邮箱" lay-verify="email" class="layui-input userEmail">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">自我评价</label>
-				<div class="layui-input-block">
-					<textarea placeholder="请输入内容" class="layui-textarea myself"></textarea>
-				</div>
-			</div>
+
 			<div class="layui-form-item">
 				<div class="layui-input-block">
-					<button class="layui-btn" lay-submit="" lay-filter="changeUser">立即提交</button>
+					<button type="button" class="layui-btn" id="upload-send">发布视频</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </form>
 <script type="text/javascript" src="{{asset('Main/admin/video/addVideo.js')}}"></script>
+<script type="text/javascript" src="{{asset('Main/admin/video/easyUpload/vendor/jquery-1.12.4.min.js')}}"></script>
+<script src="{{asset('Main/admin/video/easyUpload/vendor/jquery.cookie-1.4.1.min.js')}}"></script>
+<script src="{{asset('Main/admin/video/easyUpload/easyUpload.js')}}"></script>
 </body>
 </html>

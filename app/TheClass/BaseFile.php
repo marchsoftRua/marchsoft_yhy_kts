@@ -1,10 +1,10 @@
 <?php
-namespace App\Class;
+namespace App\TheClass;
 use Illuminate\Support\Facades\Storage; 
 class BaseFile implements FileMaster
 {
-	protected $pathMod;//路径
-	protected $storage;
+	public $pathMod;//路径
+	public $storage;
 
 	public function __construct(String $pathMod = 'local')
 	{
@@ -17,13 +17,23 @@ class BaseFile implements FileMaster
 	public function setPathMod(String $pathMod)
 	{
 		if($this->hasMod($pathMod))
-			$this->$pathMod = $pathMod;
+			$this->pathMod = $pathMod;
 		else
-			throw new Exception("pathMod:'$pathMod' has not find", 1)
+			throw new \Exception("pathMod:'$pathMod' has not find", 1);
 			
 	}
-	protected function hasMod(String $pathMod);
+
+	/*缓存文件放到public/cache里面*/
+	public function cacheFile($file)
 	{
+		$this->setPathMod('cache');
+		$path = $this->saveFile($file);
+		return $path;
+	}
+
+	public function hasMod(String $pathMod)
+	{
+
 		if(array_key_exists($pathMod,config('filesystems.disks')))
 			return true;
 		else
@@ -33,9 +43,9 @@ class BaseFile implements FileMaster
 	/*
 	保存文件,保存在path路径中
 	*/
-	public function saveFile($file,$folderName = '')
+	public function saveFile($file,$folderName = '/')
 	{
-		return $file->store($folderName);
+		return config("filesystems.disks")[$this->pathMod]['pathRoot'].''.$file->store($folderName,$this->pathMod);
 	}
 	/*
 	删除路径中的fileName名字的文件

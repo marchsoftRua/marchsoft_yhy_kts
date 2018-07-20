@@ -46,7 +46,7 @@
 	    elem: '#type'
 	    ,height: 315
 	    ,even:true
-	    ,url:'/typeList'
+	    ,url:'/showList'
 	    ,cellMinWidth: 80
 	    ,cols: [[ //表头
 	       {type:'checkbox',fixed: 'left'}
